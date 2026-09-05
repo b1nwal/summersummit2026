@@ -1,6 +1,8 @@
 extends CharacterBody2D
 
 @onready var speed = get_meta("speed")
+@onready var animated_sprite = $Sprite2D
+
 var run_start
 var stop_start
 var running = false
@@ -16,6 +18,16 @@ var angular_acceleration = 0
 func _physics_process(delta: float) -> void:
 	# movement
 	var v_vec = Input.get_vector("move_left","move_right","move_up","move_down")
+	
+	if v_vec[0] > 0:
+		animated_sprite.play("walk_right")
+	elif v_vec[0] < 0:
+		animated_sprite.play("walk_left")
+	elif v_vec[1] > 0:
+		animated_sprite.play("walk_forward")
+	elif v_vec[1] < 0:
+		animated_sprite.play("walk_backward")
+		 
 	var e = angle_difference(v_vec.angle(), facing.angle())
 
 	if not v_vec == Vector2.ZERO and not running:
@@ -24,6 +36,7 @@ func _physics_process(delta: float) -> void:
 	if v_vec == Vector2.ZERO and running:
 		running = false
 		stop_start = Time.get_ticks_msec()
+		animated_sprite.stop()
 	if running:
 		if angular_acceleration < 0.0174533:
 			e = angle_difference(v_vec.angle() + f_A*sin((Time.get_ticks_msec() - run_start)/100), facing.angle())
@@ -40,6 +53,7 @@ func _physics_process(delta: float) -> void:
 
 
 func start(pos: Vector2):
+	animated_sprite.play("default")
 	position = pos
 	show()
 	
