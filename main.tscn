@@ -151,4 +151,7 @@ position = Vector2(3003, 714)
 [node name="playerspawn3" type="Marker2D" parent="playerspawns"]
 position = Vector2(1526, 2586)
 
+[node name="CountDown" type="Timer" parent="."]
+one_shot = true
+
 [connection signal="timeout" from="RoundTimer" to="." method="_on_round_timer_timeout"]
