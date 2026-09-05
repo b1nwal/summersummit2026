@@ -33,7 +33,7 @@ one_shot = true
 [node name="HUD" parent="." instance=ExtResource("5_lquwl")]
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
-color = Color(0.20871, 0.20871, 0.20871, 1)
+color = Color(0.687215, 0.687215, 0.687215, 1)
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
 visible = false
@@ -74,3 +74,4 @@ polygon = PackedVector2Array(128, 648, 128, 984, 80, 952, 64, 656)
 one_shot = true
 
 [connection signal="timeout" from="RoundTimer" to="." method="_on_round_timer_timeout"]
+[connection signal="timeout" from="CountDown" to="." method="_on_count_down_timeout"]
