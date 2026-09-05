@@ -5,6 +5,7 @@ var artifact_scene = preload("res://gameElements/artifact.tscn")
 var futures = []
 var time
 var score
+var count
 
 var artifacts = [
 	[Vector2(360, 1997), "stand_empty"], # these are all the ones on the left
@@ -30,10 +31,17 @@ func _ready():
 	print("beginning")
 	time = 0
 	new_round()
+var past_players = []
+
+
 
 func new_round():
+	$player.set_physics_process(false)
 	time = 60
 	score = 0
+	count = 2
+	$HUD.update_timer(time)
+	$RoundTimer.stop()
 	rewind.emit()
 	if $player.record.size() > 1:
 		futures.append($player.record)
@@ -43,10 +51,12 @@ func new_round():
 			add_child(past_player_instance)
 			past_player_instance.position = past[0]
 			past_player_instance.set_movement(past.slice(1))
-	  
+			past_player_instance.set_physics_process(false)
+			past_players.append(past_player_instance)
+
 	# place artifacts
 	for artifact in artifacts:
-		add_artifact(artifact[0], artifact[1])	
+		add_artifact(artifact[0], artifact[1])
 	
 	var random_int = randi_range(1, 6)
 	if random_int == 1:
@@ -61,9 +71,17 @@ func new_round():
 		$player.start($playerspawns/playerspawn5.position)
 	if random_int == 6:
 		$player.start($playerspawns/playerspawn6.position)
-	$RoundTimer.start()
-	$HUD.update_timer(time)
-	$HUD.update_score(score)
+	
+	$HUD/CountDownLabel.show()
+	$CountDown.start()
+	
+func _process(delta):
+	if Input.is_action_just_pressed("ui_cancel"):
+		new_round()
+		
+	if time == 0:
+		print("Game Over")
+	
 
 func add_artifact(position: Vector2, sprite_name: String):
 	var artifact = artifact_scene.instantiate()
@@ -75,6 +93,18 @@ func _on_round_timer_timeout():
 	$RoundTimer.start()
 	$HUD.update_timer(time)
 
-func _process(delta):
-	if Input.is_action_just_pressed("ui_cancel"):
-		new_round()
+
+
+func _on_count_down_timeout() -> void:
+	if count == 0:
+		$HUD/CountDownLabel.hide()
+		$RoundTimer.start()
+		$HUD.update_timer(time)
+		$HUD.update_score(score)
+		$player.set_physics_process(true)
+		for p in past_players:
+			if is_instance_valid(p):
+				p.set_physics_process(true)
+	else:
+		count -= 1
+		$CountDown.start()
