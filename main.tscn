@@ -43,7 +43,6 @@ polygon = PackedVector2Array(3656, 1780, 3713, 1783, 3715, 2775, 3501, 2775, 349
 
 [node name="Root" type="Node2D"]
 material = SubResource("CanvasItemMaterial_5vw27")
-position = Vector2(-70, -32)
 script = ExtResource("1_1bvp3")
 
 [node name="MapPlaceholder" type="Sprite2D" parent="."]

@@ -68,7 +68,7 @@ func start(pos: Vector2):
 	animated_sprite.play("default")
 	position = pos
 	show()
-  for ray in $Cone.get_children():
+	for ray in $Cone.get_children():
 		ray.add_exception($"../MapCollisionPlaceholder")
 	
 func v_tween(ramp_time: int, x: float) -> float:
