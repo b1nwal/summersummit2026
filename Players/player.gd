@@ -12,6 +12,7 @@ var f_damping = 0.154
 var f_A = .07
 var angular_velocity = 0
 var angular_acceleration = 0
+var checked = 0
 
 func _physics_process(delta: float) -> void:
 	# movement
@@ -36,12 +37,25 @@ func _physics_process(delta: float) -> void:
 		velocity = velocity.normalized() * (speed - v_tween(ramp_down * (velocity.length()/speed), Time.get_ticks_msec() - stop_start))
 	
 	$FlashLight.rotation = facing.angle() + (PI/4)
+	
+	# Detection flashlight
+	$Cone.rotation = facing.angle() + (PI/4)
+	for ray in $Cone.get_children():
+		if ray.is_colliding():
+			print("Hitting: ", ray.get_collider())
+			checked = 1
+		elif checked == 1:
+			checked = 0
+			print("not hitting")
+
 	move_and_slide()
 
 
 func start(pos: Vector2):
 	position = pos
 	show()
+  for ray in $Cone.get_children():
+		ray.add_exception($"../MapCollisionPlaceholder")
 	
 func v_tween(ramp_time: int, x: float) -> float:
 	var m = 1

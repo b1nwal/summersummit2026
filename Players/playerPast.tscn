@@ -6,7 +6,6 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_onrkg"]
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
-scale = Vector2(1.5, 1.5)
 metadata/speed = 400
 metadata/_edit_group_ = true
 
