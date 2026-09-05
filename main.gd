@@ -1,10 +1,26 @@
 extends Node2D
 
 var playerPast_scene = preload("res://Players/playerPast.tscn")
-var brian_scene = preload("res://gameElements/tempartifact.tscn")
-
-var score
+var artifact_scene = preload("res://gameElements/artifact.tscn")
 var time
+var score
+
+var artifacts = [
+	[Vector2(360, 1997), "stand_empty"], # these are all the ones on the left
+	[Vector2(192, 1997), "stand_amongus"], # they all have new names and
+	[Vector2(192, 1677), "stand_amongus"], # im too lazy to comeup with it rn
+	[Vector2(768, 1037), "stand_amongus"],
+	[Vector2(704, 1805), "stand_amongus"], 
+	[Vector2(1472, 1101), "stand_amongus"], # new room / N
+	[Vector2(1280, 1933), "stand_amongus"], # famous paintings / Central
+	[Vector2(1472, 1933), "stand_amongus"], 
+	[Vector2(1664, 1933), "stand_amongus"],
+	[Vector2(2240, 1613), "stand_amongus"], # war relics / NE
+	[Vector2(2624, 1357), "stand_amongus"], 
+	[Vector2(2304, 2061), "stand_amongus"], # statues / SE
+	[Vector2(2560, 973), "stand_amongus"], # new room / E
+	[Vector2(1472, 2445), "stand_amongus"] # great hall / S
+]
 
 func _ready():
 	randomize()
@@ -15,35 +31,36 @@ func _ready():
 	var playerPast = playerPast_scene.instantiate()
 	add_child(playerPast)
 	playerPast.position = Vector2(500,1000)
-	#spawn brians
-	var brian1 = brian_scene.instantiate()
-	add_child(brian1)
-	brian1.position = Vector2(500,1000)
 	
-	var brian2 = brian_scene.instantiate()
-	add_child(brian2)
-	brian2.position = Vector2(1900,1750)
-
-	var brian3 = brian_scene.instantiate()
-	add_child(brian3)
-	brian3.position = Vector2(3500,2050)
+	# place artifacts
+	for artifact in artifacts:
+		add_artifact(artifact[0], artifact[1])	
+		
 	new_round()
 
 func new_round():
-	time = 60
-	var random_int = randi_range(1, 3)
+  time = 60
+	var random_int = randi_range(1, 6)
 	if random_int == 1:
 		$player.position = $playerspawns/playerspawn.position
 	if random_int == 2:
 		$player.position = $playerspawns/playerspawn2.position
 	if random_int == 3:
 		$player.position = $playerspawns/playerspawn3.position
-	
-	
-	
+	if random_int == 4:
+		$player.position = $playerspawns/playerspawn4.position
+	if random_int == 5:
+		$player.position = $playerspawns/playerspawn5.position
+	if random_int == 6:
+		$player.position = $playerspawns/playerspawn6.position
 	$RoundTimer.start()
 	$HUD.update_timer(time)
 	$HUD.update_score(score)
+
+func add_artifact(position: Vector2, sprite_name: String):
+	var artifact = artifact_scene.instantiate()
+	artifact.initialize_data(position, sprite_name)
+	add_child(artifact)
 
 func _on_round_timer_timeout():
 	time -= 1
