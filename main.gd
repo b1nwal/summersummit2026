@@ -1,8 +1,9 @@
 extends Node2D
-
 var time
 
 func _ready():
+	$player.start($playerspawn.position);
+	print("beginning")
 	time = 0
 	new_round()
 
