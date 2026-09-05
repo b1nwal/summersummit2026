@@ -1,3 +1,14 @@
-[gd_scene format=3 uid="uid://8b1aacpykmpl"]
+[gd_scene load_steps=3 format=3 uid="uid://bida34n0q3eor"]
+
+[ext_resource type="Script" uid="uid://b3tekr88na6fe" path="res://main.gd" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://ble0wamj0w0l0" path="res://hud.tscn" id="2_0xm2m"]
 
 [node name="Main" type="Node2D"]
+script = ExtResource("1_ig7tw")
+
+[node name="RoundTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="HUD" parent="." instance=ExtResource("2_0xm2m")]
+
+[connection signal="timeout" from="RoundTimer" to="." method="_on_round_timer_timeout"]
