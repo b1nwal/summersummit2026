@@ -1,11 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://bw4aphjyapcqh"]
+[gd_scene load_steps=4 format=3 uid="uid://bw4aphjyapcqh"]
 
 [ext_resource type="Texture2D" uid="uid://dy1s5idfmtxmi" path="res://assets/player_placeholder.png" id="1_4flbx"]
+[ext_resource type="Texture2D" uid="uid://b0iykuo3fw3eo" path="res://assets/flashlight_placeholder.png" id="2_onrkg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_onrkg"]
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
+scale = Vector2(1.5, 1.5)
 metadata/speed = 400
+metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2(2.5, 2.5)
@@ -18,3 +21,10 @@ texture = ExtResource("1_4flbx")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(1.3, 1.3)
+
+[node name="FlashLight" type="PointLight2D" parent="."]
+position = Vector2(-0.666664, -0.666672)
+shadow_enabled = true
+texture = ExtResource("2_onrkg")
+offset = Vector2(66, -62)
+texture_scale = 0.2
