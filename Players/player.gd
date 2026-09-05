@@ -81,5 +81,4 @@ func start(pos: Vector2):
 	position = pos
 	show()
 	for ray in $Cone.get_children():
-		ray.add_exception($"../MapCollisionPlaceholder")
-	
+		ray.add_exception($"../raysbs")

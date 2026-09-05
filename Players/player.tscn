@@ -2,7 +2,6 @@
 
 [ext_resource type="Material" uid="uid://lwblg6nqxg0p" path="res://Players/PlayerMaterial.tres" id="1_8g4q3"]
 [ext_resource type="Texture2D" uid="uid://cxxknilyn6av4" path="res://assets/Thief/thief front1.png" id="1_fq5u1"]
-[ext_resource type="Texture2D" uid="uid://i7fm84arhi" path="res://assets/Thief/thief back1.png" id="2_qhuue"]
 [ext_resource type="Texture2D" uid="uid://d381ir0y2xegq" path="res://assets/Thief/thief back2.png" id="3_tintf"]
 [ext_resource type="Texture2D" uid="uid://db550g7r4k5im" path="res://assets/Thief/thief back3.png" id="4_8g4q3"]
 [ext_resource type="Texture2D" uid="uid://ooujum2uc5cl" path="res://assets/Thief/thief back4.png" id="5_wvm7i"]
@@ -11,12 +10,10 @@
 [ext_resource type="Texture2D" uid="uid://6hp4nnbp1ssd" path="res://assets/Thief/thief front3.png" id="8_dw5y0"]
 [ext_resource type="Texture2D" uid="uid://ceakpi828mxbw" path="res://assets/Thief/thief front4.png" id="9_gwhy4"]
 [ext_resource type="Texture2D" uid="uid://b3owacee07mdu" path="res://assets/Thief/thief front5.png" id="10_ytosk"]
-[ext_resource type="Texture2D" uid="uid://65cx5ws31mev" path="res://assets/Thief/thief side left1.png" id="11_jwe1c"]
 [ext_resource type="Texture2D" uid="uid://nxt3uvos6umg" path="res://assets/Thief/thief side left2.png" id="12_4lk2k"]
 [ext_resource type="Texture2D" uid="uid://br7kpqcoevmmx" path="res://assets/Thief/thief side left3.png" id="13_dy27a"]
 [ext_resource type="Texture2D" uid="uid://dy7knmf8mod5b" path="res://assets/Thief/thief side left4.png" id="14_fnql2"]
 [ext_resource type="Texture2D" uid="uid://c4em5lf2g8x7k" path="res://assets/Thief/thief side left5.png" id="15_lcqvj"]
-[ext_resource type="Texture2D" uid="uid://ccyx7hpdglfy4" path="res://assets/Thief/thief side right1.png" id="16_4l5xh"]
 [ext_resource type="Texture2D" uid="uid://c0ycabde8q4rb" path="res://assets/Thief/thief side right2.png" id="17_2ggna"]
 [ext_resource type="Texture2D" uid="uid://bh3g14uijneei" path="res://assets/Thief/thief side right3.png" id="18_tqeue"]
 [ext_resource type="Texture2D" uid="uid://bku7awe1spwok" path="res://assets/Thief/thief side right4.png" id="19_ymt3s"]
@@ -39,9 +36,6 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_qhuue")
-}, {
-"duration": 1.0,
 "texture": ExtResource("3_tintf")
 }, {
 "duration": 1.0,
@@ -58,9 +52,6 @@ animations = [{
 "speed": 15.0
 }, {
 "frames": [{
-"duration": 1.0,
-"texture": ExtResource("1_fq5u1")
-}, {
 "duration": 1.0,
 "texture": ExtResource("7_0be0h")
 }, {
@@ -79,9 +70,6 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("11_jwe1c")
-}, {
-"duration": 1.0,
 "texture": ExtResource("12_4lk2k")
 }, {
 "duration": 1.0,
@@ -98,9 +86,6 @@ animations = [{
 "speed": 15.0
 }, {
 "frames": [{
-"duration": 1.0,
-"texture": ExtResource("16_4l5xh")
-}, {
 "duration": 1.0,
 "texture": ExtResource("17_2ggna")
 }, {
