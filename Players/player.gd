@@ -1,3 +1,5 @@
+
+class_name Player 
 extends CharacterBody2D
 
 @onready var speed = get_meta("speed")
@@ -15,11 +17,17 @@ var f_A = .07
 var angular_velocity = 0
 var angular_acceleration = 0
 var checked = 0
+var record = [Vector2()]
+
+func _obtain_v_vec():
+	var a = Input.get_vector("move_left","move_right","move_up","move_down")
+	record.append(a)
+	return a
 
 func _physics_process(delta: float) -> void:
 	# movement
-	var v_vec = Input.get_vector("move_left","move_right","move_up","move_down")
-	
+	var v_vec = _obtain_v_vec()
+
 	if v_vec[0] > 0:
 		animated_sprite.play("walk_right")
 	elif v_vec[0] < 0:
@@ -49,30 +57,28 @@ func _physics_process(delta: float) -> void:
 	if not running and not velocity == Vector2.ZERO:
 		velocity = velocity.normalized() * (speed - v_tween(ramp_down * (velocity.length()/speed), Time.get_ticks_msec() - stop_start))
 	
-	$FlashLight.rotation = facing.angle() + (PI/4)
+	$FlashLight.rotation = facing.angle() - PI/2
 	
 	# Detection flashlight
-	$Cone.rotation = facing.angle() + (PI/4)
+	$Cone.rotation = facing.angle() - PI/2
 	for ray in $Cone.get_children():
 		if ray.is_colliding():
-			print("Hitting: ", ray.get_collider())
 			checked = 1
 		elif checked == 1:
 			checked = 0
-			print("not hitting")
 
 	move_and_slide()
-
-
-func start(pos: Vector2):
-	animated_sprite.play("default")
-	position = pos
-	show()
-	for ray in $Cone.get_children():
-		ray.add_exception($"../MapCollisionPlaceholder")
 	
 func v_tween(ramp_time: int, x: float) -> float:
 	var m = 1
 	if x < ramp_time:
 		m = (3*((x/ramp_time)**2) - 2*((x/ramp_time)**3))
 	return m * speed
+
+func start(pos: Vector2):
+	record = [pos]
+	animated_sprite.play("default")
+	position = pos
+	show()
+	for ray in $Cone.get_children():
+		ray.add_exception($"../MapCollisionPlaceholder")

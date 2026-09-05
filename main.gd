@@ -2,6 +2,7 @@ extends Node2D
 
 var playerPast_scene = preload("res://Players/playerPast.tscn")
 var artifact_scene = preload("res://gameElements/artifact.tscn")
+var futures = []
 var time
 var score
 
@@ -22,37 +23,44 @@ var artifacts = [
 	[Vector2(1472, 2445), "stand_amongus"] # great hall / S
 ]
 
+signal rewind
+
 func _ready():
 	randomize()
 	print("beginning")
-	$player.start($playerspawns/playerspawn.position);
-	time = 60
-	score = 0
-	var playerPast = playerPast_scene.instantiate()
-	add_child(playerPast)
-	playerPast.position = Vector2(500,1000)
-	
-	# place artifacts
-	for artifact in artifacts:
-		add_artifact(artifact[0], artifact[1])	
-		
+	time = 0
 	new_round()
 
 func new_round():
 	time = 60
+	score = 0
+	rewind.emit()
+	if $player.record.size() > 1:
+		futures.append($player.record)
+	if futures:
+		for past in futures:
+			var past_player_instance = playerPast_scene.instantiate()
+			add_child(past_player_instance)
+			past_player_instance.position = past[0]
+			past_player_instance.set_movement(past.slice(1))
+      
+	# place artifacts
+	for artifact in artifacts:
+		add_artifact(artifact[0], artifact[1])	
+    
 	var random_int = randi_range(1, 6)
 	if random_int == 1:
-		$player.position = $playerspawns/playerspawn.position
+		$player.start($playerspawns/playerspawn.position)
 	if random_int == 2:
-		$player.position = $playerspawns/playerspawn2.position
+		$player.start($playerspawns/playerspawn2.position)
 	if random_int == 3:
-		$player.position = $playerspawns/playerspawn3.position
+		$player.start($playerspawns/playerspawn3.position)
 	if random_int == 4:
-		$player.position = $playerspawns/playerspawn4.position
+		$player.start($playerspawns/playerspawn4.position)
 	if random_int == 5:
-		$player.position = $playerspawns/playerspawn5.position
+		$player.start($playerspawns/playerspawn5.position)
 	if random_int == 6:
-		$player.position = $playerspawns/playerspawn6.position
+		$player.start($playerspawns/playerspawn6.position)
 	$RoundTimer.start()
 	$HUD.update_timer(time)
 	$HUD.update_score(score)
