@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://tvl054u5glus"]
+
+[ext_resource type="Texture2D" uid="uid://dy1s5idfmtxmi" path="res://assets/player_placeholder.png" id="1_4flbx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_onrkg"]
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+metadata/speed = 400
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(2.5, 2.5)
+shape = SubResource("RectangleShape2D_onrkg")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(2.6226e-06, 1.43051e-06)
+scale = Vector2(0.206612, 0.18315)
+texture = ExtResource("1_4flbx")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(1.3, 1.3)
