@@ -14,3 +14,7 @@ func _on_round_timer_timeout():
 	time += 1
 	$RoundTimer.start()
 	$HUD.update_timer(time)
+
+func _process(delta):
+	if Input.is_action_pressed("ui_cancel"):
+		get_tree().quit()
