@@ -1,27 +1,25 @@
-[gd_scene load_steps=25 format=3 uid="uid://ds72i60gi80dp"]
+[gd_scene load_steps=23 format=3 uid="uid://ds72i60gi80dp"]
 
 [ext_resource type="Script" uid="uid://cb58eunt5ma8x" path="res://Players/playerPast.gd" id="1_om0np"]
-[ext_resource type="Texture2D" uid="uid://cxxknilyn6av4" path="res://assets/Thief/thief front1.png" id="1_ske43"]
-[ext_resource type="Texture2D" uid="uid://i7fm84arhi" path="res://assets/Thief/thief back1.png" id="2_om0np"]
-[ext_resource type="Texture2D" uid="uid://d381ir0y2xegq" path="res://assets/Thief/thief back2.png" id="3_qrs7w"]
-[ext_resource type="Texture2D" uid="uid://db550g7r4k5im" path="res://assets/Thief/thief back3.png" id="4_6aqf2"]
-[ext_resource type="Texture2D" uid="uid://ooujum2uc5cl" path="res://assets/Thief/thief back4.png" id="5_5fwkd"]
-[ext_resource type="Texture2D" uid="uid://dhfw5ohqv2mjj" path="res://assets/Thief/thief back5.png" id="6_i8sd8"]
-[ext_resource type="Texture2D" uid="uid://b7avh6l5ovbr2" path="res://assets/Thief/thief front2.png" id="7_8t037"]
-[ext_resource type="Texture2D" uid="uid://6hp4nnbp1ssd" path="res://assets/Thief/thief front3.png" id="8_pjjj4"]
-[ext_resource type="Texture2D" uid="uid://ceakpi828mxbw" path="res://assets/Thief/thief front4.png" id="9_khwun"]
-[ext_resource type="Texture2D" uid="uid://b3owacee07mdu" path="res://assets/Thief/thief front5.png" id="10_h82mm"]
-[ext_resource type="Texture2D" uid="uid://65cx5ws31mev" path="res://assets/Thief/thief side left1.png" id="11_7mv4s"]
-[ext_resource type="Texture2D" uid="uid://nxt3uvos6umg" path="res://assets/Thief/thief side left2.png" id="12_gdjsw"]
-[ext_resource type="Texture2D" uid="uid://br7kpqcoevmmx" path="res://assets/Thief/thief side left3.png" id="13_pre6c"]
-[ext_resource type="Texture2D" uid="uid://dy7knmf8mod5b" path="res://assets/Thief/thief side left4.png" id="14_xt6un"]
-[ext_resource type="Texture2D" uid="uid://c4em5lf2g8x7k" path="res://assets/Thief/thief side left5.png" id="15_88ni0"]
-[ext_resource type="Texture2D" uid="uid://ccyx7hpdglfy4" path="res://assets/Thief/thief side right1.png" id="16_plf0p"]
-[ext_resource type="Texture2D" uid="uid://c0ycabde8q4rb" path="res://assets/Thief/thief side right2.png" id="17_vuc21"]
-[ext_resource type="Texture2D" uid="uid://bh3g14uijneei" path="res://assets/Thief/thief side right3.png" id="18_4qurp"]
-[ext_resource type="Texture2D" uid="uid://bku7awe1spwok" path="res://assets/Thief/thief side right4.png" id="19_yq3ih"]
-[ext_resource type="Texture2D" uid="uid://dyyvh76m0wmnj" path="res://assets/Thief/thief side right5.png" id="20_b3vmn"]
-[ext_resource type="Texture2D" uid="uid://377xapsjvqhv" path="res://assets/flashlight.png" id="22_om0np"]
+[ext_resource type="Texture2D" uid="uid://suloji8urlf5" path="res://assets/Thief/shadow.png" id="2_f5baa"]
+[ext_resource type="Texture2D" uid="uid://05wam5wt5n3x" path="res://assets/PastThief/thief front1.png" id="2_y2krc"]
+[ext_resource type="Texture2D" uid="uid://dglnj053onw3a" path="res://assets/PastThief/thief back2.png" id="3_f5baa"]
+[ext_resource type="Texture2D" uid="uid://bhm5pkpqp3txa" path="res://assets/PastThief/thief back3.png" id="4_ske43"]
+[ext_resource type="Texture2D" uid="uid://ccl7q6r7w8hed" path="res://assets/PastThief/thief back4.png" id="5_om0np"]
+[ext_resource type="Texture2D" uid="uid://c3udd2tnr3ohn" path="res://assets/PastThief/thief back5.png" id="6_qrs7w"]
+[ext_resource type="Texture2D" uid="uid://db0idey0m0dsv" path="res://assets/PastThief/thief front2.png" id="7_6aqf2"]
+[ext_resource type="Texture2D" uid="uid://0mao6k04q6fe" path="res://assets/PastThief/thief front3.png" id="8_5fwkd"]
+[ext_resource type="Texture2D" uid="uid://b0gkqy5dhnslj" path="res://assets/PastThief/thief front4.png" id="9_i8sd8"]
+[ext_resource type="Texture2D" uid="uid://brr6eefjgk3bf" path="res://assets/PastThief/thief front5.png" id="10_8t037"]
+[ext_resource type="Texture2D" uid="uid://bh802s7h8eii8" path="res://assets/PastThief/thief side left2.png" id="11_pjjj4"]
+[ext_resource type="Texture2D" uid="uid://busj0fydotdf7" path="res://assets/PastThief/thief side left3.png" id="12_khwun"]
+[ext_resource type="Texture2D" uid="uid://bctmth4immiti" path="res://assets/PastThief/thief side left4.png" id="13_h82mm"]
+[ext_resource type="Texture2D" uid="uid://dhavrsj56dy81" path="res://assets/PastThief/thief side left5.png" id="14_7mv4s"]
+[ext_resource type="Texture2D" uid="uid://c41bu04niyelc" path="res://assets/PastThief/thief side right2.png" id="15_gdjsw"]
+[ext_resource type="Texture2D" uid="uid://buf41pwlys52f" path="res://assets/PastThief/thief side right3.png" id="16_pre6c"]
+[ext_resource type="Texture2D" uid="uid://cikdkwfnoxoh2" path="res://assets/PastThief/thief side right4.png" id="17_xt6un"]
+[ext_resource type="Texture2D" uid="uid://da7lvdhqn7a5a" path="res://assets/PastThief/thief side right5.png" id="18_88ni0"]
+[ext_resource type="Texture2D" uid="uid://d4l4k8a7s268" path="res://assets/flash6.png" id="22_om0np"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3c3q8"]
 size = Vector2(10.4, 20)
@@ -30,7 +28,7 @@ size = Vector2(10.4, 20)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_ske43")
+"texture": ExtResource("2_y2krc")
 }],
 "loop": true,
 "name": &"default",
@@ -38,83 +36,71 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_om0np")
+"texture": ExtResource("3_f5baa")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_qrs7w")
+"texture": ExtResource("4_ske43")
 }, {
 "duration": 1.0,
-"texture": ExtResource("4_6aqf2")
+"texture": ExtResource("5_om0np")
 }, {
 "duration": 1.0,
-"texture": ExtResource("5_5fwkd")
-}, {
-"duration": 1.0,
-"texture": ExtResource("6_i8sd8")
+"texture": ExtResource("6_qrs7w")
 }],
 "loop": true,
 "name": &"walk_backward",
-"speed": 15.0
+"speed": 7.0
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_ske43")
+"texture": ExtResource("7_6aqf2")
 }, {
 "duration": 1.0,
-"texture": ExtResource("7_8t037")
+"texture": ExtResource("8_5fwkd")
 }, {
 "duration": 1.0,
-"texture": ExtResource("8_pjjj4")
+"texture": ExtResource("9_i8sd8")
 }, {
 "duration": 1.0,
-"texture": ExtResource("9_khwun")
-}, {
-"duration": 1.0,
-"texture": ExtResource("10_h82mm")
+"texture": ExtResource("10_8t037")
 }],
 "loop": true,
 "name": &"walk_forward",
-"speed": 15.0
+"speed": 7.0
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("11_7mv4s")
+"texture": ExtResource("11_pjjj4")
 }, {
 "duration": 1.0,
-"texture": ExtResource("12_gdjsw")
+"texture": ExtResource("12_khwun")
 }, {
 "duration": 1.0,
-"texture": ExtResource("13_pre6c")
+"texture": ExtResource("13_h82mm")
 }, {
 "duration": 1.0,
-"texture": ExtResource("14_xt6un")
-}, {
-"duration": 1.0,
-"texture": ExtResource("15_88ni0")
+"texture": ExtResource("14_7mv4s")
 }],
 "loop": true,
 "name": &"walk_left",
-"speed": 15.0
+"speed": 7.0
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("16_plf0p")
+"texture": ExtResource("15_gdjsw")
 }, {
 "duration": 1.0,
-"texture": ExtResource("17_vuc21")
+"texture": ExtResource("16_pre6c")
 }, {
 "duration": 1.0,
-"texture": ExtResource("18_4qurp")
+"texture": ExtResource("17_xt6un")
 }, {
 "duration": 1.0,
-"texture": ExtResource("19_yq3ih")
-}, {
-"duration": 1.0,
-"texture": ExtResource("20_b3vmn")
+"texture": ExtResource("18_88ni0")
 }],
 "loop": true,
 "name": &"walk_right",
-"speed": 15.0
+"speed": 7.0
 }]
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
@@ -122,6 +108,19 @@ collision_layer = 2
 script = ExtResource("1_om0np")
 metadata/speed = 400
 metadata/_edit_group_ = true
+
+[node name="FlashLight" type="PointLight2D" parent="."]
+position = Vector2(-0.682289, -0.666672)
+rotation = -2.32641
+energy = 0.5
+shadow_enabled = true
+texture = ExtResource("22_om0np")
+offset = Vector2(-2.1928, 109.471)
+texture_scale = 0.2
+
+[node name="Shadow" type="Sprite2D" parent="."]
+position = Vector2(0, 16)
+texture = ExtResource("2_f5baa")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1, 0)
@@ -132,10 +131,6 @@ shape = SubResource("RectangleShape2D_3c3q8")
 position = Vector2(2.6226e-06, 1.43051e-06)
 scale = Vector2(2, 1.768)
 sprite_frames = SubResource("SpriteFrames_n48rb")
-
-[node name="FlashLight" type="PointLight2D" parent="."]
-position = Vector2(3, 0)
-texture = ExtResource("22_om0np")
 
 [node name="Cone" type="Node2D" parent="."]
 z_index = 1
