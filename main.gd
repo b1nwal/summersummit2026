@@ -72,9 +72,16 @@ func new_round():
 	if random_int == 6:
 		$player.start($playerspawns/playerspawn6.position)
 	
-	
 	$HUD/CountDownLabel.show()
 	$CountDown.start()
+	
+func _process(delta):
+	if Input.is_action_just_pressed("ui_cancel"):
+		new_round()
+		
+	if time == 0:
+		print("Game Over")
+	
 
 func add_artifact(position: Vector2, sprite_name: String):
 	var artifact = artifact_scene.instantiate()
@@ -86,9 +93,6 @@ func _on_round_timer_timeout():
 	$RoundTimer.start()
 	$HUD.update_timer(time)
 
-func _process(delta):
-	if Input.is_action_just_pressed("ui_cancel"):
-		new_round()
 
 
 func _on_count_down_timeout() -> void:
