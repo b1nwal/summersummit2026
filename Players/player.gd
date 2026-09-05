@@ -30,7 +30,7 @@ func _physics_process(delta: float) -> void:
 		facing = v_vec
 
 	$FlashLight.rotation = facing.angle() + (PI/4)
-	print(velocity)
+	#print(velocity)
 	move_and_slide()
 
 

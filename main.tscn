@@ -1,9 +1,10 @@
-[gd_scene load_steps=16 format=3 uid="uid://8b1aacpykmpl"]
+[gd_scene load_steps=17 format=3 uid="uid://8b1aacpykmpl"]
 
 [ext_resource type="Script" uid="uid://cj5kaa1m55hos" path="res://main.gd" id="1_1bvp3"]
 [ext_resource type="Texture2D" uid="uid://rqaa06atgbby" path="res://assets/map_placeholder.png" id="2_lquwl"]
 [ext_resource type="PackedScene" uid="uid://bw4aphjyapcqh" path="res://Players/player.tscn" id="3_7mycd"]
 [ext_resource type="Script" uid="uid://dn1d50r54uxxv" path="res://Players/player.gd" id="4_272bh"]
+[ext_resource type="Script" uid="uid://b7j7ijdgqb8aa" path="res://Players/playerSoundManager.gd" id="5_7mycd"]
 [ext_resource type="PackedScene" uid="uid://ble0wamj0w0l0" path="res://UI/hud.tscn" id="5_lquwl"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_5vw27"]
@@ -39,6 +40,15 @@ size = Vector2(153, 128)
 material = SubResource("CanvasItemMaterial_5vw27")
 script = ExtResource("1_1bvp3")
 
+[node name="FmodBanks" type="FmodBankLoader" parent="."]
+bank_paths = ["res://assets/Audio/Desktop/Master.bank"]
+
+[node name="bgAudio" type="Node2D" parent="."]
+
+[node name="music" type="FmodEventEmitter2D" parent="bgAudio"]
+event_name = "event:/music"
+event_guid = "{3ace9a90-760a-46a8-945a-efeb9447ac4b}"
+
 [node name="MapPlaceholder" type="Sprite2D" parent="."]
 position = Vector2(575.5, 320.5)
 scale = Vector2(2.36831, 1.98476)
@@ -47,6 +57,19 @@ texture = ExtResource("2_lquwl")
 [node name="player" parent="." instance=ExtResource("3_7mycd")]
 visible = false
 script = ExtResource("4_272bh")
+
+[node name="audioListener" type="FmodListener2D" parent="player"]
+
+[node name="playerSounds" type="Node2D" parent="player"]
+script = ExtResource("5_7mycd")
+metadata/delay = 0.2
+
+[node name="footsteps" type="FmodEventEmitter2D" parent="player/playerSounds"]
+event_name = "event:/walking"
+event_guid = "{f1337a33-50eb-40bb-a12e-da83cdddf796}"
+fmod_parameters/ReverbWet/id = 3810293487696999223
+fmod_parameters/ReverbWet = 0.4
+fmod_parameters/ReverbWet/variant_type = 3
 
 [node name="playerspawn" type="Marker2D" parent="."]
 position = Vector2(1090, 339)
