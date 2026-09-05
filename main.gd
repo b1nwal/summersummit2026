@@ -39,7 +39,7 @@ func _ready():
 	new_round()
 
 func new_round():
-  time = 60
+	time = 60
 	var random_int = randi_range(1, 6)
 	if random_int == 1:
 		$player.position = $playerspawns/playerspawn.position
