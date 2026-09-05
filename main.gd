@@ -1,4 +1,7 @@
 extends Node2D
+
+var playerPast_scene = preload("res://Players/playerPast.tscn")
+
 var time
 
 func _ready():
@@ -6,6 +9,11 @@ func _ready():
 	print("beginning")
 	time = 0
 	new_round()
+	
+	# spawn another stewie on a tricycle 
+	var playerPast = playerPast_scene.instantiate()
+	playerPast.global_position = Vector2(700,250)
+	add_child(playerPast)
 
 func new_round():
 	$RoundTimer.start()
