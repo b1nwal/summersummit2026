@@ -1,3 +1,5 @@
+
+class_name Player 
 extends CharacterBody2D
 
 @onready var speed = get_meta("speed")
@@ -17,10 +19,15 @@ var angular_acceleration = 0
 var checked = 0
 var record = [Vector2()]
 
+func _obtain_v_vec():
+	var a = Input.get_vector("move_left","move_right","move_up","move_down")
+	record.append(a)
+	return a
+
 func _physics_process(delta: float) -> void:
 	# movement
-	var v_vec = Input.get_vector("move_left","move_right","move_up","move_down")
-	record.append(v_vec)
+	var v_vec = _obtain_v_vec()
+
 	if v_vec[0] > 0:
 		animated_sprite.play("walk_right")
 	elif v_vec[0] < 0:

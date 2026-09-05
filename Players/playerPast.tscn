@@ -136,7 +136,7 @@ sprite_frames = SubResource("SpriteFrames_n48rb")
 [node name="FlashLight" type="PointLight2D" parent="."]
 position = Vector2(-0.682289, -0.666672)
 rotation = -2.32641
-energy = 0.7
+energy = 0.5
 shadow_enabled = true
 texture = ExtResource("22_om0np")
 offset = Vector2(-2.1928, 109.471)

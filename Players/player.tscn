@@ -134,7 +134,7 @@ sprite_frames = SubResource("SpriteFrames_x7o8n")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 top_level = true
-zoom = Vector2(0.2, 0.2)
+zoom = Vector2(2.4, 2.4)
 limit_left = 288
 limit_top = 225
 limit_right = 3712
