@@ -27,3 +27,20 @@ shadow_enabled = true
 texture = ExtResource("2_onrkg")
 offset = Vector2(66, -62)
 texture_scale = 0.2
+
+[node name="Cone" type="Node2D" parent="."]
+
+[node name="RayCast2D" type="RayCast2D" parent="Cone"]
+target_position = Vector2(58, -145)
+
+[node name="RayCast2D2" type="RayCast2D" parent="Cone"]
+target_position = Vector2(88, -132)
+
+[node name="RayCast2D3" type="RayCast2D" parent="Cone"]
+target_position = Vector2(120, -121)
+
+[node name="RayCast2D4" type="RayCast2D" parent="Cone"]
+target_position = Vector2(139, -93)
+
+[node name="RayCast2D5" type="RayCast2D" parent="Cone"]
+target_position = Vector2(154, -56)
