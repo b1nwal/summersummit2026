@@ -1,7 +1,6 @@
-[gd_scene load_steps=24 format=3 uid="uid://bw4aphjyapcqh"]
+[gd_scene load_steps=25 format=3 uid="uid://bw4aphjyapcqh"]
 
 [ext_resource type="Texture2D" uid="uid://cxxknilyn6av4" path="res://assets/Thief/thief front1.png" id="1_fq5u1"]
-[ext_resource type="Texture2D" uid="uid://b0iykuo3fw3eo" path="res://assets/flashlight_placeholder.png" id="2_onrkg"]
 [ext_resource type="Texture2D" uid="uid://i7fm84arhi" path="res://assets/Thief/thief back1.png" id="2_qhuue"]
 [ext_resource type="Texture2D" uid="uid://d381ir0y2xegq" path="res://assets/Thief/thief back2.png" id="3_tintf"]
 [ext_resource type="Texture2D" uid="uid://db550g7r4k5im" path="res://assets/Thief/thief back3.png" id="4_8g4q3"]
@@ -21,6 +20,8 @@
 [ext_resource type="Texture2D" uid="uid://bh3g14uijneei" path="res://assets/Thief/thief side right3.png" id="18_tqeue"]
 [ext_resource type="Texture2D" uid="uid://bku7awe1spwok" path="res://assets/Thief/thief side right4.png" id="19_ymt3s"]
 [ext_resource type="Texture2D" uid="uid://dyyvh76m0wmnj" path="res://assets/Thief/thief side right5.png" id="20_dce2x"]
+[ext_resource type="Texture2D" uid="uid://d4l4k8a7s268" path="res://assets/flash6.png" id="21_qhuue"]
+[ext_resource type="Script" uid="uid://bipnx7p5s1amy" path="res://UI/camera.gd" id="21_tintf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_onrkg"]
 size = Vector2(10.4, 20)
@@ -117,6 +118,7 @@ animations = [{
 }]
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
+collision_layer = 2
 metadata/speed = 400
 metadata/_edit_group_ = true
 
@@ -131,13 +133,22 @@ scale = Vector2(2, 1.768)
 sprite_frames = SubResource("SpriteFrames_x7o8n")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(2.4, 2.4)
+top_level = true
+zoom = Vector2(0.2, 0.2)
+limit_left = 288
+limit_top = 225
+limit_right = 3712
+limit_bottom = 3150
+editor_draw_limits = true
+script = ExtResource("21_tintf")
 
 [node name="FlashLight" type="PointLight2D" parent="."]
-position = Vector2(-0.666664, -0.666672)
+position = Vector2(-0.015625, 0)
+rotation = -2.32641
+energy = 0.5
 shadow_enabled = true
-texture = ExtResource("2_onrkg")
-offset = Vector2(66, -62)
+texture = ExtResource("21_qhuue")
+offset = Vector2(-2.1928, 109.471)
 texture_scale = 0.2
 
 [node name="Cone" type="Node2D" parent="."]

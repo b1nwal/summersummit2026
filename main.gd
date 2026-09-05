@@ -2,40 +2,35 @@ extends Node2D
 
 var playerPast_scene = preload("res://Players/playerPast.tscn")
 var brian_scene = preload("res://gameElements/tempartifact.tscn")
-
-
+var futures = []
 var time
+
+signal rewind
 
 func _ready():
 	randomize()
 	$player.start($playerspawns/playerspawn.position);
 	print("beginning")
 	time = 0
-	var playerPast = playerPast_scene.instantiate()
-	add_child(playerPast)
-	playerPast.position = Vector2(500,1000)
-	#spawn brians
-	var brian1 = brian_scene.instantiate()
-	add_child(brian1)
-	brian1.position = Vector2(500,1000)
-	
-	var brian2 = brian_scene.instantiate()
-	add_child(brian2)
-	brian2.position = Vector2(1900,1750)
-
-	var brian3 = brian_scene.instantiate()
-	add_child(brian3)
-	brian3.position = Vector2(3500,2050)
 	new_round()
 
 func new_round():
+	rewind.emit()
+	if $player.record.size() > 1:
+		futures.append($player.record)
+	if futures:
+		for past in futures:
+			var past_player_instance = playerPast_scene.instantiate()
+			add_child(past_player_instance)
+			past_player_instance.position = past[0]
+			past_player_instance.set_movement(past.slice(1))
 	var random_int = randi_range(1, 3)
 	if random_int == 1:
-		$player.position = $playerspawns/playerspawn.position
+		$player.start($playerspawns/playerspawn.position)
 	if random_int == 2:
-		$player.position = $playerspawns/playerspawn2.position
+		$player.start($playerspawns/playerspawn2.position)
 	if random_int == 3:
-		$player.position = $playerspawns/playerspawn3.position
+		$player.start($playerspawns/playerspawn3.position)
 	$RoundTimer.start()
 	$HUD.update_timer(time)
 
