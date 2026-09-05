@@ -70,4 +70,7 @@ shape = SubResource("RectangleShape2D_lquwl")
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
 polygon = PackedVector2Array(128, 648, 128, 984, 80, 952, 64, 656)
 
+[node name="CountDown" type="Timer" parent="."]
+one_shot = true
+
 [connection signal="timeout" from="RoundTimer" to="." method="_on_round_timer_timeout"]

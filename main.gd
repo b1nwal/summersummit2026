@@ -3,6 +3,7 @@ extends Node2D
 var playerPast_scene = preload("res://Players/playerPast.tscn")
 var artifact_scene = preload("res://gameElements/artifact.tscn")
 var time
+var score
 
 var artifacts = [
 	[Vector2(360, 1997), "stand_empty"], # these are all the ones on the left
@@ -23,9 +24,10 @@ var artifacts = [
 
 func _ready():
 	randomize()
-	$player.start($playerspawns/playerspawn.position);
 	print("beginning")
-	time = 0
+	$player.start($playerspawns/playerspawn.position);
+	time = 60
+	score = 0
 	var playerPast = playerPast_scene.instantiate()
 	add_child(playerPast)
 	playerPast.position = Vector2(500,1000)
@@ -37,6 +39,7 @@ func _ready():
 	new_round()
 
 func new_round():
+  time = 60
 	var random_int = randi_range(1, 6)
 	if random_int == 1:
 		$player.position = $playerspawns/playerspawn.position
@@ -52,6 +55,7 @@ func new_round():
 		$player.position = $playerspawns/playerspawn6.position
 	$RoundTimer.start()
 	$HUD.update_timer(time)
+	$HUD.update_score(score)
 
 func add_artifact(position: Vector2, sprite_name: String):
 	var artifact = artifact_scene.instantiate()
@@ -59,7 +63,7 @@ func add_artifact(position: Vector2, sprite_name: String):
 	add_child(artifact)
 
 func _on_round_timer_timeout():
-	time += 1
+	time -= 1
 	$RoundTimer.start()
 	$HUD.update_timer(time)
 
