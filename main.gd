@@ -1,7 +1,7 @@
 extends Node2D
 
 var playerPast_scene = preload("res://Players/playerPast.tscn")
-var artifact_scene = preload("res://gameElements/tempartifact.tscn")
+var artifact_scene = preload("res://gameElements/artifact.tscn")
 var time
 
 func _ready():
@@ -12,10 +12,10 @@ func _ready():
 	var playerPast = playerPast_scene.instantiate()
 	add_child(playerPast)
 	playerPast.position = Vector2(500,1000)
-	#spawn brians
-	add_artifact(Vector2(500,1000))
-	add_artifact(Vector2(1900,1750))
-	add_artifact(Vector2(3500,2050))
+	#spawn artifacts
+	add_artifact(Vector2(500,1000), "stand_empty")
+	add_artifact(Vector2(360,1997), "stand_amongus")
+	add_artifact(Vector2(192,1997), "stand_empty")
 	new_round()
 
 func new_round():
@@ -35,9 +35,9 @@ func new_round():
 	$RoundTimer.start()
 	$HUD.update_timer(time)
 
-func add_artifact(position: Vector2):
+func add_artifact(position: Vector2, sprite_name: String):
 	var artifact = artifact_scene.instantiate()
-	artifact.position = position
+	artifact.initialize_data(position, sprite_name)
 	add_child(artifact)
 	
 

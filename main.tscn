@@ -19,6 +19,7 @@ script = ExtResource("1_1bvp3")
 position = Vector2(1504, 1421)
 scale = Vector2(64, 64)
 texture = ExtResource("2_lquwl")
+metadata/_edit_lock_ = true
 
 [node name="player" parent="." instance=ExtResource("3_7mycd")]
 visible = false
@@ -36,10 +37,13 @@ color = Color(0.20871, 0.20871, 0.20871, 1)
 visible = false
 occluder = SubResource("OccluderPolygon2D_efxa6")
 
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(192, 1997)
+
 [node name="playerspawns" type="Node2D" parent="."]
 
 [node name="playerspawn" type="Marker2D" parent="playerspawns"]
-position = Vector2(102, 2477)
+position = Vector2(93, 2478)
 
 [node name="playerspawn2" type="Marker2D" parent="playerspawns"]
 position = Vector2(2921, 1838)
