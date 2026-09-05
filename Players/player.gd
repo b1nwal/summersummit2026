@@ -1,19 +1,15 @@
 extends CharacterBody2D
 
 @onready var speed = get_meta("speed")
-
-var prev_v_vec
 var run_start
 var stop_start
 var running = false
 var ramp_up = 300
 var ramp_down = 410
 var facing := Vector2.RIGHT
-
 var f_stiffness = 0.02352
 var f_damping = 0.154
-var f_A = .1
-
+var f_A = .07
 var angular_velocity = 0
 var angular_acceleration = 0
 
@@ -34,14 +30,10 @@ func _physics_process(delta: float) -> void:
 		angular_acceleration = f_stiffness*e - f_damping*angular_velocity
 		angular_velocity += angular_acceleration
 		
-			
 		facing = facing.rotated(-angular_velocity)
 		velocity = v_vec * v_tween(ramp_up, Time.get_ticks_msec() - run_start)
 	if not running and not velocity == Vector2.ZERO:
 		velocity = velocity.normalized() * (speed - v_tween(ramp_down * (velocity.length()/speed), Time.get_ticks_msec() - stop_start))
-	
-	# flashlight
-	
 	
 	$FlashLight.rotation = facing.angle() + (PI/4)
 	move_and_slide()
