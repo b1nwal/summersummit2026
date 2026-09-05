@@ -15,12 +15,6 @@ run/main_scene="uid://8b1aacpykmpl"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
-[display]
-
-window/size/viewport_width=1920
-window/size/viewport_height=1080
-window/size/mode=3
-
 [input]
 
 move_right={
