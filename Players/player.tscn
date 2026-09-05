@@ -1,5 +1,6 @@
-[gd_scene load_steps=25 format=3 uid="uid://bw4aphjyapcqh"]
+[gd_scene load_steps=26 format=3 uid="uid://bw4aphjyapcqh"]
 
+[ext_resource type="Material" uid="uid://lwblg6nqxg0p" path="res://Players/PlayerMaterial.tres" id="1_8g4q3"]
 [ext_resource type="Texture2D" uid="uid://cxxknilyn6av4" path="res://assets/Thief/thief front1.png" id="1_fq5u1"]
 [ext_resource type="Texture2D" uid="uid://i7fm84arhi" path="res://assets/Thief/thief back1.png" id="2_qhuue"]
 [ext_resource type="Texture2D" uid="uid://d381ir0y2xegq" path="res://assets/Thief/thief back2.png" id="3_tintf"]
@@ -20,8 +21,8 @@
 [ext_resource type="Texture2D" uid="uid://bh3g14uijneei" path="res://assets/Thief/thief side right3.png" id="18_tqeue"]
 [ext_resource type="Texture2D" uid="uid://bku7awe1spwok" path="res://assets/Thief/thief side right4.png" id="19_ymt3s"]
 [ext_resource type="Texture2D" uid="uid://dyyvh76m0wmnj" path="res://assets/Thief/thief side right5.png" id="20_dce2x"]
-[ext_resource type="Texture2D" uid="uid://d4l4k8a7s268" path="res://assets/flash6.png" id="21_qhuue"]
 [ext_resource type="Script" uid="uid://bipnx7p5s1amy" path="res://UI/camera.gd" id="21_tintf"]
+[ext_resource type="Texture2D" uid="uid://377xapsjvqhv" path="res://assets/flashlight.png" id="22_tintf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_onrkg"]
 size = Vector2(10.4, 20)
@@ -128,42 +129,35 @@ scale = Vector2(2.5, 2.5)
 shape = SubResource("RectangleShape2D_onrkg")
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+material = ExtResource("1_8g4q3")
 position = Vector2(2.6226e-06, 1.43051e-06)
 scale = Vector2(2, 1.768)
 sprite_frames = SubResource("SpriteFrames_x7o8n")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 top_level = true
-zoom = Vector2(2.4, 2.4)
-limit_left = 288
-limit_top = 225
-limit_right = 3712
-limit_bottom = 3150
+zoom = Vector2(2.3, 2.3)
 editor_draw_limits = true
 script = ExtResource("21_tintf")
 
-[node name="FlashLight" type="PointLight2D" parent="."]
-position = Vector2(-0.015625, 0)
-rotation = -2.32641
-energy = 0.5
-shadow_enabled = true
-texture = ExtResource("21_qhuue")
-offset = Vector2(-2.1928, 109.471)
-texture_scale = 0.2
-
 [node name="Cone" type="Node2D" parent="."]
+z_index = 1
 
 [node name="RayCast2D" type="RayCast2D" parent="Cone"]
-target_position = Vector2(58, -145)
+target_position = Vector2(175, -80)
 
 [node name="RayCast2D2" type="RayCast2D" parent="Cone"]
-target_position = Vector2(88, -132)
+target_position = Vector2(175, -40)
 
 [node name="RayCast2D3" type="RayCast2D" parent="Cone"]
-target_position = Vector2(120, -121)
+target_position = Vector2(175, 0)
 
 [node name="RayCast2D4" type="RayCast2D" parent="Cone"]
-target_position = Vector2(139, -93)
+target_position = Vector2(175, 40)
 
 [node name="RayCast2D5" type="RayCast2D" parent="Cone"]
-target_position = Vector2(154, -56)
+target_position = Vector2(175, 80)
+
+[node name="FlashLight" type="PointLight2D" parent="."]
+position = Vector2(3, 0)
+texture = ExtResource("22_tintf")

@@ -43,11 +43,11 @@ func new_round():
 			add_child(past_player_instance)
 			past_player_instance.position = past[0]
 			past_player_instance.set_movement(past.slice(1))
-      
+	  
 	# place artifacts
 	for artifact in artifacts:
 		add_artifact(artifact[0], artifact[1])	
-    
+	
 	var random_int = randi_range(1, 6)
 	if random_int == 1:
 		$player.start($playerspawns/playerspawn.position)

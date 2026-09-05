@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://8b1aacpykmpl"]
+[gd_scene load_steps=10 format=3 uid="uid://8b1aacpykmpl"]
 
 [ext_resource type="Script" uid="uid://cj5kaa1m55hos" path="res://main.gd" id="1_1bvp3"]
 [ext_resource type="Texture2D" uid="uid://k72jwh8m255w" path="res://assets/map_layout_draft.png" id="2_lquwl"]
@@ -7,6 +7,16 @@
 [ext_resource type="PackedScene" uid="uid://ble0wamj0w0l0" path="res://UI/hud.tscn" id="5_lquwl"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_5vw27"]
+
+[sub_resource type="Environment" id="Environment_7mycd"]
+background_mode = 3
+glow_enabled = true
+glow_intensity = 3.87
+glow_strength = 0.64
+glow_bloom = 0.45
+glow_hdr_threshold = 0.76
+glow_hdr_scale = 1.92
+glow_hdr_luminance_cap = 16.88
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_efxa6"]
 polygon = PackedVector2Array(3656, 1780, 3713, 1783, 3715, 2775, 3501, 2775, 3498, 2735, 3659, 2723, 3661, 2025, 3001, 2021, 3003, 1936, 3055, 1936, 3053, 1974, 3652, 1978)
@@ -17,6 +27,9 @@ polygon = PackedVector2Array(3656, 1780, 3713, 1783, 3715, 2775, 3501, 2775, 349
 material = SubResource("CanvasItemMaterial_5vw27")
 script = ExtResource("1_1bvp3")
 
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_7mycd")
+
 [node name="Map" type="Sprite2D" parent="."]
 position = Vector2(1504, 1421)
 scale = Vector2(64, 64)
@@ -24,7 +37,6 @@ texture = ExtResource("2_lquwl")
 metadata/_edit_lock_ = true
 
 [node name="player" parent="." instance=ExtResource("3_7mycd")]
-visible = false
 script = ExtResource("4_272bh")
 
 [node name="RoundTimer" type="Timer" parent="."]
@@ -36,10 +48,10 @@ one_shot = true
 color = Color(0.20871, 0.20871, 0.20871, 1)
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
-visible = false
 occluder = SubResource("OccluderPolygon2D_efxa6")
 
 [node name="Marker2D" type="Marker2D" parent="."]
+visible = false
 position = Vector2(1476, 1110)
 
 [node name="playerspawns" type="Node2D" parent="."]
