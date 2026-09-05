@@ -1,133 +1,31 @@
-[gd_scene load_steps=18 format=3 uid="uid://8b1aacpykmpl"]
+[gd_scene load_steps=9 format=3 uid="uid://8b1aacpykmpl"]
 
 [ext_resource type="Script" uid="uid://cj5kaa1m55hos" path="res://main.gd" id="1_1bvp3"]
-[ext_resource type="Texture2D" uid="uid://wjvdw0k5c33o" path="res://assets/map2_placeholder.png" id="2_lquwl"]
+[ext_resource type="Texture2D" uid="uid://k72jwh8m255w" path="res://assets/map_layout_draft.png" id="2_lquwl"]
 [ext_resource type="PackedScene" uid="uid://bw4aphjyapcqh" path="res://Players/player.tscn" id="3_7mycd"]
 [ext_resource type="Script" uid="uid://dn1d50r54uxxv" path="res://Players/player.gd" id="4_272bh"]
 [ext_resource type="PackedScene" uid="uid://ble0wamj0w0l0" path="res://UI/hud.tscn" id="5_lquwl"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_5vw27"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_lquwl"]
-size = Vector2(2726, 99)
-
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_lquwl"]
-polygon = PackedVector2Array(3270, 1610, 546, 1618, 554, 3646, 670, 3646, 670, 3404, 1008, 3406, 1008, 3298, 670, 3296, 670, 1712, 3274, 1712)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_7mycd"]
-size = Vector2(113, 1978)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_272bh"]
-size = Vector2(106, 1509)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_5vw27"]
-size = Vector2(343, 109)
-
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_7mycd"]
-polygon = PackedVector2Array(2496, 2110, 2608, 2108, 2608, 4512, 2488, 4516, 2492, 4284, 1774, 4276, 1778, 4840, 2008, 4850, 2012, 4924, 1772, 4928, 1770, 5448, 2488, 5454, 2486, 5370, 2610, 5388, 2614, 5538, 1410, 5552, 1410, 5442, 1690, 5450, 1684, 4276, 1386, 4282, 1382, 4168, 2494, 4170, 2486, 3408, 1422, 3404, 1428, 3296, 2490, 3296)
-
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_272bh"]
-polygon = PackedVector2Array(556, 4026, 668, 4028, 664, 4156, 1048, 4174, 1054, 4274, 660, 4270, 662, 5030, 930, 5018, 938, 5098, 812, 5094, 822, 5442, 982, 5446, 984, 5544, 552, 5540)
-
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_5vw27"]
-polygon = PackedVector2Array(2490, 5040, 2502, 4850, 5354, 4858, 5364, 4048, 5174, 4048, 5176, 3952, 5598, 3952, 5602, 4044, 5468, 4028, 5480, 5416, 6542, 5422, 6550, 5522, 5370, 5532, 5346, 4964, 2614, 4954, 2612, 5020)
-
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_kek77"]
-polygon = PackedVector2Array(4774, 1624, 5788, 1620, 5788, 1704, 5466, 1710, 5472, 2982, 5584, 2988, 5598, 3104, 5170, 3100, 5174, 3002, 5368, 2996, 5344, 1686, 4708, 1704)
-
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_4c57u"]
-polygon = PackedVector2Array(6194, 1622, 7394, 1622, 7402, 3150, 7310, 3160, 7296, 3100, 6076, 3108, 6066, 3588, 5982, 3580, 5976, 2990, 7290, 2998, 7292, 1710, 6208, 1710)
-
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_efxa6"]
 polygon = PackedVector2Array(3656, 1780, 3713, 1783, 3715, 2775, 3501, 2775, 3498, 2735, 3659, 2723, 3661, 2025, 3001, 2021, 3003, 1936, 3055, 1936, 3053, 1974, 3652, 1978)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lquwl"]
 
 [node name="Root" type="Node2D"]
 material = SubResource("CanvasItemMaterial_5vw27")
 script = ExtResource("1_1bvp3")
 
-[node name="MapPlaceholder" type="Sprite2D" parent="."]
-position = Vector2(2002.27, 1640.27)
-scale = Vector2(7.49614, 6.91409)
+[node name="Map" type="Sprite2D" parent="."]
+position = Vector2(1504, 1421)
+scale = Vector2(64, 64)
 texture = ExtResource("2_lquwl")
+metadata/_edit_lock_ = true
 
 [node name="player" parent="." instance=ExtResource("3_7mycd")]
 visible = false
 script = ExtResource("4_272bh")
-
-[node name="MapCollisionPlaceholder" type="StaticBody2D" parent="."]
-position = Vector2(13, 3)
-scale = Vector2(0.5, 0.5)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="MapCollisionPlaceholder"]
-position = Vector2(1911, 1661.5)
-shape = SubResource("RectangleShape2D_lquwl")
-metadata/_edit_group_ = true
-
-[node name="LightOccluder2D2" type="LightOccluder2D" parent="MapCollisionPlaceholder/CollisionShape2D"]
-position = Vector2(-1911, -1661.5)
-occluder = SubResource("OccluderPolygon2D_lquwl")
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="MapCollisionPlaceholder"]
-position = Vector2(612.5, 2660)
-shape = SubResource("RectangleShape2D_7mycd")
-metadata/_edit_group_ = true
-
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="MapCollisionPlaceholder"]
-position = Vector2(609, 4783.5)
-shape = SubResource("RectangleShape2D_272bh")
-metadata/_edit_group_ = true
-
-[node name="CollisionShape2D4" type="CollisionShape2D" parent="MapCollisionPlaceholder"]
-position = Vector2(837.5, 3350.5)
-shape = SubResource("RectangleShape2D_5vw27")
-metadata/_edit_group_ = true
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="MapCollisionPlaceholder"]
-polygon = PackedVector2Array(2496, 2108, 2609, 2109, 2604, 4507, 2492, 4505, 2493, 4278, 1771, 4274, 1776, 4843, 2009, 4848, 2014, 4926, 1771, 4924, 1773, 5541, 1409, 5551, 1411, 5446, 1690, 5448, 1682, 4277, 1384, 4280, 1383, 4167, 2494, 4171, 2488, 3408, 1422, 3403, 1428, 3297, 2490, 3295)
-metadata/_edit_group_ = true
-
-[node name="LightOccluder2D" type="LightOccluder2D" parent="MapCollisionPlaceholder/CollisionPolygon2D"]
-occluder = SubResource("OccluderPolygon2D_7mycd")
-
-[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="MapCollisionPlaceholder"]
-polygon = PackedVector2Array(661, 4164, 1050, 4172, 1055, 4275, 663, 4280)
-metadata/_edit_group_ = true
-
-[node name="CollisionPolygon2D3" type="CollisionPolygon2D" parent="MapCollisionPlaceholder"]
-polygon = PackedVector2Array(662, 5540, 980, 5547, 984, 5448, 821, 5446, 818, 5095, 939, 5098, 930, 5025, 663, 5028)
-metadata/_edit_group_ = true
-
-[node name="CollisionPolygon2D4" type="CollisionPolygon2D" parent="MapCollisionPlaceholder"]
-polygon = PackedVector2Array(4710, 1695, 5352, 1699, 5363, 2998, 5173, 2998, 5170, 3100, 5603, 3104, 5591, 2994, 5481, 2994, 5473, 1703, 5789, 1711, 5785, 1616, 4775, 1623)
-metadata/_edit_group_ = true
-
-[node name="CollisionPolygon2D5" type="CollisionPolygon2D" parent="MapCollisionPlaceholder"]
-polygon = PackedVector2Array(6195, 1623, 7399, 1616, 7403, 3150, 7315, 3161, 7304, 3097, 6073, 3100, 6065, 3589, 5986, 3582, 5977, 2989, 7295, 2999, 7293, 1712, 6205, 1708)
-metadata/_edit_group_ = true
-
-[node name="CollisionPolygon2D6" type="CollisionPolygon2D" parent="MapCollisionPlaceholder"]
-polygon = PackedVector2Array(2493, 5030, 2504, 4847, 5357, 4858, 5362, 4046, 5173, 4046, 5173, 3951, 5601, 3951, 5601, 4046, 5468, 4029, 5479, 5414, 6546, 5425, 6552, 5525, 5373, 5530, 5357, 4963, 2615, 4952, 2615, 5019)
-metadata/_edit_group_ = true
-
-[node name="CollisionPolygon2D7" type="CollisionPolygon2D" parent="MapCollisionPlaceholder"]
-polygon = PackedVector2Array(1769, 5444, 2482, 5456, 2488, 5372, 2614, 5387, 2614, 5541, 1776, 5547)
-metadata/_edit_group_ = true
-
-[node name="CollisionPolygon2D8" type="CollisionPolygon2D" parent="MapCollisionPlaceholder"]
-polygon = PackedVector2Array(6968, 5467, 7298, 5437, 7296, 4044, 5978, 4034, 5971, 3868, 6081, 3875, 6081, 3937, 7289, 3951, 7293, 3547, 7407, 3550, 7411, 5548, 6986, 5542)
-metadata/_edit_group_ = true
-
-[node name="LightOccluder2D" type="LightOccluder2D" parent="MapCollisionPlaceholder"]
-occluder = SubResource("OccluderPolygon2D_272bh")
-
-[node name="LightOccluder2D2" type="LightOccluder2D" parent="MapCollisionPlaceholder"]
-occluder = SubResource("OccluderPolygon2D_5vw27")
-
-[node name="LightOccluder2D3" type="LightOccluder2D" parent="MapCollisionPlaceholder"]
-occluder = SubResource("OccluderPolygon2D_kek77")
-
-[node name="LightOccluder2D4" type="LightOccluder2D" parent="MapCollisionPlaceholder"]
-occluder = SubResource("OccluderPolygon2D_4c57u")
 
 [node name="RoundTimer" type="Timer" parent="."]
 one_shot = true
@@ -138,17 +36,41 @@ one_shot = true
 color = Color(0.20871, 0.20871, 0.20871, 1)
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+visible = false
 occluder = SubResource("OccluderPolygon2D_efxa6")
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(1476, 1110)
 
 [node name="playerspawns" type="Node2D" parent="."]
 
 [node name="playerspawn" type="Marker2D" parent="playerspawns"]
-position = Vector2(192, 1934)
+position = Vector2(93, 2478)
 
 [node name="playerspawn2" type="Marker2D" parent="playerspawns"]
-position = Vector2(3003, 714)
+position = Vector2(2921, 1838)
 
 [node name="playerspawn3" type="Marker2D" parent="playerspawns"]
-position = Vector2(1526, 2586)
+position = Vector2(1507, 2730)
+
+[node name="playerspawn4" type="Marker2D" parent="playerspawns"]
+position = Vector2(846, 621)
+
+[node name="playerspawn5" type="Marker2D" parent="playerspawns"]
+position = Vector2(2803, 106)
+
+[node name="playerspawn6" type="Marker2D" parent="playerspawns"]
+position = Vector2(1502, 681)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("RectangleShape2D_lquwl")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PackedVector2Array(128, 648, 128, 984, 80, 952, 64, 656)
+
+[node name="CountDown" type="Timer" parent="."]
+one_shot = true
 
 [connection signal="timeout" from="RoundTimer" to="." method="_on_round_timer_timeout"]
