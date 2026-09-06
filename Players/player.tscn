@@ -437,7 +437,7 @@ volume = 0.5
 [node name="rewind" type="FmodEventEmitter2D" parent="playerSounds"]
 event_name = "event:/TP"
 event_guid = "{eaf1e1d5-9b0c-4994-a5aa-5683139c7814}"
-volume = 0.1
+volume = 0.05
 
 [node name="ItemSprite2D" type="Sprite2D" parent="."]
 z_index = 10
