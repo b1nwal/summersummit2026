@@ -214,6 +214,7 @@ func create_player_path():
 	
 	# spawn portal @ exit point
 	portal_sprite.global_position = spawns[randi2 - 1]
+	$HUD.set_waypoint(spawns[randi2 - 1])
 	
 	visited_spawns.append(spawns[randi1 - 1])
 	
