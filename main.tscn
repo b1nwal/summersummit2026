@@ -1754,6 +1754,10 @@ occluder = SubResource("OccluderPolygon2D_cegan")
 [node name="LightOccluder2D10" type="LightOccluder2D" parent="LightOccluders"]
 occluder = SubResource("OccluderPolygon2D_074og")
 
+[node name="death" type="FmodEventEmitter3D" parent="."]
+event_name = "event:/dath sound"
+event_guid = "{20ecf3fd-543b-4647-8c95-ea65d8dc893f}"
+
 [connection signal="timeout" from="RoundTimer" to="." method="_on_round_timer_timeout"]
 [connection signal="timeout" from="CountDown" to="." method="_on_count_down_timeout"]
 [connection signal="timeout" from="gameovertimer" to="." method="_on_gameovertimer_timeout"]

@@ -261,6 +261,7 @@ func _on_spotted(observer, target):
 	$RoundTimer.stop()
 	var t := create_tween().set_parallel(true).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 	t.tween_property($ColorRect, "color:a", 1.0, 2.5)
+	$death.play_one_shot()
 	await get_tree().create_timer(3).timeout
 	
 	_game_over()
