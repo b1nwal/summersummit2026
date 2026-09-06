@@ -8,6 +8,7 @@ extends Node2D
 	$playerspawns/playerspawn5.position,
 	$playerspawns/playerspawn6.position
 ]
+@onready var portal = $PortalSprite
 
 var playerPast_scene = preload("res://Players/playerPast.tscn")
 var artifact_scene = preload("res://gameElements/artifact.tscn")

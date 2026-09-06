@@ -10,9 +10,9 @@
 [ext_resource type="Texture2D" uid="uid://bkrywdyp51cc2" path="res://assets/wall floor tile_specular.png" id="5_4c57u"]
 [ext_resource type="PackedScene" uid="uid://ble0wamj0w0l0" path="res://UI/hud.tscn" id="5_lquwl"]
 [ext_resource type="Texture2D" uid="uid://d0gfo2g0kaye3" path="res://assets/decor tiles.png" id="6_4c57u"]
-[ext_resource type="Texture2D" uid="uid://bmt5w4xcmjhcs" path="res://assets/portals/big portal1.png" id="11_ycdy4"]
-[ext_resource type="Texture2D" uid="uid://vjbtp0wjf2na" path="res://assets/portals/big portal2.png" id="12_w48qg"]
-[ext_resource type="Texture2D" uid="uid://c2uk417q0csbn" path="res://assets/portals/big portal3.png" id="13_vivmo"]
+[ext_resource type="Texture2D" uid="uid://com23kpi8s6xx" path="res://assets/portals/big portal1.png" id="11_ycdy4"]
+[ext_resource type="Texture2D" uid="uid://xk2wss46q787" path="res://assets/portals/big portal2.png" id="12_ycdy4"]
+[ext_resource type="Texture2D" uid="uid://bryth6mxhtkj4" path="res://assets/portals/big portal3.png" id="13_w48qg"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_5vw27"]
 
@@ -831,10 +831,10 @@ animations = [{
 "texture": ExtResource("11_ycdy4")
 }, {
 "duration": 1.0,
-"texture": ExtResource("12_w48qg")
+"texture": ExtResource("12_ycdy4")
 }, {
 "duration": 1.0,
-"texture": ExtResource("13_vivmo")
+"texture": ExtResource("13_w48qg")
 }],
 "loop": true,
 "name": &"default",
