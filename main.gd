@@ -55,6 +55,7 @@ func _ready():
 		
 	$player.score_earned.connect(_on_score_added)
 	$player.exit_point_reached.connect(_on_exit_reached)
+	$player.spotted.connect(_on_spotted)
 		
 	new_round()
 	
@@ -83,6 +84,8 @@ func new_round():
 			past_player_instance.set_movement(past.slice(1))
 			past_player_instance.set_physics_process(false)
 			past_players.append(past_player_instance)
+			past_player_instance.spotted.connect(_on_spotted)
+
 	
 	create_player_path()
 	
@@ -123,6 +126,8 @@ func _on_score_added(points):
 func _on_exit_reached():
 	new_round()
 	
+func _on_spotted():
+	print("yo")
 # needs dev
 func _on_game_end():
 	print("game over you got")

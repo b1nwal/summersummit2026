@@ -9,6 +9,7 @@ extends CharacterBody2D
 
 signal score_earned(amount)
 signal exit_point_reached()
+signal spotted()
 
 var run_start
 var stop_start
@@ -23,8 +24,10 @@ var f_damping = 0.154
 var f_A = .07
 var angular_velocity = 0
 var angular_acceleration = 0
-var checked = 0
 var record = [Vector2()]
+const spot_time := 0.07
+var spot_timer := 0.0
+var spot_fired := false
 
 func _unhandled_input(event):
 	if get_script() != Player:
@@ -41,7 +44,7 @@ func _obtain_v_vec():
 
 func _physics_process(delta: float) -> void:
 	handle_movement()
-	handle_flashlight()
+	handle_flashlight(delta)
 
 	# check if distance to exit is < 64 px
 	if exit_point:
@@ -86,15 +89,28 @@ func handle_movement():
 		velocity = velocity.normalized() * (speed - v_tween(ramp_down * (velocity.length()/speed), Time.get_ticks_msec() - stop_start))
 		
 
-func handle_flashlight():
+func handle_flashlight(delta: float) -> void:
 	$FlashLight.rotation = facing.angle()
 	
 	$Cone.rotation = facing.angle()
+	
+	var target = null
 	for ray in $Cone.get_children():
+		if not ray.is_colliding():
+			continue
 		if ray.is_colliding():
-			checked = 1
-		elif checked == 1:
-			checked = 0
+			if ray.get_collider() is Player and ray.get_collider() != self:
+				target = ray.get_collider()
+				break
+	if target:
+		spot_timer += delta
+		if spot_timer >= spot_time and not spot_fired:
+			spot_fired = true
+			spotted.emit()
+	else:
+		spot_timer = max(0.0, spot_timer - delta * 2.0)
+		if spot_timer == 0.0:
+			spot_fired = false
 	
 func v_tween(ramp_time: int, x: float) -> float:
 	var m = 1
