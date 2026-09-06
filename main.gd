@@ -141,6 +141,8 @@ func _process(delta):
 		for p in past_players:
 			if is_instance_valid(p):
 				p.set_invincible(false)
+		$player/ParticleEffect.hide()
+		$player/ParticleEffect.stop()
 
 
 func _frame_whole_map() -> void:
@@ -204,6 +206,8 @@ func _on_count_down_timeout() -> void:
 		$RoundTimer.start()
 		$HUD.update_timer(time)
 		$HUD.update_score(score)
+		$player/ParticleEffect.show()
+		$player/ParticleEffect.play("default")
 		$player.set_physics_process(true)
 		for p in past_players:
 			if is_instance_valid(p):
