@@ -3,6 +3,7 @@ extends Node2D
 
 # artifact's sprite child node
 
+@onready var particles = $GPUParticles2D
 const TEXTURE_STAND_EMPTY = preload("res://assets/artifacts/artifact_stand_empty.png")
 var collected # boolean: is the artifact collected?
 var treasure_sprite_name
@@ -43,6 +44,7 @@ func interact() -> bool:
 		
 	else:
 		collected = true
+		particles.restart()
 		$artifactsprite.hide()
 		return true 
 		

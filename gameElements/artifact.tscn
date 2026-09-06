@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bgn2qmn7p2qxf"]
+[gd_scene load_steps=9 format=3 uid="uid://bgn2qmn7p2qxf"]
 
 [ext_resource type="Script" uid="uid://4wu0lvi7i2rf" path="res://gameElements/artifact.gd" id="1_32u3t"]
 [ext_resource type="Texture2D" uid="uid://bd6pt7tja3u1w" path="res://assets/artifacts/artifact_stand_empty.png" id="2_uci8d"]
@@ -13,6 +13,28 @@ size = Vector2(128, 256)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_02tqw"]
 polygon = PackedVector2Array(64, -46, 64, -84, 0, -84, 0, -46, 2.24209, -46, 62, -46)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_02tqw"]
+particle_flag_disable_z = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 3.0
+emission_ring_radius = 3.0
+emission_ring_inner_radius = 0.0
+emission_ring_cone_angle = 90.0
+angle_min = -180.0
+angle_max = 180.0
+direction = Vector3(0, 0, 0)
+spread = 180.0
+flatness = 1.0
+initial_velocity_min = 45.0
+initial_velocity_max = 45.0
+gravity = Vector3(0, 0, 0)
+radial_accel_min = -10.0
+radial_accel_max = -10.0
+scale_min = 4.0
+scale_max = 4.0
+color = Color(1, 1, 0.588235, 1)
 
 [node name="Artifact" type="Node2D"]
 script = ExtResource("1_32u3t")
@@ -50,3 +72,15 @@ texture = ExtResource("4_02tqw")
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
 occluder = SubResource("OccluderPolygon2D_02tqw")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+z_index = 15
+position = Vector2(32, -112)
+scale = Vector2(2, 2)
+emitting = false
+amount = 10
+lifetime = 0.3
+one_shot = true
+explosiveness = 0.5
+trail_lifetime = 0.1
+process_material = SubResource("ParticleProcessMaterial_02tqw")
