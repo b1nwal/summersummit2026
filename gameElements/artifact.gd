@@ -16,9 +16,11 @@ func initialize_data(pos: Vector2, sprite_name = null):
 	collected = false
 	position = pos
 	
+	sprite.texture = TEXTURE_STAND_EMPTY
 	if sprite_name == null:
-		sprite.texture = TEXTURE_STAND_EMPTY
 		collected = true
+		$artifactsprite.hide()
+		
 	
 	else:
 		treasure_sprite_name = sprite_name
@@ -26,10 +28,8 @@ func initialize_data(pos: Vector2, sprite_name = null):
 		var data = {
 			"sprite_name": sprite_name
 		}
-		
-		sprite.texture = load("res://assets/artifacts/artifact_stand_{sprite_name}.png".format(data))
-	
-	
+		$artifactsprite.show()
+		_start_float()
 # returns true if the artifact was successfully collected. returns false if you cant interact.
 func interact() -> bool:
 	
@@ -40,9 +40,17 @@ func interact() -> bool:
 		
 	else:
 		collected = true
-		sprite.texture = TEXTURE_STAND_EMPTY
+		$artifactsprite.hide()
 		return true 
 		
 # returns the name of the artifact to render on player 
 func get_sprite_name() -> String:
 	return treasure_sprite_name
+
+# make the artifact move up and down
+func _start_float() -> void:
+	var t := create_tween().set_loops()
+	t.tween_property($artifactsprite, "position", Vector2(32, -88), 1.5) \
+		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	t.tween_property($artifactsprite, "position", Vector2(32, -112), 1.5) \
+		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
