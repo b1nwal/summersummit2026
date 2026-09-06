@@ -9,12 +9,13 @@ var treasure_sprite_name
 var point_value = 200
 
 # null creates an empty stand. otherwise please input a string or else my code explodes
-func initialize_data(pos: Vector2, sprite_name = null):
+func initialize_data(pos: Vector2, sprite_name = null, points = 200):
 	
 	var sprite = $Sprite2D
 	
 	collected = false
 	position = pos
+	point_value = points
 	
 	sprite.texture = TEXTURE_STAND_EMPTY
 	if sprite_name == null:
