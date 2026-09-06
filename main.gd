@@ -24,19 +24,19 @@ const ROUNDCLOCK = 30
 var gameovertime = 0
 
 const artifacts = [
-	[Vector2(192, 1997), "pot1"], 
-	[Vector2(192, 1677), "pot2"], 
-	[Vector2(768, 1037), "pot2"],
-	[Vector2(704, 1805), "pot1"], 
-	[Vector2(1472, 1101), "pot2"], # new room / N
-	[Vector2(1280, 1933), "chisato"], # famous paintings / Central
-	[Vector2(1472, 1933), "purpleguy"], 
-	[Vector2(1664, 1933), "shark"],
-	[Vector2(2240, 1613), "sword1"], # war relics / NE
-	[Vector2(2624, 1357), "sword2"], 
-	[Vector2(2304, 2061), "statue1"], # statues / SE
-	[Vector2(2560, 973), "statue2"], # new room / E
-	[Vector2(1472, 2445), "freddy"] # great hall / S
+	[Vector2(192, 1997), "pot1", 175], 
+	[Vector2(192, 1677), "pot2", 175], 
+	[Vector2(768, 1037), "pot2", 175],
+	[Vector2(704, 1805), "pot1", 175], 
+	[Vector2(1472, 1101), "pot2", 175], # new room / N
+	[Vector2(1280, 1933), "chisato", 300], # famous paintings / Central
+	[Vector2(1472, 1933), "purpleguy", 300], 
+	[Vector2(1664, 1933), "shark", 300],
+	[Vector2(2240, 1613), "sword1", 300], # war relics / NE
+	[Vector2(2624, 1357), "sword2", 300], 
+	[Vector2(2304, 2061), "statue1", 200], # statues / SE
+	[Vector2(2560, 973), "statue2", 200], # new room / E
+	[Vector2(1472, 2445), "freddy", 450] # great hall / S
 ]
 
 signal rewind
@@ -49,7 +49,7 @@ func _ready():
 	roundNum = 0
 	# place artifacts
 	for artifact in artifacts:
-		add_artifact(artifact[0], artifact[1])
+		add_artifact(artifact[0], artifact[1], artifact[2])
 		
 	## place portal
 	#portal_sprite = Sprite2D.new()
@@ -222,9 +222,9 @@ func _on_spotted():
 	#print(score)
 	#print("diamonds")
 	
-func add_artifact(position: Vector2, sprite_name: String):
+func add_artifact(position: Vector2, sprite_name: String, points=200):
 	var artifact = artifact_scene.instantiate()
-	artifact.initialize_data(position, sprite_name)
+	artifact.initialize_data(position, sprite_name, points)
 	add_child(artifact)
 
 func create_player_path():
