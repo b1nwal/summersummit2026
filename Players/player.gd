@@ -59,6 +59,8 @@ func handle_movement():
 		animated_sprite.play("walk_forward")
 	elif v_vec[1] < 0:
 		animated_sprite.play("walk_backward")
+	elif v_vec[0] == 0:
+		animated_sprite.play("default")
 		 
 	var e = angle_difference(v_vec.angle(), facing.angle())
 
