@@ -7,6 +7,7 @@ extends CharacterBody2D
 @onready var interaction_range = $InteractionRange
 
 signal score_earned(amount)
+signal exit_point_reached()
 
 var run_start
 var stop_start
@@ -42,8 +43,9 @@ func _physics_process(delta: float) -> void:
 	handle_flashlight()
 
 	# check if distance to exit is < 64 px
-	if global_position.distance_squared_to(exit_point) < 4096:
-		on_exit_point_reached()
+	if exit_point:
+		if global_position.distance_squared_to(exit_point) < 4096:
+			on_exit_point_reached()
 
 	move_and_slide()
 	
@@ -111,9 +113,12 @@ func set_exit_point(point):
 	exit_point = point
 	
 func on_exit_point_reached():
+	
 	if holding_item:
 		score_earned.emit(holding_item.point_value)
 		holding_item = null
+	
+	exit_point_reached.emit()
 
 # interact with all the closest artifacts
 func interact_with_closest_artifacts():

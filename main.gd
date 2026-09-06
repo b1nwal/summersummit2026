@@ -39,12 +39,14 @@ func _ready():
 	randomize()
 	print("beginning")
 	time = 0
+	score = 0
 	
 	# place artifacts
 	for artifact in artifacts:
 		add_artifact(artifact[0], artifact[1])
 		
 	$player.score_earned.connect(_on_score_added)
+	$player.exit_point_reached.connect(_on_exit_reached)
 		
 	new_round()
 	
@@ -54,7 +56,6 @@ var past_players = []
 func new_round():
 	$player.set_physics_process(false)
 	time = 60
-	score = 0
 	count = 2
 	$HUD.update_timer(time)
 	$RoundTimer.stop()
@@ -106,6 +107,9 @@ func _on_score_added(points):
 	score += points
 	$HUD.update_score(score)
 	
+func _on_exit_reached():
+	new_round()
+	
 func add_artifact(position: Vector2, sprite_name: String):
 	var artifact = artifact_scene.instantiate()
 	artifact.initialize_data(position, sprite_name)
@@ -118,11 +122,11 @@ func create_player_path():
 	while randi1 == randi2:
 		randi2 = randi_range(1, spawns.size())
 		
-	$player.start(spawns[randi1])
-	$player.set_exit_point(spawns[randi2])
+	$player.start(spawns[randi1 - 1])
+	$player.set_exit_point(spawns[randi2 - 1])
 	
 	var data = {
-		"s": randi2
+		"s": randi2 - 1
 	}
 	
 	print("exit point set to position {s}".format(data))
