@@ -1,8 +1,9 @@
-[gd_scene load_steps=25 format=3 uid="uid://ds72i60gi80dp"]
+[gd_scene load_steps=26 format=3 uid="uid://ds72i60gi80dp"]
 
 [ext_resource type="Script" uid="uid://cb58eunt5ma8x" path="res://Players/playerPast.gd" id="1_om0np"]
 [ext_resource type="Texture2D" uid="uid://cxxknilyn6av4" path="res://assets/Thief/thief front1.png" id="1_ske43"]
 [ext_resource type="Texture2D" uid="uid://i7fm84arhi" path="res://assets/Thief/thief back1.png" id="2_om0np"]
+[ext_resource type="Material" uid="uid://cj4j4v7svv4br" path="res://Players/PastPlayerMaterial.tres" id="2_qrs7w"]
 [ext_resource type="Texture2D" uid="uid://d381ir0y2xegq" path="res://assets/Thief/thief back2.png" id="3_qrs7w"]
 [ext_resource type="Texture2D" uid="uid://db550g7r4k5im" path="res://assets/Thief/thief back3.png" id="4_6aqf2"]
 [ext_resource type="Texture2D" uid="uid://ooujum2uc5cl" path="res://assets/Thief/thief back4.png" id="5_5fwkd"]
@@ -129,6 +130,7 @@ scale = Vector2(2.5, 2.5)
 shape = SubResource("RectangleShape2D_3c3q8")
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+material = ExtResource("2_qrs7w")
 position = Vector2(2.6226e-06, 1.43051e-06)
 scale = Vector2(2, 1.768)
 sprite_frames = SubResource("SpriteFrames_n48rb")
