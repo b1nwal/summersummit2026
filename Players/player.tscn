@@ -1,9 +1,7 @@
-[gd_scene load_steps=27 format=3 uid="uid://bw4aphjyapcqh"]
+[gd_scene load_steps=26 format=3 uid="uid://bw4aphjyapcqh"]
 
 [ext_resource type="Material" uid="uid://lwblg6nqxg0p" path="res://Players/PlayerMaterial.tres" id="1_8g4q3"]
 [ext_resource type="Texture2D" uid="uid://cxxknilyn6av4" path="res://assets/Thief/thief front1.png" id="1_fq5u1"]
-[ext_resource type="Texture2D" uid="uid://suloji8urlf5" path="res://assets/Thief/shadow.png" id="1_wvm7i"]
-[ext_resource type="Texture2D" uid="uid://i7fm84arhi" path="res://assets/Thief/thief back1.png" id="2_qhuue"]
 [ext_resource type="Texture2D" uid="uid://d381ir0y2xegq" path="res://assets/Thief/thief back2.png" id="3_tintf"]
 [ext_resource type="Texture2D" uid="uid://db550g7r4k5im" path="res://assets/Thief/thief back3.png" id="4_8g4q3"]
 [ext_resource type="Texture2D" uid="uid://ooujum2uc5cl" path="res://assets/Thief/thief back4.png" id="5_wvm7i"]
@@ -21,7 +19,7 @@
 [ext_resource type="Texture2D" uid="uid://bku7awe1spwok" path="res://assets/Thief/thief side right4.png" id="19_ymt3s"]
 [ext_resource type="Texture2D" uid="uid://dyyvh76m0wmnj" path="res://assets/Thief/thief side right5.png" id="20_dce2x"]
 [ext_resource type="Script" uid="uid://bipnx7p5s1amy" path="res://UI/camera.gd" id="21_tintf"]
-[ext_resource type="Texture2D" uid="uid://bxv0vdju0ieig" path="res://assets/circle light2.png" id="23_8g4q3"]
+[ext_resource type="Texture2D" uid="uid://377xapsjvqhv" path="res://assets/flashlight.png" id="22_tintf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_onrkg"]
 size = Vector2(10.4, 20)
@@ -34,30 +32,6 @@ animations = [{
 }],
 "loop": true,
 "name": &"default",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("2_qhuue")
-}],
-"loop": true,
-"name": &"default_back",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("11_jwe1c")
-}],
-"loop": true,
-"name": &"default_left",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("16_4l5xh")
-}],
-"loop": true,
-"name": &"default_right",
 "speed": 5.0
 }, {
 "frames": [{
@@ -75,7 +49,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"walk_backward",
-"speed": 7.0
+"speed": 15.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -92,7 +66,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"walk_forward",
-"speed": 7.0
+"speed": 15.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -109,7 +83,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"walk_left",
-"speed": 7.0
+"speed": 15.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -126,7 +100,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"walk_right",
-"speed": 7.0
+"speed": 15.0
 }]
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
@@ -139,42 +113,17 @@ position = Vector2(-1, 0)
 scale = Vector2(2.5, 2.5)
 shape = SubResource("RectangleShape2D_onrkg")
 
-[node name="FlashLight" type="PointLight2D" parent="."]
-position = Vector2(1.89624, -2.64932)
-rotation = -2.32641
-energy = 0.5
-shadow_enabled = true
-texture = ExtResource("21_qhuue")
-offset = Vector2(-2.81008, 106.263)
-texture_scale = 0.2
-
-[node name="Shadow" type="Sprite2D" parent="."]
-position = Vector2(0, 16)
-texture = ExtResource("1_wvm7i")
-
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]
 material = ExtResource("1_8g4q3")
 position = Vector2(2.6226e-06, 1.43051e-06)
 scale = Vector2(2, 1.768)
 sprite_frames = SubResource("SpriteFrames_x7o8n")
-animation = &"walk_forward"
 
 [node name="Camera2D" type="Camera2D" parent="."]
 top_level = true
 zoom = Vector2(2.3, 2.3)
 editor_draw_limits = true
 script = ExtResource("21_tintf")
-
-[node name="Spotlight" type="PointLight2D" parent="."]
-modulate = Color(1, 1, 1, 0.737255)
-position = Vector2(2, 12)
-rotation = -3.03574
-scale = Vector2(6.16047, 5.60788)
-energy = 0.5
-shadow_enabled = true
-texture = ExtResource("23_8g4q3")
-offset = Vector2(0.576872, 2.04265)
-texture_scale = 0.2
 
 [node name="Cone" type="Node2D" parent="."]
 z_index = 1
