@@ -49,7 +49,7 @@ func new_round():
 		for past in futures:
 			var past_player_instance = playerPast_scene.instantiate()
 			add_child(past_player_instance)
-			past_player_instance.position = past[0]
+			past_player_instance.start(past[0])
 			past_player_instance.set_movement(past.slice(1))
 			past_player_instance.set_physics_process(false)
 			past_players.append(past_player_instance)

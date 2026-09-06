@@ -63,17 +63,19 @@ func _physics_process(delta: float) -> void:
 	$Cone.rotation = facing.angle() - PI/2
 	for ray in $Cone.get_children():
 		if ray.is_colliding():
+			print(ray.get_collider())
 			checked = 1
 		elif checked == 1:
 			checked = 0
-
 	move_and_slide()
-	
+
 func v_tween(ramp_time: int, x: float) -> float:
 	var m = 1
 	if x < ramp_time:
 		m = (3*((x/ramp_time)**2) - 2*((x/ramp_time)**3))
 	return m * speed
+
+
 
 func start(pos: Vector2):
 	record = [pos]
@@ -82,3 +84,4 @@ func start(pos: Vector2):
 	show()
 	for ray in $Cone.get_children():
 		ray.add_exception($"../raysbs")
+		print("rays excpetions")
