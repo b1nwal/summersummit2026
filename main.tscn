@@ -1,4 +1,4 @@
-[gd_scene load_steps=142 format=4 uid="uid://8b1aacpykmpl"]
+[gd_scene load_steps=146 format=4 uid="uid://8b1aacpykmpl"]
 
 [ext_resource type="Script" uid="uid://cj5kaa1m55hos" path="res://main.gd" id="1_1bvp3"]
 [ext_resource type="Texture2D" uid="uid://qosfyoqaho0b" path="res://assets/wall floor tile.png" id="2_7mycd"]
@@ -10,6 +10,9 @@
 [ext_resource type="Texture2D" uid="uid://bkrywdyp51cc2" path="res://assets/wall floor tile_specular.png" id="5_4c57u"]
 [ext_resource type="PackedScene" uid="uid://ble0wamj0w0l0" path="res://UI/hud.tscn" id="5_lquwl"]
 [ext_resource type="Texture2D" uid="uid://d0gfo2g0kaye3" path="res://assets/decor tiles.png" id="6_4c57u"]
+[ext_resource type="Texture2D" uid="uid://com23kpi8s6xx" path="res://assets/portals/big portal1.png" id="11_ycdy4"]
+[ext_resource type="Texture2D" uid="uid://xk2wss46q787" path="res://assets/portals/big portal2.png" id="12_ycdy4"]
+[ext_resource type="Texture2D" uid="uid://bryth6mxhtkj4" path="res://assets/portals/big portal3.png" id="13_w48qg"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_5vw27"]
 
@@ -821,6 +824,23 @@ glow_hdr_threshold = 0.76
 glow_hdr_scale = 1.92
 glow_hdr_luminance_cap = 16.88
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_2cqfq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("11_ycdy4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_ycdy4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_w48qg")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7mycd"]
 size = Vector2(704, 64)
 
@@ -1229,6 +1249,7 @@ environment = SubResource("Environment_7mycd")
 
 [node name="player" parent="." instance=ExtResource("3_7mycd")]
 z_index = 1
+collision_mask = 1
 script = ExtResource("4_272bh")
 
 [node name="ColorRect" type="ColorRect" parent="."]
@@ -1242,6 +1263,10 @@ color = Color(1, 1, 1, 0)
 one_shot = true
 
 [node name="HUD" parent="." instance=ExtResource("5_lquwl")]
+
+[node name="PortalSprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_2cqfq")
+autoplay = "default"
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.575081, 0.605724, 0.662387, 1)
