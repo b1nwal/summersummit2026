@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://bgn2qmn7p2qxf"]
+[gd_scene load_steps=8 format=3 uid="uid://bgn2qmn7p2qxf"]
 
 [ext_resource type="Script" uid="uid://4wu0lvi7i2rf" path="res://gameElements/artifact.gd" id="1_32u3t"]
 [ext_resource type="Texture2D" uid="uid://bd6pt7tja3u1w" path="res://assets/artifacts/artifact_stand_empty.png" id="2_uci8d"]
@@ -9,6 +9,17 @@ size = Vector2(64, 84)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_02tqw"]
 size = Vector2(128, 256)
+
+[sub_resource type="Gradient" id="Gradient_uci8d"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0.00324675, 0.282468, 0.451299, 0.665584)
+colors = PackedColorArray(0.988235, 1, 0.647059, 1, 0.166531, 0.166531, 0.166531, 1, 0.0527718, 0.0527718, 0.0527718, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_02tqw"]
+gradient = SubResource("Gradient_uci8d")
+fill = 1
+fill_from = Vector2(0.506881, 0.490826)
+fill_to = Vector2(0.83945, 0.142202)
 
 [node name="Artifact" type="Node2D"]
 script = ExtResource("1_32u3t")
@@ -38,3 +49,8 @@ z_index = 12
 position = Vector2(32, -112)
 scale = Vector2(2, 2)
 texture = ExtResource("3_uci8d")
+
+[node name="PointLight2D" type="PointLight2D" parent="artifactsprite"]
+position = Vector2(0, 0.5)
+scale = Vector2(1.82031, 1.82031)
+texture = SubResource("GradientTexture2D_02tqw")

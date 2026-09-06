@@ -1686,37 +1686,39 @@ shape = SubResource("RectangleShape2D_inymm")
 position = Vector2(544, 1808)
 shape = SubResource("RectangleShape2D_jcxqu")
 
-[node name="LightOccluder2D8" type="LightOccluder2D" parent="."]
+[node name="gameovertimer" type="Timer" parent="."]
+
+[node name="LightOccluders" type="Node2D" parent="."]
+
+[node name="LightOccluder2D8" type="LightOccluder2D" parent="LightOccluders"]
 occluder = SubResource("OccluderPolygon2D_2cqfq")
 
-[node name="LightOccluder2D7" type="LightOccluder2D" parent="."]
+[node name="LightOccluder2D7" type="LightOccluder2D" parent="LightOccluders"]
 occluder = SubResource("OccluderPolygon2D_vivmo")
 
-[node name="LightOccluder2D6" type="LightOccluder2D" parent="."]
+[node name="LightOccluder2D6" type="LightOccluder2D" parent="LightOccluders"]
 occluder = SubResource("OccluderPolygon2D_w48qg")
 
-[node name="LightOccluder2D5" type="LightOccluder2D" parent="."]
+[node name="LightOccluder2D5" type="LightOccluder2D" parent="LightOccluders"]
 occluder = SubResource("OccluderPolygon2D_4c57u")
 
-[node name="LightOccluder2D4" type="LightOccluder2D" parent="."]
+[node name="LightOccluder2D4" type="LightOccluder2D" parent="LightOccluders"]
 occluder = SubResource("OccluderPolygon2D_dg77c")
 
-[node name="LightOccluder2D3" type="LightOccluder2D" parent="."]
+[node name="LightOccluder2D3" type="LightOccluder2D" parent="LightOccluders"]
 occluder = SubResource("OccluderPolygon2D_ycdy4")
 
-[node name="LightOccluder2D2" type="LightOccluder2D" parent="."]
+[node name="LightOccluder2D2" type="LightOccluder2D" parent="LightOccluders"]
 occluder = SubResource("OccluderPolygon2D_kek77")
 
-[node name="LightOccluder2D9" type="LightOccluder2D" parent="."]
+[node name="LightOccluder2D9" type="LightOccluder2D" parent="LightOccluders"]
 occluder = SubResource("OccluderPolygon2D_yaehf")
 
-[node name="LightOccluder2D11" type="LightOccluder2D" parent="."]
+[node name="LightOccluder2D11" type="LightOccluder2D" parent="LightOccluders"]
 occluder = SubResource("OccluderPolygon2D_cegan")
 
-[node name="LightOccluder2D10" type="LightOccluder2D" parent="."]
+[node name="LightOccluder2D10" type="LightOccluder2D" parent="LightOccluders"]
 occluder = SubResource("OccluderPolygon2D_074og")
-
-[node name="gameovertimer" type="Timer" parent="."]
 
 [connection signal="timeout" from="RoundTimer" to="." method="_on_round_timer_timeout"]
 [connection signal="timeout" from="CountDown" to="." method="_on_count_down_timeout"]
