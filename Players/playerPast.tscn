@@ -23,7 +23,7 @@
 [ext_resource type="Texture2D" uid="uid://cikdkwfnoxoh2" path="res://assets/PastThief/thief side right4.png" id="18_88ni0"]
 [ext_resource type="Texture2D" uid="uid://da7lvdhqn7a5a" path="res://assets/PastThief/thief side right5.png" id="19_plf0p"]
 [ext_resource type="Texture2D" uid="uid://377xapsjvqhv" path="res://assets/flashlight.png" id="22_om0np"]
-[ext_resource type="Script" uid="uid://b7j7ijdgqb8aa" path="res://Players/playerSoundManager.gd" id="23_qrs7w"]
+[ext_resource type="Script" path="res://Players/playerSoundManager.gd" id="23_qrs7w"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3c3q8"]
 size = Vector2(10.4, 20)
