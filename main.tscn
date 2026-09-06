@@ -327,6 +327,7 @@ bank_paths = ["res://assets/Audio/Desktop/Master.bank"]
 [node name="music" type="FmodEventEmitter2D" parent="bgAudio"]
 event_name = "event:/music"
 event_guid = "{3ace9a90-760a-46a8-945a-efeb9447ac4b}"
+volume = 0.3
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_7mycd")
