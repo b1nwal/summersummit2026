@@ -29,6 +29,10 @@ var record = [Vector2()]
 const spot_time := 0.05
 var spot_timer := 0.0
 var spot_fired := false
+var gameoverseq := false
+
+func gameoverbruh():
+	gameoverseq = true
 
 func _unhandled_input(event):
 	if get_script() != Player:
@@ -94,24 +98,24 @@ func handle_flashlight(delta: float) -> void:
 	$FlashLight.rotation = facing.angle()
 	
 	$Cone.rotation = facing.angle()
-	
-	var target = null
-	for ray in $Cone.get_children():
-		if not ray.is_colliding():
-			continue
-		if ray.is_colliding():
-			if ray.get_collider() is Player and ray.get_collider() != self:
-				target = ray.get_collider()
-				break
-	if target:
-		spot_timer += delta
-		if spot_timer >= spot_time and not spot_fired:
-			spot_fired = true
-			spotted.emit()
-	else:
-		spot_timer = max(0.0, spot_timer - delta * 2.0)
-		if spot_timer == 0.0:
-			spot_fired = false
+	if gameoverseq == false:
+		var target = null
+		for ray in $Cone.get_children():
+			if not ray.is_colliding():
+				continue
+			if ray.is_colliding():
+				if ray.get_collider() is Player and ray.get_collider() != self:
+					target = ray.get_collider()
+					break
+		if target:
+			spot_timer += delta
+			if spot_timer >= spot_time and not spot_fired:
+				spot_fired = true
+				spotted.emit()
+		else:
+			spot_timer = max(0.0, spot_timer - delta * 2.0)
+			if spot_timer == 0.0:
+				spot_fired = false
 	
 func v_tween(ramp_time: int, x: float) -> float:
 	var m = 1
