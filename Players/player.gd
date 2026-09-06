@@ -68,10 +68,10 @@ func _physics_process(delta: float) -> void:
 	if not running and not velocity == Vector2.ZERO:
 		velocity = velocity.normalized() * (speed - v_tween(ramp_down * (velocity.length()/speed), Time.get_ticks_msec() - stop_start))
 	
-	$FlashLight.rotation = facing.angle() - PI/2
+	$FlashLight.rotation = facing.angle()
 	
 	# Detection flashlight
-	$Cone.rotation = facing.angle() - PI/2
+	$Cone.rotation = facing.angle()
 	for ray in $Cone.get_children():
 		if ray.is_colliding():
 			checked = 1
