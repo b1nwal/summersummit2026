@@ -907,7 +907,7 @@ one_shot = true
 [node name="HUD" parent="." instance=ExtResource("5_lquwl")]
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
-color = Color(0.662452, 0.662452, 0.662452, 1)
+color = Color(0.575081, 0.605724, 0.662387, 1)
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
 occluder = SubResource("OccluderPolygon2D_efxa6")
