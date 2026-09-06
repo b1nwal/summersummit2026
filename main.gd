@@ -223,7 +223,17 @@ func _on_score_added(points):
 	
 func _on_exit_reached():
 	new_round()
-	
+
+func _frame_killer(observer) -> void:
+	var cam: Camera2D = $player/Camera2D
+	cam.set_process(false)
+	var pos = observer.position
+	var vp := get_viewport_rect().size
+	#var z: float = min(vp.x / map_size.x, vp.y / map_size.y)
+	cam.limit_left = -100000
+	cam.limit_top = -100000
+	cam.limit_right = 100000
+	cam.limit_bottom = 100000
 	var t := create_tween().set_parallel(true).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 	t.tween_property(cam, "global_position", pos, 1.5)
 	t.tween_property(cam, "zoom", Vector2(2.7, 2.7), 1.5)
