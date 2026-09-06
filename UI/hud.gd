@@ -67,9 +67,15 @@ func _waypointer():
 func update_ready(message):
 	$CountDownLabel.text = message
 	if message.contains("Space"):
+		$CountDownLabel.add_theme_font_size_override("font_size", 100)
 		$CountDownLabel.add_theme_color_override("font_color", Color(0, 0, 0))
 		$CountDownLabel.add_theme_color_override("font_outline_color", Color(255, 255, 255))
+	elif message.contains("Avoid"):
+		$CountDownLabel.add_theme_font_size_override("font_size", 85)
+		$CountDownLabel.add_theme_color_override("font_color", Color(255, 0, 0))
+		$CountDownLabel.add_theme_color_override("font_outline_color", Color(255, 255, 255))
 	else:
+		$CountDownLabel.add_theme_font_size_override("font_size", 75)
 		$CountDownLabel.add_theme_color_override("font_color", Color(255, 255, 255))
 		$CountDownLabel.add_theme_color_override("font_outline_color", Color(0, 0, 0))
 

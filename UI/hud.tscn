@@ -97,7 +97,7 @@ grow_vertical = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 16
 theme_override_fonts/font = ExtResource("2_b1lf8")
-theme_override_font_sizes/font_size = 112
+theme_override_font_sizes/font_size = 75
 text = "Ready?"
 horizontal_alignment = 1
 
