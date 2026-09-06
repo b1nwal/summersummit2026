@@ -8,6 +8,7 @@ func _ready() -> void:
 	get_tree().current_scene.connect("rewind",_on_rewind)
 	
 func _on_rewind() -> void:
+	
 	queue_free()
 	
 func set_movement(_record: Array) -> void:

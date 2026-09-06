@@ -63,6 +63,7 @@ var past_players = []
 
 
 func new_round():
+	$player/playerSounds.play_reset_sound()
 	$player.set_physics_process(false)
 	
 	if visited_spawns.size() == spawns.size():
