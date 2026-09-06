@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://bgn2qmn7p2qxf"]
+
+[ext_resource type="Script" uid="uid://4wu0lvi7i2rf" path="res://gameElements/artifact.gd" id="1_32u3t"]
+[ext_resource type="Texture2D" uid="uid://dp3u5fwf5jkkp" path="res://assets/artifacts/artifact_stand_empty.png" id="2_uci8d"]
+
+[node name="Artifact" type="Node2D"]
+script = ExtResource("1_32u3t")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(32, -64)
+scale = Vector2(2, 2)
+texture = ExtResource("2_uci8d")
