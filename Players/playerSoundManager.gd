@@ -3,33 +3,46 @@ extends Node
 @onready var player = get_parent();
 
 @onready var step_delay = get_meta("delay") 
-@onready var step_delay_max = step_delay + 0.05
-##delete this for matching speed later??
 
-var running_playing = false
+var footstep_timer: Timer
+var time_sound_running = false;
+
+func _ready():
+	timer_ready()
  
 func _process(delta):
-	play_walk()
+	play_walk_sound()
 	#print(calc_ramp_delay())
 	
-func calc_ramp_delay():
-	var delay_ramp = step_delay_max - step_delay
-	var player_real_v = abs(player.velocity.length())
-	var player_max_v = player.speed
-	return step_delay_max - delay_ramp * player_real_v / player_max_v
-
-func play_walk(): #tempporary
-	if (player.running == true && running_playing == false && !player.velocity.is_zero_approx()):
-		running_playing = true
-		play_dela_wait_async($footsteps, calc_ramp_delay())
+func play_walk_sound(): #tempporary
+	if (!player.is_physics_processing()):
+		footstep_timer.stop()
+	elif !player.velocity.is_zero_approx():
+		if footstep_timer.is_stopped():
+			footstep_timer.start()
+	else: 
+		footstep_timer.stop()
+		
 
 func play_delay_async(emitter: FmodEventEmitter2D, delay):
 	emitter.play()
 	await get_tree().create_timer(delay).timeout
 	
-func play_dela_wait_async(emitter: FmodEventEmitter2D, delay : float):
-	emitter.play()
-	await get_tree().create_timer(delay).timeout
-	running_playing = false;
+func timer_ready():
+	footstep_timer = Timer.new()
+	footstep_timer.one_shot = false
+	footstep_timer.wait_time = step_delay
+	add_child(footstep_timer)
+	footstep_timer.timeout.connect(_on_footstep_timer_timeout)
+#
+func _on_footstep_timer_timeout():
+	$footsteps.play()
 	
+func play_artifact_sound():
+	$artifact.play()
 	
+func play_death_sound():
+	print("OW")
+	
+func play_reset_sound():
+	$rewind.play_one_shot()
