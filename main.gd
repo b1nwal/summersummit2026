@@ -24,19 +24,19 @@ const ROUNDCLOCK = 30
 var gameovertime = 0
 
 const artifacts = [
-	[Vector2(192, 1997), "purpleguy"], 
-	[Vector2(192, 1677), "purpleguy"], 
-	[Vector2(768, 1037), "purpleguy"],
-	[Vector2(704, 1805), "purpleguy"], 
-	[Vector2(1472, 1101), "purpleguy"], # new room / N
-	[Vector2(1280, 1933), "purpleguy"], # famous paintings / Central
+	[Vector2(192, 1997), "pot1"], 
+	[Vector2(192, 1677), "pot2"], 
+	[Vector2(768, 1037), "pot2"],
+	[Vector2(704, 1805), "pot1"], 
+	[Vector2(1472, 1101), "pot2"], # new room / N
+	[Vector2(1280, 1933), "chisato"], # famous paintings / Central
 	[Vector2(1472, 1933), "purpleguy"], 
-	[Vector2(1664, 1933), "purpleguy"],
-	[Vector2(2240, 1613), "purpleguy"], # war relics / NE
-	[Vector2(2624, 1357), "purpleguy"], 
-	[Vector2(2304, 2061), "purpleguy"], # statues / SE
-	[Vector2(2560, 973), "purpleguy"], # new room / E
-	[Vector2(1472, 2445), "purpleguy"] # great hall / S
+	[Vector2(1664, 1933), "shark"],
+	[Vector2(2240, 1613), "sword1"], # war relics / NE
+	[Vector2(2624, 1357), "sword2"], 
+	[Vector2(2304, 2061), "statue1"], # statues / SE
+	[Vector2(2560, 973), "statue2"], # new room / E
+	[Vector2(1472, 2445), "freddy"] # great hall / S
 ]
 
 signal rewind
