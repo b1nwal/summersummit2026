@@ -98,7 +98,11 @@ func new_round():
 	
 	create_player_path()
 	
-	$HUD.update_ready("Ready?")
+	if roundNum == 1:
+		$HUD.update_ready("Steal an artifact and escape.")
+	elif roundNum > 1:
+		$HUD.update_ready("Avoid your past selves.")
+	
 	$HUD/CountDownLabel.show()
 	$CountDown.start()
 	
@@ -115,6 +119,7 @@ func _frame_whole_map() -> void:
 	cam.set_process(false)
 
 	$player/Sprite2D.hide()
+	$player/Shadow.hide()
 	$player/ItemSprite2D.hide()
 	$player/FlashLight.hide()
 
