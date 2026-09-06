@@ -51,7 +51,9 @@ func _obtain_v_vec():
 func _physics_process(delta: float) -> void:
 	handle_movement()
 	handle_flashlight(delta)
-
+	
+	
+	
 	# check if distance to exit is < 64 px
 	if exit_point:
 		if global_position.distance_squared_to(exit_point) < 4096:
