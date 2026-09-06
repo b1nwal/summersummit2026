@@ -139,6 +139,7 @@ animation = &"walk_right"
 
 [node name="FlashLight" type="PointLight2D" parent="."]
 position = Vector2(3, 0)
+shadow_enabled = true
 texture = ExtResource("22_om0np")
 
 [node name="Cone" type="Node2D" parent="."]

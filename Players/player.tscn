@@ -156,6 +156,7 @@ shape = SubResource("CircleShape2D_ps8ke")
 
 [node name="FlashLight" type="PointLight2D" parent="."]
 position = Vector2(3, 0)
+shadow_enabled = true
 texture = ExtResource("22_tintf")
 
 [node name="audioListener" type="FmodListener2D" parent="."]
