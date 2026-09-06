@@ -73,7 +73,7 @@ theme_override_font_sizes/font_size = 112
 text = "Ready?"
 horizontal_alignment = 1
 
-[node name="Restart Label" type="Label" parent="."]
+[node name="RestartLabel" type="Label" parent="."]
 visible = false
 anchors_preset = 7
 anchor_left = 0.5
