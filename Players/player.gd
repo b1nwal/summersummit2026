@@ -10,6 +10,7 @@ signal score_earned(amount)
 
 var run_start
 var stop_start
+var exit_point
 var holding_item = null
 var running = false
 var ramp_up = 300
@@ -28,7 +29,8 @@ func _unhandled_input(event):
 		return
 
 	if event.is_action_pressed("interact"):
-		interact_with_closest_artifacts()
+		if !holding_item:
+			interact_with_closest_artifacts()
 
 func _obtain_v_vec():
 	var a = Input.get_vector("move_left","move_right","move_up","move_down")
@@ -78,6 +80,10 @@ func _physics_process(delta: float) -> void:
 		elif checked == 1:
 			checked = 0
 
+	# check if distance to exit is < 64 px
+	if global_position.distance_squared_to(exit_point) < 4096:
+		on_exit_point_reached()
+
 	move_and_slide()
 	
 func v_tween(ramp_time: int, x: float) -> float:
@@ -93,7 +99,17 @@ func start(pos: Vector2):
 	show()
 	for ray in $Cone.get_children():
 		ray.add_exception($"../raysbs")
-		
+
+# set the exit point for the player
+func set_exit_point(point):
+	exit_point = point
+	
+func on_exit_point_reached():
+	if holding_item:
+		score_earned.emit(holding_item.point_value)
+		holding_item = null
+
+# interact with all the closest artifacts
 func interact_with_closest_artifacts():
 	var nodes_in_range: Array[Node2D] = interaction_range.get_overlapping_bodies()
 	
@@ -113,5 +129,7 @@ func interact_with_closest_artifacts():
 	# try interacting with all the artifacts in range in order of distance
 	for artifact in artifacts:
 		if artifact.interact():
-			score_earned.emit(artifact.point_value)
+			
+			holding_item = artifact
+			print("now holding artifact")
 			break
