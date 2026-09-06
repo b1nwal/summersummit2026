@@ -106,6 +106,7 @@ func start(pos: Vector2):
 	record = [pos,facing]
 	animated_sprite.play("default")
 	position = pos
+	holding_item = null
 	show()
 	for ray in $Cone.get_children():
 		ray.add_exception($"../raysbs")

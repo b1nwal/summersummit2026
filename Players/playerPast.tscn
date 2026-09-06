@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://ds72i60gi80dp"]
+[gd_scene load_steps=27 format=3 uid="uid://ds72i60gi80dp"]
 
 [ext_resource type="Script" uid="uid://cb58eunt5ma8x" path="res://Players/playerPast.gd" id="1_om0np"]
 [ext_resource type="Material" uid="uid://cj4j4v7svv4br" path="res://Players/PastPlayerMaterial.tres" id="2_qrs7w"]
@@ -23,6 +23,7 @@
 [ext_resource type="Texture2D" uid="uid://cikdkwfnoxoh2" path="res://assets/PastThief/thief side right4.png" id="18_88ni0"]
 [ext_resource type="Texture2D" uid="uid://da7lvdhqn7a5a" path="res://assets/PastThief/thief side right5.png" id="19_plf0p"]
 [ext_resource type="Texture2D" uid="uid://377xapsjvqhv" path="res://assets/flashlight.png" id="22_om0np"]
+[ext_resource type="Script" path="res://Players/playerSoundManager.gd" id="23_qrs7w"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3c3q8"]
 size = Vector2(10.4, 20)
@@ -157,3 +158,15 @@ target_position = Vector2(175, 40)
 
 [node name="RayCast2D5" type="RayCast2D" parent="Cone"]
 target_position = Vector2(175, 80)
+
+[node name="playerSounds" type="Node2D" parent="."]
+script = ExtResource("23_qrs7w")
+metadata/delay = 0.15
+
+[node name="footsteps" type="FmodEventEmitter2D" parent="playerSounds"]
+event_name = "event:/walking"
+event_guid = "{f1337a33-50eb-40bb-a12e-da83cdddf796}"
+volume = 0.5
+fmod_parameters/ReverbWet/id = 3810293487696999223
+fmod_parameters/ReverbWet = 0.8
+fmod_parameters/ReverbWet/variant_type = 3
