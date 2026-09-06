@@ -122,7 +122,11 @@ func _frame_whole_map() -> void:
 	var map_center := Vector2(1504, 1408)
 	var vp := get_viewport_rect().size
 	var z: float = min(vp.x / map_size.x, vp.y / map_size.y)
-
+	cam.limit_left = -100000
+	cam.limit_top = -100000
+	cam.limit_right = 100000
+	cam.limit_bottom = 100000
+	
 	var t := create_tween().set_parallel(true) \
 		.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 	t.tween_property(cam, "global_position", map_center, 1.5)
@@ -222,12 +226,18 @@ func create_player_path():
 
 
 func _on_gameovertimer_timeout() -> void:
-	if gameovertime > ROUNDCLOCK + 5:
-		get_tree().change_scene_to_file("res://UI/death_screen.tscn")
-	if gameovertime == 3:
+	#if gameovertime > ROUNDCLOCK + 5:
+		#get_tree().change_scene_to_file("res://UI/death_screen.tscn")
+	if gameovertime == 2:
 		for p in past_players:
 			if is_instance_valid(p):
 				p.set_physics_process(true)
-	if gameovertime <= ROUNDCLOCK + 5:
-		gameovertime += 1
-		$gameovertimer.start()
+	#if gameovertime <= ROUNDCLOCK + 5:
+	gameovertime += 1
+	$gameovertimer.start()
+
+func _unhandled_input(event: InputEvent) -> void:
+	if gameovertime > 0: 
+		if event is InputEventKey and event.pressed and not event.echo:
+			if event.keycode == KEY_ENTER or event.keycode == KEY_KP_ENTER:
+				get_tree().change_scene_to_file("res://UI/main_menu.tscn")
