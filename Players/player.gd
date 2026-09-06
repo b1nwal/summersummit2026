@@ -26,7 +26,7 @@ var f_A = .07
 var angular_velocity = 0
 var angular_acceleration = 0
 var record = [Vector2()]
-const spot_time := 0.07
+const spot_time := 0.05
 var spot_timer := 0.0
 var spot_fired := false
 
