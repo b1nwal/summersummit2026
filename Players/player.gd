@@ -38,7 +38,16 @@ func _obtain_v_vec():
 	return [a,position]
 
 func _physics_process(delta: float) -> void:
-	# movement
+	handle_movement()
+	handle_flashlight()
+
+	# check if distance to exit is < 64 px
+	if global_position.distance_squared_to(exit_point) < 4096:
+		on_exit_point_reached()
+
+	move_and_slide()
+	
+func handle_movement():	
 	var v_vec = _obtain_v_vec()[0]
 	position = _obtain_v_vec()[1]
 	
@@ -71,21 +80,17 @@ func _physics_process(delta: float) -> void:
 	if not running and not velocity == Vector2.ZERO:
 		velocity = velocity.normalized() * (speed - v_tween(ramp_down * (velocity.length()/speed), Time.get_ticks_msec() - stop_start))
 	
+	
+
+func handle_flashlight():
 	$FlashLight.rotation = facing.angle()
 	
-	# Detection flashlight
 	$Cone.rotation = facing.angle()
 	for ray in $Cone.get_children():
 		if ray.is_colliding():
 			checked = 1
 		elif checked == 1:
 			checked = 0
-
-	# check if distance to exit is < 64 px
-	if global_position.distance_squared_to(exit_point) < 4096:
-		on_exit_point_reached()
-
-	move_and_slide()
 	
 func v_tween(ramp_time: int, x: float) -> float:
 	var m = 1

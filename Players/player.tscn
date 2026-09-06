@@ -124,7 +124,7 @@ sprite_frames = SubResource("SpriteFrames_x7o8n")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 top_level = true
-zoom = Vector2(0.2, 0.2)
+zoom = Vector2(3.5, 3.5)
 editor_draw_limits = true
 script = ExtResource("21_tintf")
 
