@@ -16,6 +16,34 @@
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_37p78")
 
+[node name="Waypoint" type="Marker2D" parent="."]
+visible = false
+scale = Vector2(3, 3)
+
+[node name="bottomleft" type="Sprite2D" parent="Waypoint"]
+texture = ExtResource("5_rnl6m")
+
+[node name="bottomright" type="Sprite2D" parent="Waypoint"]
+texture = ExtResource("6_1ui3w")
+
+[node name="bottom" type="Sprite2D" parent="Waypoint"]
+texture = ExtResource("7_phrgc")
+
+[node name="left" type="Sprite2D" parent="Waypoint"]
+texture = ExtResource("8_8nmcf")
+
+[node name="right" type="Sprite2D" parent="Waypoint"]
+texture = ExtResource("9_sab3h")
+
+[node name="topleft" type="Sprite2D" parent="Waypoint"]
+texture = ExtResource("10_vdnig")
+
+[node name="topright" type="Sprite2D" parent="Waypoint"]
+texture = ExtResource("11_pueji")
+
+[node name="top" type="Sprite2D" parent="Waypoint"]
+texture = ExtResource("12_4evux")
+
 [node name="TimeLabel" type="Label" parent="."]
 anchors_preset = 5
 anchor_left = 0.5
@@ -130,30 +158,3 @@ theme_override_fonts/font = ExtResource("2_bytes")
 theme_override_font_sizes/font_size = 28
 text = "bruh"
 vertical_alignment = 2
-
-[node name="Waypoint" type="Marker2D" parent="."]
-scale = Vector2(3, 3)
-
-[node name="bottomleft" type="Sprite2D" parent="Waypoint"]
-texture = ExtResource("5_rnl6m")
-
-[node name="bottomright" type="Sprite2D" parent="Waypoint"]
-texture = ExtResource("6_1ui3w")
-
-[node name="bottom" type="Sprite2D" parent="Waypoint"]
-texture = ExtResource("7_phrgc")
-
-[node name="left" type="Sprite2D" parent="Waypoint"]
-texture = ExtResource("8_8nmcf")
-
-[node name="right" type="Sprite2D" parent="Waypoint"]
-texture = ExtResource("9_sab3h")
-
-[node name="topleft" type="Sprite2D" parent="Waypoint"]
-texture = ExtResource("10_vdnig")
-
-[node name="topright" type="Sprite2D" parent="Waypoint"]
-texture = ExtResource("11_pueji")
-
-[node name="top" type="Sprite2D" parent="Waypoint"]
-texture = ExtResource("12_4evux")
