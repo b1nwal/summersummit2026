@@ -20,20 +20,19 @@ var score
 var count
 
 const artifacts = [
-	[Vector2(360, 1997), "stand_empty"], # these are all the ones on the left
-	[Vector2(192, 1997), "stand_amongus"], # they all have new names and
-	[Vector2(192, 1677), "stand_amongus"], # im too lazy to comeup with it rn
-	[Vector2(768, 1037), "stand_amongus"],
-	[Vector2(704, 1805), "stand_amongus"], 
-	[Vector2(1472, 1101), "stand_amongus"], # new room / N
-	[Vector2(1280, 1933), "stand_amongus"], # famous paintings / Central
-	[Vector2(1472, 1933), "stand_amongus"], 
-	[Vector2(1664, 1933), "stand_amongus"],
-	[Vector2(2240, 1613), "stand_amongus"], # war relics / NE
-	[Vector2(2624, 1357), "stand_amongus"], 
-	[Vector2(2304, 2061), "stand_amongus"], # statues / SE
-	[Vector2(2560, 973), "stand_amongus"], # new room / E
-	[Vector2(1472, 2445), "stand_amongus"] # great hall / S
+	[Vector2(192, 1997), "purpleguy"], 
+	[Vector2(192, 1677), "purpleguy"], 
+	[Vector2(768, 1037), "purpleguy"],
+	[Vector2(704, 1805), "purpleguy"], 
+	[Vector2(1472, 1101), "purpleguy"], # new room / N
+	[Vector2(1280, 1933), "purpleguy"], # famous paintings / Central
+	[Vector2(1472, 1933), "purpleguy"], 
+	[Vector2(1664, 1933), "purpleguy"],
+	[Vector2(2240, 1613), "purpleguy"], # war relics / NE
+	[Vector2(2624, 1357), "purpleguy"], 
+	[Vector2(2304, 2061), "purpleguy"], # statues / SE
+	[Vector2(2560, 973), "purpleguy"], # new room / E
+	[Vector2(1472, 2445), "purpleguy"] # great hall / S
 ]
 
 signal rewind
