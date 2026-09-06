@@ -1,4 +1,4 @@
-[gd_scene load_steps=126 format=4 uid="uid://8b1aacpykmpl"]
+[gd_scene load_steps=132 format=4 uid="uid://8b1aacpykmpl"]
 
 [ext_resource type="Script" uid="uid://cj5kaa1m55hos" path="res://main.gd" id="1_1bvp3"]
 [ext_resource type="Texture2D" uid="uid://qosfyoqaho0b" path="res://assets/wall floor tile.png" id="2_7mycd"]
@@ -703,6 +703,24 @@ size = Vector2(192, 64)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sm6fg"]
 size = Vector2(128, 64)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m74q3"]
+size = Vector2(64, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ywjan"]
+size = Vector2(64, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0arob"]
+size = Vector2(64, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dij0e"]
+size = Vector2(64, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k1udn"]
+size = Vector2(128, 56)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wat4s"]
+size = Vector2(64, 64)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b17eg"]
 size = Vector2(704, 32)
 
@@ -859,8 +877,8 @@ script = ExtResource("1_1bvp3")
 
 [node name="Map-layoutBg" type="Sprite2D" parent="."]
 z_index = -11
-position = Vector2(1503, 1516)
-scale = Vector2(2.25, 2.25)
+position = Vector2(1496, 1408)
+scale = Vector2(2.24468, 2.20455)
 texture = ExtResource("2_272bh")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
@@ -918,7 +936,7 @@ position = Vector2(96, 2463)
 position = Vector2(2912, 1855)
 
 [node name="playerspawn3" type="Marker2D" parent="playerspawns"]
-position = Vector2(1507, 2730)
+position = Vector2(1504, 2720)
 
 [node name="playerspawn4" type="Marker2D" parent="playerspawns"]
 position = Vector2(864, 607)
@@ -927,7 +945,7 @@ position = Vector2(864, 607)
 position = Vector2(2784, 95)
 
 [node name="playerspawn6" type="Marker2D" parent="playerspawns"]
-position = Vector2(1502, 681)
+position = Vector2(1504, 704)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
@@ -1163,6 +1181,30 @@ shape = SubResource("RectangleShape2D_pjyto")
 position = Vector2(2560, 1760)
 shape = SubResource("RectangleShape2D_sm6fg")
 
+[node name="CollisionShape2D59" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(1440, 704)
+shape = SubResource("RectangleShape2D_m74q3")
+
+[node name="CollisionShape2D60" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(2784, 32)
+shape = SubResource("RectangleShape2D_ywjan")
+
+[node name="CollisionShape2D61" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(32, 2464)
+shape = SubResource("RectangleShape2D_0arob")
+
+[node name="CollisionShape2D62" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(2976, 1856)
+shape = SubResource("RectangleShape2D_dij0e")
+
+[node name="CollisionShape2D63" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(1504, 2780)
+shape = SubResource("RectangleShape2D_k1udn")
+
+[node name="CollisionShape2D64" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(864, 544)
+shape = SubResource("RectangleShape2D_wat4s")
+
 [node name="CountDown" type="Timer" parent="."]
 one_shot = true
 
@@ -1359,6 +1401,18 @@ occluder = SubResource("OccluderPolygon2D_cegan")
 occluder = SubResource("OccluderPolygon2D_074og")
 
 [node name="gameovertimer" type="Timer" parent="."]
+
+[node name="Map-layoutBg2" type="Sprite2D" parent="."]
+z_index = -11
+position = Vector2(4728, 1408)
+scale = Vector2(2.05319, 2.20455)
+texture = ExtResource("2_272bh")
+
+[node name="Map-layoutBg2" type="Sprite2D" parent="Map-layoutBg2"]
+z_index = -11
+position = Vector2(-3128.79, 4.36306e-05)
+scale = Vector2(0.974093, 1)
+texture = ExtResource("2_272bh")
 
 [connection signal="timeout" from="RoundTimer" to="." method="_on_round_timer_timeout"]
 [connection signal="timeout" from="CountDown" to="." method="_on_count_down_timeout"]
