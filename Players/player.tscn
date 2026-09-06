@@ -379,9 +379,9 @@ animation = &"walk_right_artifact"
 [node name="Camera2D" type="Camera2D" parent="."]
 top_level = true
 zoom = Vector2(2, 2)
-limit_left = -192
+limit_left = -300
 limit_top = -144
-limit_right = 3184
+limit_right = 4000
 limit_bottom = 2960
 editor_draw_limits = true
 script = ExtResource("21_tintf")
@@ -393,15 +393,21 @@ z_index = 1
 target_position = Vector2(175, -80)
 
 [node name="RayCast2D2" type="RayCast2D" parent="Cone"]
-target_position = Vector2(175, -40)
+target_position = Vector2(192, -56)
 
 [node name="RayCast2D3" type="RayCast2D" parent="Cone"]
-target_position = Vector2(175, 0)
+target_position = Vector2(200, -24)
 
 [node name="RayCast2D4" type="RayCast2D" parent="Cone"]
-target_position = Vector2(175, 40)
+target_position = Vector2(208, 0)
 
 [node name="RayCast2D5" type="RayCast2D" parent="Cone"]
+target_position = Vector2(200, 24)
+
+[node name="RayCast2D6" type="RayCast2D" parent="Cone"]
+target_position = Vector2(192, 56)
+
+[node name="RayCast2D7" type="RayCast2D" parent="Cone"]
 target_position = Vector2(176, 80)
 
 [node name="InteractionRange" type="Area2D" parent="."]

@@ -10,7 +10,7 @@ extends CharacterBody2D
 
 signal score_earned(amount)
 signal exit_point_reached()
-signal spotted()
+signal spotted(observer, target)
 
 var run_start
 var stop_start
@@ -129,7 +129,7 @@ func handle_flashlight(delta: float) -> void:
 			spot_timer += delta
 			if spot_timer >= spot_time and not spot_fired:
 				spot_fired = true
-				spotted.emit()
+				spotted.emit(self, target)
 		else:
 			spot_timer = max(0.0, spot_timer - delta * 2.0)
 			if spot_timer == 0.0:
