@@ -181,6 +181,7 @@ animations = [{
 radius = 96.0
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
+z_index = 11
 metadata/speed = 400
 metadata/_edit_group_ = true
 
@@ -197,6 +198,7 @@ scale = Vector2(2.5, 2.5)
 shape = SubResource("RectangleShape2D_onrkg")
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+z_index = 11
 material = ExtResource("1_8g4q3")
 position = Vector2(2.6226e-06, 1.43051e-06)
 scale = Vector2(2, 1.768)
@@ -267,5 +269,6 @@ event_guid = "{9c723345-b439-490f-81ad-9158cdd185e0}"
 volume = 0.5
 
 [node name="ItemSprite2D" type="Sprite2D" parent="."]
+z_index = 10
 scale = Vector2(2, 2)
 offset = Vector2(0, -19.5)

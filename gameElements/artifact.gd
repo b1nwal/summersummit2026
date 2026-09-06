@@ -28,6 +28,8 @@ func initialize_data(pos: Vector2, sprite_name = null):
 		var data = {
 			"sprite_name": sprite_name
 		}
+		
+		$artifactsprite.texture = load("res://assets/artifacts/artifact_item_{sprite_name}.png".format(data))
 		$artifactsprite.show()
 		_start_float()
 # returns true if the artifact was successfully collected. returns false if you cant interact.
