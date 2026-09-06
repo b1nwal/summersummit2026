@@ -71,6 +71,7 @@ func new_round():
 		
 	time = 60
 	count = 2
+	$HUD.update_score(score)
 	$HUD.update_timer(time)
 	$RoundTimer.stop()
 	rewind.emit()
