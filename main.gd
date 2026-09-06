@@ -11,6 +11,7 @@ extends Node2D
 
 var playerPast_scene = preload("res://Players/playerPast.tscn")
 var artifact_scene = preload("res://gameElements/artifact.tscn")
+var portal_texture = preload("res://assets/portals/portal1.png")
 var futures = []
 var time
 var score
@@ -128,6 +129,12 @@ func create_player_path():
 	var data = {
 		"s": randi2 - 1
 	}
+	
+	# spawn portal @ exit point
+	var sprite = Sprite2D.new()
+	sprite.texture = portal_texture
+	sprite.global_position = spawns[randi2 - 1]
+	add_child(sprite)
 	
 	print("exit point set to position {s}".format(data))
 	
