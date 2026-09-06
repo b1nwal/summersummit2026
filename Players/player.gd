@@ -4,6 +4,7 @@ extends CharacterBody2D
 
 @onready var speed = get_meta("speed")
 @onready var animated_sprite = $Sprite2D
+@onready var item_sprite = $ItemSprite2D
 @onready var interaction_range = $InteractionRange
 
 signal score_earned(amount)
@@ -83,8 +84,7 @@ func handle_movement():
 		velocity = v_vec * v_tween(ramp_up, Time.get_ticks_msec() - run_start)
 	if not running and not velocity == Vector2.ZERO:
 		velocity = velocity.normalized() * (speed - v_tween(ramp_down * (velocity.length()/speed), Time.get_ticks_msec() - stop_start))
-	
-	
+		
 
 func handle_flashlight():
 	$FlashLight.rotation = facing.angle()
@@ -107,6 +107,7 @@ func start(pos: Vector2):
 	animated_sprite.play("default")
 	position = pos
 	holding_item = null
+	item_sprite.texture = null
 	show()
 	for ray in $Cone.get_children():
 		ray.add_exception($"../raysbs")
@@ -145,5 +146,9 @@ func interact_with_closest_artifacts():
 		if artifact.interact():
 			
 			holding_item = artifact
+			var data = {
+				"name": artifact.get_sprite_name()
+			}
+			item_sprite.texture = load("res://assets/artifacts/artifact_item_{name}.png".format(data))
 			print("now holding artifact")
 			break
