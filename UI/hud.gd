@@ -10,12 +10,14 @@ extends CanvasLayer
 @onready var waypointTR := $Waypoint/topright
 @onready var waypointT := $Waypoint/top
 
-const top = 96.0
-const left = 96.0
-const right = 1825.0
-const bottom = 984.0
+@onready var viewport_size = get_viewport().size
+const top = WAYPOINT_MARGIN
+const left = WAYPOINT_MARGIN
+@onready var right = viewport_size.x - WAYPOINT_MARGIN 
+@onready var bottom = viewport_size.y - WAYPOINT_MARGIN
 const WAYPOINT_MARGIN := 96.0
 var waypoint_target = null
+@onready var max_dimension = max(viewport_size.x, viewport_size.y)
 
 func _process(delta: float) -> void:
 	if not $CountDownLabel.visible:
