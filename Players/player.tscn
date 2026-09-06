@@ -206,6 +206,10 @@ animation = &"walk_right_artifact"
 [node name="Camera2D" type="Camera2D" parent="."]
 top_level = true
 zoom = Vector2(2, 2)
+limit_left = -192
+limit_top = -144
+limit_right = 3184
+limit_bottom = 2960
 editor_draw_limits = true
 script = ExtResource("21_tintf")
 
