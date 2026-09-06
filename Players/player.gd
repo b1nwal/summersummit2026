@@ -7,10 +7,11 @@ extends CharacterBody2D
 @onready var item_sprite = $ItemSprite2D
 @onready var interaction_range = $InteractionRange
 @onready var soundManager = $playerSounds
+@onready var particles = $GPUParticles2D
 
 signal score_earned(amount)
 signal exit_point_reached()
-signal spotted()
+signal spotted(observer, target)
 
 var run_start
 var stop_start
@@ -66,23 +67,33 @@ func handle_movement():
 	position = _obtain_v_vec()[1]
 	
 	if v_vec[0] > 0:
+		if particles:
+			particles.emitting = true
 		if holding_item:
 			animated_sprite.play("walk_right_artifact")
 		else:
 			animated_sprite.play("walk_right")
 	elif v_vec[0] < 0:
+		if particles:
+			particles.emitting = true
 		if holding_item:
 			animated_sprite.play("walk_left_artifact")
 		else:
 			animated_sprite.play("walk_left")
 	elif v_vec[1] > 0:
+		if particles:
+			particles.emitting = true
 		if holding_item:
 			animated_sprite.play("walk_forward_artifact")
 		else:
 			animated_sprite.play("walk_forward")
 	elif v_vec[1] < 0:
+		if particles:
+			particles.emitting = true
 		animated_sprite.play("walk_backward")
 	elif v_vec[0] == 0:
+		if particles:
+			particles.emitting = false
 		if holding_item:
 			animated_sprite.play("default_artifact")
 		else:
@@ -129,7 +140,7 @@ func handle_flashlight(delta: float) -> void:
 			spot_timer += delta
 			if spot_timer >= spot_time and not spot_fired:
 				spot_fired = true
-				spotted.emit()
+				spotted.emit(self, target)
 		else:
 			spot_timer = max(0.0, spot_timer - delta * 2.0)
 			if spot_timer == 0.0:
@@ -160,6 +171,7 @@ func on_exit_point_reached():
 	if holding_item:
 		score_earned.emit(holding_item.point_value)
 		holding_item = null
+		particles.emitting = false
 	
 	exit_point_reached.emit()
 

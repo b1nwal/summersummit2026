@@ -1,4 +1,4 @@
-[gd_scene load_steps=79 format=3 uid="uid://bw4aphjyapcqh"]
+[gd_scene load_steps=80 format=3 uid="uid://bw4aphjyapcqh"]
 
 [ext_resource type="Texture2D" uid="uid://dmo3p0nl7eyp4" path="res://assets/Particles/particle effects2.png" id="1_2ggna"]
 [ext_resource type="Material" uid="uid://lwblg6nqxg0p" path="res://Players/PlayerMaterial.tres" id="1_8g4q3"]
@@ -344,6 +344,18 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_ps8ke"]
 radius = 96.0
 
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wu1qw"]
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(8, 8, 8)
+emission_shape = 1
+emission_sphere_radius = 8.0
+direction = Vector3(0, -1, 0)
+initial_velocity_max = 256.0
+gravity = Vector3(0, 98, 0)
+scale_min = 1.2
+scale_max = 2.4
+color = Color(0.235294, 0.227451, 0.2, 0.74902)
+
 [node name="CharacterBody2D" type="CharacterBody2D"]
 z_index = 11
 metadata/speed = 400
@@ -357,7 +369,6 @@ texture = ExtResource("1_tintf")
 offset = Vector2(-0.5, -9)
 
 [node name="ParticleEffect" type="AnimatedSprite2D" parent="."]
-visible = false
 z_index = 11
 position = Vector2(1, -1)
 scale = Vector2(2, 2)
@@ -379,9 +390,9 @@ animation = &"walk_right_artifact"
 [node name="Camera2D" type="Camera2D" parent="."]
 top_level = true
 zoom = Vector2(2, 2)
-limit_left = -192
+limit_left = -300
 limit_top = -144
-limit_right = 3184
+limit_right = 4000
 limit_bottom = 2960
 editor_draw_limits = true
 script = ExtResource("21_tintf")
@@ -393,19 +404,24 @@ z_index = 1
 target_position = Vector2(175, -80)
 
 [node name="RayCast2D2" type="RayCast2D" parent="Cone"]
-target_position = Vector2(175, -40)
+target_position = Vector2(192, -56)
 
 [node name="RayCast2D3" type="RayCast2D" parent="Cone"]
-target_position = Vector2(175, 0)
+target_position = Vector2(200, -24)
 
 [node name="RayCast2D4" type="RayCast2D" parent="Cone"]
-target_position = Vector2(175, 40)
+target_position = Vector2(208, 0)
 
 [node name="RayCast2D5" type="RayCast2D" parent="Cone"]
+target_position = Vector2(200, 24)
+
+[node name="RayCast2D6" type="RayCast2D" parent="Cone"]
+target_position = Vector2(192, 56)
+
+[node name="RayCast2D7" type="RayCast2D" parent="Cone"]
 target_position = Vector2(176, 80)
 
 [node name="InteractionRange" type="Area2D" parent="."]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionRange"]
 shape = SubResource("CircleShape2D_ps8ke")
@@ -443,3 +459,14 @@ volume = 0.5
 z_index = 10
 scale = Vector2(2, 2)
 offset = Vector2(0, -19.5)
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+position = Vector2(0, 26.18)
+scale = Vector2(0.35, 0.35)
+emitting = false
+amount = 24
+lifetime = 0.5
+randomness = 0.5
+collision_base_size = 4.0
+visibility_rect = Rect2(-100, -100, 200, 110)
+process_material = SubResource("ParticleProcessMaterial_wu1qw")
