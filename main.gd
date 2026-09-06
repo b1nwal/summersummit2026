@@ -82,9 +82,9 @@ func new_round():
 	$player/playerSounds.play_reset_sound()
 	$player.set_physics_process(false)
 	roundNum += 1
-	if visited_spawns.size() == spawns.size():
-		#_on_game_end()
-		return
+	#if visited_spawns.size() == spawns.size():
+		##_on_game_end()
+		#return
 		
 	time = ROUNDCLOCK
 	count = 2
@@ -107,9 +107,13 @@ func new_round():
 			past_player_instance.set_physics_process(false)
 			past_players.append(past_player_instance)
 			past_player_instance.spotted.connect(_on_spotted)
-
 	
 	create_player_path()
+	$player.set_invincible(true)
+	for p in past_players:
+		if is_instance_valid(p):
+			p.set_invincible(true)
+	
 	
 	if roundNum == 1:
 		$HUD.update_ready("Steal an artifact and escape.")
@@ -126,6 +130,12 @@ func _process(delta):
 	if time < 0:
 		_game_over()
 		time = 9999
+	if time == 27: 
+		$player.set_invincible(false)
+		for p in past_players:
+			if is_instance_valid(p):
+				p.set_invincible(false)
+
 
 func _frame_whole_map() -> void:
 	var cam: Camera2D = $player/Camera2D
@@ -221,8 +231,8 @@ func create_player_path():
 	var randi1 = randi_range(1, spawns.size())
 	var randi2 = randi_range(1, spawns.size())
 	
-	while spawns[randi1 - 1] in visited_spawns:
-		randi1 = randi_range(1, spawns.size())
+	#while spawns[randi1 - 1] in visited_spawns:
+		#randi1 = randi_range(1, spawns.size())
 	
 	while randi1 == randi2:
 		randi2 = randi_range(1, spawns.size())
@@ -234,7 +244,7 @@ func create_player_path():
 	portal_sprite.global_position = spawns[randi2 - 1]
 	$HUD.set_waypoint(spawns[randi2 - 1])
 	
-	visited_spawns.append(spawns[randi1 - 1])
+	#visited_spawns.append(spawns[randi1 - 1])
 	
 	var data = {
 		"s": randi2 - 1

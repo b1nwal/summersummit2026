@@ -30,6 +30,7 @@ const spot_time := 0.05
 var spot_timer := 0.0
 var spot_fired := false
 var gameoverseq := false
+var invincible := true
 
 func gameoverbruh():
 	gameoverseq = true
@@ -106,11 +107,14 @@ func handle_movement():
 		velocity = velocity.normalized() * (speed - v_tween(ramp_down * (velocity.length()/speed), Time.get_ticks_msec() - stop_start))
 		
 
+func set_invincible(boo):
+	invincible = boo
+
 func handle_flashlight(delta: float) -> void:
 	$FlashLight.rotation = facing.angle()
 	
 	$Cone.rotation = facing.angle()
-	if gameoverseq == false:
+	if gameoverseq == false and invincible == false:
 		var target = null
 		for ray in $Cone.get_children():
 			if not ray.is_colliding():
