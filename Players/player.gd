@@ -159,8 +159,8 @@ func start(pos: Vector2):
 	holding_item = null
 	item_sprite.texture = null
 	show()
-	for ray in $Cone.get_children():
-		ray.add_exception($"../raysbs")
+	#for ray in $Cone.get_children():
+		#ray.add_exception($"../raysbs")
 
 # set the exit point for the player
 func set_exit_point(point):
