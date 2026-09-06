@@ -131,7 +131,7 @@ func new_round():
 	
 func _process(delta):
 	if Input.is_action_just_pressed("ui_cancel"):
-		new_round()
+		get_tree().quit()
 		
 	if time < 0:
 		_game_over()

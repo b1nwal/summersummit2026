@@ -1229,6 +1229,7 @@ environment = SubResource("Environment_7mycd")
 
 [node name="player" parent="." instance=ExtResource("3_7mycd")]
 z_index = 1
+collision_mask = 1
 script = ExtResource("4_272bh")
 
 [node name="ColorRect" type="ColorRect" parent="."]
