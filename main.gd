@@ -12,6 +12,7 @@ extends Node2D
 var playerPast_scene = preload("res://Players/playerPast.tscn")
 var artifact_scene = preload("res://gameElements/artifact.tscn")
 var portal_texture = preload("res://assets/portals/portal1.png")
+var portal_sprite
 var futures = []
 var time
 var score
@@ -45,6 +46,12 @@ func _ready():
 	# place artifacts
 	for artifact in artifacts:
 		add_artifact(artifact[0], artifact[1])
+		
+	# place portal
+	portal_sprite = Sprite2D.new()
+	portal_sprite.texture = portal_texture
+	add_child(portal_sprite)
+	
 		
 	$player.score_earned.connect(_on_score_added)
 	$player.exit_point_reached.connect(_on_exit_reached)
@@ -131,10 +138,7 @@ func create_player_path():
 	}
 	
 	# spawn portal @ exit point
-	var sprite = Sprite2D.new()
-	sprite.texture = portal_texture
-	sprite.global_position = spawns[randi2 - 1]
-	add_child(sprite)
+	portal_sprite.global_position = spawns[randi2 - 1]
 	
 	print("exit point set to position {s}".format(data))
 	
