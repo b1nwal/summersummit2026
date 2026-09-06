@@ -171,7 +171,7 @@ func _frame_whole_map() -> void:
 
 func _game_over():
 	_frame_whole_map()
-	
+	create_tween().tween_property($ColorRect, "color:a", 0.0, 0.5)
 	$player.set_physics_process(false)
 	$RoundTimer.stop()
 	$HUD/TimeLabel.hide()
@@ -267,9 +267,14 @@ func _on_spotted(observer, target):
 			p.set_physics_process(false)
 	_frame_killer(observer)
 	$RoundTimer.stop()
-	await get_tree().create_timer(3.5).timeout
+	var t := create_tween().set_parallel(true).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+	t.tween_property($ColorRect, "color:a", 1.0, 2.5)
+	await get_tree().create_timer(3).timeout
+	
 	_game_over()
 
+func end_animation():
+	pass
 
 # needs dev
 #func _on_game_end():

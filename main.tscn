@@ -1230,6 +1230,13 @@ environment = SubResource("Environment_7mycd")
 z_index = 1
 script = ExtResource("4_272bh")
 
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -2504.0
+offset_top = -2057.0
+offset_right = 8344.0
+offset_bottom = 5431.0
+color = Color(1, 1, 1, 0)
+
 [node name="RoundTimer" type="Timer" parent="."]
 one_shot = true
 
@@ -1525,6 +1532,7 @@ one_shot = true
 
 [node name="raysbs" type="StaticBody2D" parent="."]
 visible = false
+collision_layer = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="raysbs"]
 position = Vector2(480, 656)
