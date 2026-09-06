@@ -135,6 +135,7 @@ func _game_over():
 	$RoundTimer.stop()
 	$HUD/TimeLabel.hide()
 	$HUD/ObjectiveLabel.hide()
+	$HUD/ObjectiveLabel2.hide()
 	$HUD/CountDownLabel.hide()
 	$player.gameoverbruh()
 	$HUD.update_ready("You broke the\nSpace Time Continuum")
