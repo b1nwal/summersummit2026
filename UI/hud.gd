@@ -13,8 +13,8 @@ extends CanvasLayer
 @onready var viewport_size = get_viewport().size
 const top = WAYPOINT_MARGIN
 const left = WAYPOINT_MARGIN
-@onready var right = viewport_size.x - WAYPOINT_MARGIN 
-@onready var bottom = viewport_size.y - WAYPOINT_MARGIN
+@onready var right = viewport_size.x - WAYPOINT_MARGIN + 3
+@onready var bottom = viewport_size.y - WAYPOINT_MARGIN + 2
 const WAYPOINT_MARGIN := 96.0
 var waypoint_target = null
 @onready var max_dimension = max(viewport_size.x, viewport_size.y)
@@ -55,11 +55,14 @@ func _waypointer():
 		waypointL.show()
 	elif waypoint.position.x == right:
 		waypointR.show()
+		
 	elif waypoint.position.y == top:
 		waypointT.show()
 	elif waypoint.position.y == bottom:
 		waypointB.show()
-	
+	print(waypoint.position)
+	print(right)
+	print(bottom)
 
 func update_ready(message):
 	$CountDownLabel.text = message

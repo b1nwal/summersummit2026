@@ -13,6 +13,7 @@ var playerPast_scene = preload("res://Players/playerPast.tscn")
 var artifact_scene = preload("res://gameElements/artifact.tscn")
 var portal_texture = preload("res://assets/portals/portal1.png")
 var portal_sprite
+var portal_visual
 var visited_spawns = []
 var futures = []
 var time
@@ -50,20 +51,32 @@ func _ready():
 	for artifact in artifacts:
 		add_artifact(artifact[0], artifact[1])
 		
-	# place portal
-	portal_sprite = Sprite2D.new()
-	portal_sprite.texture = portal_texture
-	add_child(portal_sprite)
+	## place portal
+	#portal_sprite = Sprite2D.new()
+	#portal_sprite.texture = portal_texture
+	#add_child(portal_sprite)
 	
+	# place portal
+	portal_sprite = Node2D.new()
+	portal_visual = Sprite2D.new()
+	portal_visual.texture = portal_texture
+	portal_sprite.add_child(portal_visual)
+	add_child(portal_sprite)
 		
 	$player.score_earned.connect(_on_score_added)
 	$player.exit_point_reached.connect(_on_exit_reached)
 	$player.spotted.connect(_on_spotted)
 		
 	new_round()
-	
+	_start_float_on_portal() 
 var past_players = []
 
+func _start_float_on_portal() -> void:
+	var t := create_tween().set_loops()
+	t.tween_property(portal_visual, "position", Vector2(0, -25), 1.5) \
+		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	t.tween_property(portal_visual, "position", Vector2(0, 0), 1.5) \
+		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 
 func new_round():
 	$player/playerSounds.play_reset_sound()
