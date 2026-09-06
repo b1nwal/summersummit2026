@@ -63,15 +63,27 @@ func handle_movement():
 	position = _obtain_v_vec()[1]
 	
 	if v_vec[0] > 0:
-		animated_sprite.play("walk_right")
+		if holding_item:
+			animated_sprite.play("walk_right_artifact")
+		else:
+			animated_sprite.play("walk_right")
 	elif v_vec[0] < 0:
-		animated_sprite.play("walk_left")
+		if holding_item:
+			animated_sprite.play("walk_left_artifact")
+		else:
+			animated_sprite.play("walk_left")
 	elif v_vec[1] > 0:
-		animated_sprite.play("walk_forward")
+		if holding_item:
+			animated_sprite.play("walk_forward_artifact")
+		else:
+			animated_sprite.play("walk_forward")
 	elif v_vec[1] < 0:
 		animated_sprite.play("walk_backward")
 	elif v_vec[0] == 0:
-		animated_sprite.play("default")
+		if holding_item:
+			animated_sprite.play("default_artifact")
+		else:
+			animated_sprite.play("default")
 		 
 	var e = angle_difference(v_vec.angle(), facing.angle())
 
@@ -170,7 +182,7 @@ func interact_with_closest_artifacts():
 			var data = {
 				"name": artifact.get_sprite_name()
 			}
-			item_sprite.texture = load("res://assets/artifacts/artifact_item_{name}.png".format(data))
+			item_sprite.texture = load("res://assets/artifacts/artifact_item_{name}_small.png".format(data))
 			print("now holding artifact")
 			soundManager.play_artifact_sound()
 			break

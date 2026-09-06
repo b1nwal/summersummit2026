@@ -1,6 +1,7 @@
-[gd_scene load_steps=27 format=3 uid="uid://ds72i60gi80dp"]
+[gd_scene load_steps=28 format=3 uid="uid://ds72i60gi80dp"]
 
 [ext_resource type="Script" uid="uid://cb58eunt5ma8x" path="res://Players/playerPast.gd" id="1_om0np"]
+[ext_resource type="Texture2D" uid="uid://suloji8urlf5" path="res://assets/Thief/shadow.png" id="2_5fwkd"]
 [ext_resource type="Material" uid="uid://cj4j4v7svv4br" path="res://Players/PastPlayerMaterial.tres" id="2_qrs7w"]
 [ext_resource type="Texture2D" uid="uid://05wam5wt5n3x" path="res://assets/PastThief/thief front1.png" id="3_f5baa"]
 [ext_resource type="Texture2D" uid="uid://dgaetp4asxu2f" path="res://assets/PastThief/thief back1.png" id="4_om0np"]
@@ -123,6 +124,13 @@ animations = [{
 script = ExtResource("1_om0np")
 metadata/speed = 400
 metadata/_edit_group_ = true
+
+[node name="Shadow" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.67451)
+position = Vector2(1, 23)
+scale = Vector2(2, 2)
+texture = ExtResource("2_5fwkd")
+offset = Vector2(-0.5, -9)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1, 0)
