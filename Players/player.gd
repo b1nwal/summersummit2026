@@ -6,6 +6,7 @@ extends CharacterBody2D
 @onready var animated_sprite = $Sprite2D
 @onready var item_sprite = $ItemSprite2D
 @onready var interaction_range = $InteractionRange
+@onready var soundManager = $playerSounds
 
 signal score_earned(amount)
 signal exit_point_reached()
@@ -167,4 +168,5 @@ func interact_with_closest_artifacts():
 			}
 			item_sprite.texture = load("res://assets/artifacts/artifact_item_{name}.png".format(data))
 			print("now holding artifact")
+			soundManager.play_artifact_sound()
 			break
