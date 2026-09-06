@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://nse38d24or5w"]
 
-[ext_resource type="Texture2D" uid="uid://bhl36kfellqjb" path="res://assets/mainmenu_placeholder.jpg" id="1_p8ccj"]
 [ext_resource type="Script" uid="uid://c0giqgdmoo1fr" path="res://UI/main_menu.gd" id="1_tk8dj"]
+[ext_resource type="Texture2D" uid="uid://d21jiwwvhcyao" path="res://assets/splash.png" id="2_tk8dj"]
 
 [node name="Main Menu" type="Control"]
 layout_mode = 3
@@ -16,4 +16,4 @@ script = ExtResource("1_tk8dj")
 layout_mode = 1
 offset_right = 1920.0
 offset_bottom = 1080.0
-texture = ExtResource("1_p8ccj")
+texture = ExtResource("2_tk8dj")
