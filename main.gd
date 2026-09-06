@@ -35,6 +35,8 @@ func _ready():
 	for artifact in artifacts:
 		add_artifact(artifact[0], artifact[1])
 		
+	$player.score_earned.connect(_on_score_added)
+		
 	new_round()
 	
 var past_players = []
@@ -108,3 +110,7 @@ func _on_count_down_timeout() -> void:
 	else:
 		count -= 1
 		$CountDown.start()
+		
+func _on_score_added(points):
+	score += points
+	$HUD.update_score(score)

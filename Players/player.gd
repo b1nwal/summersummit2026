@@ -4,9 +4,13 @@ extends CharacterBody2D
 
 @onready var speed = get_meta("speed")
 @onready var animated_sprite = $Sprite2D
+@onready var interaction_range = $InteractionRange
+
+signal score_earned(amount)
 
 var run_start
 var stop_start
+var holding_item = null
 var running = false
 var ramp_up = 300
 var ramp_down = 410
@@ -18,6 +22,13 @@ var angular_velocity = 0
 var angular_acceleration = 0
 var checked = 0
 var record = [Vector2()]
+
+func _unhandled_input(event):
+	if get_script() != Player:
+		return
+
+	if event.is_action_pressed("interact"):
+		interact_with_closest_artifacts()
 
 func _obtain_v_vec():
 	var a = Input.get_vector("move_left","move_right","move_up","move_down")
@@ -82,3 +93,25 @@ func start(pos: Vector2):
 	show()
 	for ray in $Cone.get_children():
 		ray.add_exception($"../raysbs")
+		
+func interact_with_closest_artifacts():
+	var nodes_in_range: Array[Node2D] = interaction_range.get_overlapping_bodies()
+	
+	var artifacts = []
+	
+	for body in interaction_range.get_overlapping_bodies():
+		var parent = body.get_parent()
+
+		if parent is Artifact:
+			artifacts.append(parent)
+	
+	# sort by proximity!
+	artifacts.sort_custom(func(a,b):
+		return global_position.distance_squared_to(a.global_position) < global_position.distance_squared_to(b.global_position)
+	)
+	
+	# try interacting with all the artifacts in range in order of distance
+	for artifact in artifacts:
+		if artifact.interact():
+			score_earned.emit(artifact.point_value)
+			break
