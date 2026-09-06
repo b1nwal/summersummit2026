@@ -223,7 +223,7 @@ func create_player_path():
 func _on_gameovertimer_timeout() -> void:
 	if gameovertime > ROUNDCLOCK + 5:
 		get_tree().change_scene_to_file("res://UI/death_screen.tscn")
-	if gameovertime == 3:
+	if gameovertime == 2:
 		for p in past_players:
 			if is_instance_valid(p):
 				p.set_physics_process(true)
