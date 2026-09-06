@@ -898,19 +898,19 @@ position = Vector2(1476, 1110)
 [node name="playerspawns" type="Node2D" parent="."]
 
 [node name="playerspawn" type="Marker2D" parent="playerspawns"]
-position = Vector2(93, 2478)
+position = Vector2(96, 2463)
 
 [node name="playerspawn2" type="Marker2D" parent="playerspawns"]
-position = Vector2(2921, 1838)
+position = Vector2(2912, 1855)
 
 [node name="playerspawn3" type="Marker2D" parent="playerspawns"]
 position = Vector2(1507, 2730)
 
 [node name="playerspawn4" type="Marker2D" parent="playerspawns"]
-position = Vector2(846, 621)
+position = Vector2(864, 607)
 
 [node name="playerspawn5" type="Marker2D" parent="playerspawns"]
-position = Vector2(2803, 106)
+position = Vector2(2784, 95)
 
 [node name="playerspawn6" type="Marker2D" parent="playerspawns"]
 position = Vector2(1502, 681)
