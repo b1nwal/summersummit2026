@@ -136,6 +136,7 @@ offset = Vector2(-0.5, -9)
 position = Vector2(-1, 0)
 scale = Vector2(2.5, 2.5)
 shape = SubResource("RectangleShape2D_3c3q8")
+disabled = true
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]
 material = ExtResource("2_qrs7w")

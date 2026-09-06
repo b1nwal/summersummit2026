@@ -60,9 +60,9 @@ func _waypointer():
 		waypointT.show()
 	elif waypoint.position.y == bottom:
 		waypointB.show()
-	print(waypoint.position)
-	print(right)
-	print(bottom)
+	#print(waypoint.position)
+	#print(right)
+	#print(bottom)
 
 func update_ready(message):
 	$CountDownLabel.text = message
