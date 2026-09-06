@@ -51,8 +51,6 @@ func _process(delta: float) -> void:
 		waypointT.show()
 	elif waypoint.position.y == bottom:
 		waypointB.show()
-		
-	print(waypoint.position)
 
 func update_ready(message):
 	$CountDownLabel.text = message

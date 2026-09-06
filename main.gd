@@ -233,6 +233,8 @@ func _on_gameovertimer_timeout() -> void:
 		for p in past_players:
 			if is_instance_valid(p):
 				p.set_physics_process(true)
+	if gameovertime == 3:
+		$HUD/RestartLabel.show()
 	#if gameovertime <= ROUNDCLOCK + 5:
 	gameovertime += 1
 	$gameovertimer.start()
