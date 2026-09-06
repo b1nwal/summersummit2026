@@ -54,6 +54,7 @@ var past_players = []
 
 
 func new_round():
+	$player/playerSounds.play_reset_sound()
 	$player.set_physics_process(false)
 	time = 60
 	count = 2

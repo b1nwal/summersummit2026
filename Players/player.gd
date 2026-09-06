@@ -5,6 +5,7 @@ extends CharacterBody2D
 @onready var speed = get_meta("speed")
 @onready var animated_sprite = $Sprite2D
 @onready var interaction_range = $InteractionRange
+@onready var soundManager = $playerSounds
 
 signal score_earned(amount)
 signal exit_point_reached()
@@ -146,4 +147,5 @@ func interact_with_closest_artifacts():
 			
 			holding_item = artifact
 			print("now holding artifact")
+			soundManager.play_artifact_sound()
 			break
