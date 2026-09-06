@@ -12,6 +12,7 @@ extends Node2D
 var playerPast_scene = preload("res://Players/playerPast.tscn")
 var artifact_scene = preload("res://gameElements/artifact.tscn")
 var portal_texture = preload("res://assets/portals/portal1.png")
+var portal_light_texture = preload("res://assets/Lights/PointLightGradient.tres")
 var portal_sprite
 var portal_visual
 var visited_spawns = []
@@ -57,9 +58,14 @@ func _ready():
 	#add_child(portal_sprite)
 	
 	# place portal
+	var portal_light = PointLight2D.new()
+	portal_light.texture = portal_light_texture
+	portal_light.scale = Vector2(3.0, 3.0)
+	
 	portal_sprite = Node2D.new()
 	portal_visual = Sprite2D.new()
 	portal_visual.texture = portal_texture
+	portal_visual.add_child(portal_light)
 	portal_sprite.add_child(portal_visual)
 	add_child(portal_sprite)
 		
