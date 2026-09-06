@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bgn2qmn7p2qxf"]
+[gd_scene load_steps=8 format=3 uid="uid://bgn2qmn7p2qxf"]
 
 [ext_resource type="Script" uid="uid://4wu0lvi7i2rf" path="res://gameElements/artifact.gd" id="1_32u3t"]
 [ext_resource type="Texture2D" uid="uid://bd6pt7tja3u1w" path="res://assets/artifacts/artifact_stand_empty.png" id="2_uci8d"]
@@ -10,6 +10,9 @@ size = Vector2(64, 84)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_02tqw"]
 size = Vector2(128, 256)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_02tqw"]
+polygon = PackedVector2Array(64, -46, 64, -84, 0, -84, 0, -46, 2.24209, -46, 62, -46)
 
 [node name="Artifact" type="Node2D"]
 script = ExtResource("1_32u3t")
@@ -41,6 +44,9 @@ scale = Vector2(2, 2)
 texture = ExtResource("3_uci8d")
 
 [node name="PointLight2D" type="PointLight2D" parent="artifactsprite"]
-position = Vector2(0, 0.5)
+position = Vector2(2.5, 0.5)
 scale = Vector2(1.82031, 1.82031)
 texture = ExtResource("4_02tqw")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_02tqw")
