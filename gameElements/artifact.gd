@@ -17,6 +17,7 @@ func initialize_data(pos: Vector2, sprite_name = null):
 	
 	if sprite_name == null:
 		sprite.texture = TEXTURE_STAND_EMPTY
+		collected = true
 	
 	else:
 		var data = {

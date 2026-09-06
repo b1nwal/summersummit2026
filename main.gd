@@ -1,5 +1,14 @@
 extends Node2D
 
+@onready var spawns = [
+	$playerspawns/playerspawn.position,
+	$playerspawns/playerspawn2.position,
+	$playerspawns/playerspawn3.position,
+	$playerspawns/playerspawn4.position,
+	$playerspawns/playerspawn5.position,
+	$playerspawns/playerspawn6.position
+]
+
 var playerPast_scene = preload("res://Players/playerPast.tscn")
 var artifact_scene = preload("res://gameElements/artifact.tscn")
 var futures = []
@@ -7,7 +16,7 @@ var time
 var score
 var count
 
-var artifacts = [
+const artifacts = [
 	[Vector2(360, 1997), "stand_empty"], # these are all the ones on the left
 	[Vector2(192, 1997), "stand_amongus"], # they all have new names and
 	[Vector2(192, 1677), "stand_amongus"], # im too lazy to comeup with it rn
@@ -60,21 +69,8 @@ func new_round():
 			past_player_instance.set_movement(past.slice(1))
 			past_player_instance.set_physics_process(false)
 			past_players.append(past_player_instance)
-
 	
-	var random_int = randi_range(1, 6)
-	if random_int == 1:
-		$player.start($playerspawns/playerspawn.position)
-	if random_int == 2:
-		$player.start($playerspawns/playerspawn2.position)
-	if random_int == 3:
-		$player.start($playerspawns/playerspawn3.position)
-	if random_int == 4:
-		$player.start($playerspawns/playerspawn4.position)
-	if random_int == 5:
-		$player.start($playerspawns/playerspawn5.position)
-	if random_int == 6:
-		$player.start($playerspawns/playerspawn6.position)
+	create_player_path()
 	
 	$HUD/CountDownLabel.show()
 	$CountDown.start()
@@ -85,12 +81,7 @@ func _process(delta):
 		
 	if time == 0:
 		print("Game Over")
-	
 
-func add_artifact(position: Vector2, sprite_name: String):
-	var artifact = artifact_scene.instantiate()
-	artifact.initialize_data(position, sprite_name)
-	add_child(artifact)
 
 func _on_round_timer_timeout():
 	time -= 1
@@ -114,3 +105,25 @@ func _on_count_down_timeout() -> void:
 func _on_score_added(points):
 	score += points
 	$HUD.update_score(score)
+	
+func add_artifact(position: Vector2, sprite_name: String):
+	var artifact = artifact_scene.instantiate()
+	artifact.initialize_data(position, sprite_name)
+	add_child(artifact)
+
+func create_player_path():
+	var randi1 = randi_range(1, spawns.size())
+	var randi2 = randi_range(1, spawns.size())
+	
+	while randi1 == randi2:
+		randi2 = randi_range(1, spawns.size())
+		
+	$player.start(spawns[randi1])
+	$player.set_exit_point(spawns[randi2])
+	
+	var data = {
+		"s": randi2
+	}
+	
+	print("exit point set to position {s}".format(data))
+	
