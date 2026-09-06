@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://bw4aphjyapcqh"]
+[gd_scene load_steps=24 format=3 uid="uid://bw4aphjyapcqh"]
 
 [ext_resource type="Material" uid="uid://lwblg6nqxg0p" path="res://Players/PlayerMaterial.tres" id="1_8g4q3"]
 [ext_resource type="Texture2D" uid="uid://cxxknilyn6av4" path="res://assets/Thief/thief front1.png" id="1_fq5u1"]
