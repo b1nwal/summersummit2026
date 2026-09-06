@@ -1,4 +1,4 @@
-[gd_scene load_steps=127 format=4 uid="uid://8b1aacpykmpl"]
+[gd_scene load_steps=126 format=4 uid="uid://8b1aacpykmpl"]
 
 [ext_resource type="Script" uid="uid://cj5kaa1m55hos" path="res://main.gd" id="1_1bvp3"]
 [ext_resource type="Texture2D" uid="uid://qosfyoqaho0b" path="res://assets/wall floor tile.png" id="2_7mycd"]
@@ -529,9 +529,6 @@ glow_hdr_threshold = 0.76
 glow_hdr_scale = 1.92
 glow_hdr_luminance_cap = 16.88
 
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_efxa6"]
-polygon = PackedVector2Array(3656, 1780, 3713, 1783, 3715, 2775, 3501, 2775, 3498, 2735, 3659, 2723, 3661, 2025, 3001, 2021, 3003, 1936, 3055, 1936, 3053, 1974, 3652, 1978)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7mycd"]
 size = Vector2(704, 64)
 
@@ -542,10 +539,10 @@ size = Vector2(64, 64)
 size = Vector2(64, 640)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kek77"]
-size = Vector2(65, 1856)
+size = Vector2(64, 1856)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4c57u"]
-size = Vector2(64, 66.5)
+size = Vector2(64, 64)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_efxa6"]
 size = Vector2(1152, 64)
@@ -909,9 +906,6 @@ one_shot = true
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.662452, 0.662452, 0.662452, 1)
 
-[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
-occluder = SubResource("OccluderPolygon2D_efxa6")
-
 [node name="Marker2D" type="Marker2D" parent="."]
 position = Vector2(1476, 1110)
 
@@ -950,11 +944,11 @@ position = Vector2(992, 896)
 shape = SubResource("RectangleShape2D_5vw27")
 
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(95.5, 1504)
+position = Vector2(96, 1504)
 shape = SubResource("RectangleShape2D_kek77")
 
 [node name="CollisionShape2D5" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(96, 2526.75)
+position = Vector2(96, 2528)
 shape = SubResource("RectangleShape2D_4c57u")
 
 [node name="CollisionShape2D6" type="CollisionShape2D" parent="StaticBody2D"]
