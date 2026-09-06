@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://bw4aphjyapcqh"]
+[gd_scene load_steps=25 format=3 uid="uid://bw4aphjyapcqh"]
 
 [ext_resource type="Material" uid="uid://lwblg6nqxg0p" path="res://Players/PlayerMaterial.tres" id="1_8g4q3"]
 [ext_resource type="Texture2D" uid="uid://cxxknilyn6av4" path="res://assets/Thief/thief front1.png" id="1_fq5u1"]
@@ -20,6 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://dyyvh76m0wmnj" path="res://assets/Thief/thief side right5.png" id="20_dce2x"]
 [ext_resource type="Script" path="res://UI/camera.gd" id="21_tintf"]
 [ext_resource type="Texture2D" uid="uid://377xapsjvqhv" path="res://assets/flashlight.png" id="22_tintf"]
+[ext_resource type="Script" uid="uid://b7j7ijdgqb8aa" path="res://Players/playerSoundManager.gd" id="23_qhuue"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_onrkg"]
 size = Vector2(10.4, 10)
@@ -155,3 +156,17 @@ shape = SubResource("CircleShape2D_ps8ke")
 [node name="FlashLight" type="PointLight2D" parent="."]
 position = Vector2(3, 0)
 texture = ExtResource("22_tintf")
+
+[node name="audioListener" type="FmodListener2D" parent="."]
+
+[node name="playerSounds" type="Node2D" parent="."]
+script = ExtResource("23_qhuue")
+metadata/delay = 0.15
+
+[node name="footsteps" type="FmodEventEmitter2D" parent="playerSounds"]
+event_name = "event:/walking"
+event_guid = "{f1337a33-50eb-40bb-a12e-da83cdddf796}"
+volume = 0.5
+fmod_parameters/ReverbWet/id = 3810293487696999223
+fmod_parameters/ReverbWet = 0.6
+fmod_parameters/ReverbWet/variant_type = 3
