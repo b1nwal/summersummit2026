@@ -177,6 +177,7 @@ func _frame_whole_map() -> void:
 
 func _game_over():
 	_frame_whole_map()
+	create_tween().tween_property($ColorRect, "color:a", 0.0, 0.5)
 	$player.set_physics_process(false)
 	$RoundTimer.stop()
 	$HUD/TimeLabel.hide()
@@ -199,6 +200,20 @@ func _game_over():
 			past_player_instance.set_physics_process(false)
 			past_players.append(past_player_instance)
 			past_player_instance.spotted.connect(_on_spotted)
+	$gameovertimer.start()
+
+func _on_gameovertimer_timeout() -> void:
+	#if gameovertime > ROUNDCLOCK + 5:
+		#get_tree().change_scene_to_file("res://UI/death_screen.tscn")
+	if gameovertime == 2:
+		for p in past_players:
+			if is_instance_valid(p):
+				p.set_physics_process(true)
+				print("bihanbo")
+	if gameovertime == 3:
+		$HUD/RestartLabel.show()
+	#if gameovertime <= ROUNDCLOCK + 5:
+	gameovertime += 1
 	$gameovertimer.start()
 
 func _on_round_timer_timeout():
@@ -228,10 +243,45 @@ func _on_score_added(points):
 	
 func _on_exit_reached():
 	new_round()
+
+func _frame_killer(observer) -> void:
+	var cam: Camera2D = $player/Camera2D
+	cam.set_process(false)
+	var pos = observer.position
+	var vp := get_viewport_rect().size
+	#var z: float = min(vp.x / map_size.x, vp.y / map_size.y)
+	cam.limit_left = -100000
+	cam.limit_top = -100000
+	cam.limit_right = 100000
+	cam.limit_bottom = 100000
 	
-func _on_spotted():
+	var t := create_tween().set_parallel(true).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+	t.tween_property(cam, "global_position", pos, 1.5)
+	t.tween_property(cam, "zoom", Vector2(2.7, 2.7), 1.5)
+
+var gameoverseq_started := false
+func _on_spotted(observer, target):
+	if observer != $player and target != $player:
+		return                                    
+	if gameoverseq_started:
+		return                               
+	gameoverseq_started = true
+	
+	$player.set_physics_process(false)
+	for p in past_players:
+		if is_instance_valid(p):
+			p.set_physics_process(false)
+	_frame_killer(observer)
+	$RoundTimer.stop()
+	var t := create_tween().set_parallel(true).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+	t.tween_property($ColorRect, "color:a", 1.0, 2.5)
+	await get_tree().create_timer(3).timeout
+	
 	_game_over()
-	
+
+func end_animation():
+	pass
+
 # needs dev
 #func _on_game_end():
 	#print("game over you got")
@@ -270,18 +320,6 @@ func create_player_path():
 	
 
 
-func _on_gameovertimer_timeout() -> void:
-	#if gameovertime > ROUNDCLOCK + 5:
-		#get_tree().change_scene_to_file("res://UI/death_screen.tscn")
-	if gameovertime == 2:
-		for p in past_players:
-			if is_instance_valid(p):
-				p.set_physics_process(true)
-	if gameovertime == 3:
-		$HUD/RestartLabel.show()
-	#if gameovertime <= ROUNDCLOCK + 5:
-	gameovertime += 1
-	$gameovertimer.start()
 
 func _unhandled_input(event: InputEvent) -> void:
 	if gameovertime > 0: 
