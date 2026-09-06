@@ -65,10 +65,15 @@ theme_override_font_sizes/font_size = 60
 text = "Ready?"
 
 [node name="ObjectiveLabel" type="Label" parent="."]
-offset_left = 28.0
-offset_top = 988.0
-offset_right = 127.0
-offset_bottom = 1039.0
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 26.0
+offset_top = -80.0
+offset_right = 138.0
+offset_bottom = -29.0
+grow_vertical = 0
+size_flags_horizontal = 0
 theme_override_constants/outline_size = 8
 theme_override_fonts/font = ExtResource("2_bytes")
 theme_override_font_sizes/font_size = 28
@@ -76,10 +81,15 @@ text = "bruh"
 vertical_alignment = 2
 
 [node name="ObjectiveLabel2" type="Label" parent="."]
-offset_left = 28.0
-offset_top = 936.0
-offset_right = 127.0
-offset_bottom = 987.0
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 26.0
+offset_top = -126.0
+offset_right = 138.0
+offset_bottom = -75.0
+grow_vertical = 0
+size_flags_horizontal = 0
 theme_override_colors/font_color = Color(1, 0.153352, 0.0868529, 1)
 theme_override_constants/outline_size = 8
 theme_override_fonts/font = ExtResource("2_bytes")
