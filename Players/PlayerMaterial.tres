@@ -4,6 +4,6 @@
 
 [resource]
 shader = ExtResource("1_27u53")
-shader_parameter/glow_color = Color(0.380392, 0.647059, 0.247059, 1)
-shader_parameter/glow_intensity = 2.281
+shader_parameter/glow_color = Color(1, 1, 1, 1)
+shader_parameter/glow_intensity = 12.395
 shader_parameter/tolerance = 0.1

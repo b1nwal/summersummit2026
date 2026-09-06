@@ -34,13 +34,14 @@ func _unhandled_input(event):
 
 func _obtain_v_vec():
 	var a = Input.get_vector("move_left","move_right","move_up","move_down")
-	record.append(a)
-	return a
+	record.append([a,position])
+	return [a,position]
 
 func _physics_process(delta: float) -> void:
 	# movement
-	var v_vec = _obtain_v_vec()
-
+	var v_vec = _obtain_v_vec()[0]
+	position = _obtain_v_vec()[1]
+	
 	if v_vec[0] > 0:
 		animated_sprite.play("walk_right")
 	elif v_vec[0] < 0:
@@ -93,7 +94,7 @@ func v_tween(ramp_time: int, x: float) -> float:
 	return m * speed
 
 func start(pos: Vector2):
-	record = [pos]
+	record = [pos,facing]
 	animated_sprite.play("default")
 	position = pos
 	show()
