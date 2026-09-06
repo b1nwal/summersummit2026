@@ -13,6 +13,7 @@ var playerPast_scene = preload("res://Players/playerPast.tscn")
 var artifact_scene = preload("res://gameElements/artifact.tscn")
 var portal_texture = preload("res://assets/portals/portal1.png")
 var portal_sprite
+var visited_spawns = []
 var futures = []
 var time
 var score
@@ -63,6 +64,11 @@ var past_players = []
 
 func new_round():
 	$player.set_physics_process(false)
+	
+	if visited_spawns.size() == spawns.size():
+		_on_game_end()
+		return
+		
 	time = 60
 	count = 2
 	$HUD.update_timer(time)
@@ -118,6 +124,12 @@ func _on_score_added(points):
 func _on_exit_reached():
 	new_round()
 	
+# needs dev
+func _on_game_end():
+	print("game over you got")
+	print(score)
+	print("diamonds")
+	
 func add_artifact(position: Vector2, sprite_name: String):
 	var artifact = artifact_scene.instantiate()
 	artifact.initialize_data(position, sprite_name)
@@ -127,18 +139,23 @@ func create_player_path():
 	var randi1 = randi_range(1, spawns.size())
 	var randi2 = randi_range(1, spawns.size())
 	
+	while spawns[randi1 - 1] in visited_spawns:
+		randi1 = randi_range(1, spawns.size())
+	
 	while randi1 == randi2:
 		randi2 = randi_range(1, spawns.size())
 		
 	$player.start(spawns[randi1 - 1])
 	$player.set_exit_point(spawns[randi2 - 1])
 	
+	# spawn portal @ exit point
+	portal_sprite.global_position = spawns[randi2 - 1]
+	
+	visited_spawns.append(spawns[randi1 - 1])
+	
 	var data = {
 		"s": randi2 - 1
 	}
-	
-	# spawn portal @ exit point
-	portal_sprite.global_position = spawns[randi2 - 1]
 	
 	print("exit point set to position {s}".format(data))
 	
