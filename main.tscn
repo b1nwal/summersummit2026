@@ -1036,6 +1036,12 @@ tile_set = SubResource("TileSet_dg77c")
 z_index = 12
 tile_set = SubResource("TileSet_w48qg")
 
+[node name="Map" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.176471)
+position = Vector2(1504, 1408)
+scale = Vector2(2, 2)
+texture = ExtResource("2_lquwl")
+
 [node name="FmodBanks" type="FmodBankLoader" parent="."]
 bank_paths = ["res://assets/Audio/Desktop/Master.bank"]
 

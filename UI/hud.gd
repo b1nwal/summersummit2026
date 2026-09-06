@@ -18,6 +18,12 @@ const WAYPOINT_MARGIN := 96.0
 var waypoint_target = null
 
 func _process(delta: float) -> void:
+	if not $CountDownLabel.visible:
+		_waypointer()
+	else:
+		waypoint.hide()
+
+func _waypointer():
 	if waypoint_target == null:
 		waypoint.hide()
 		return
@@ -51,6 +57,7 @@ func _process(delta: float) -> void:
 		waypointT.show()
 	elif waypoint.position.y == bottom:
 		waypointB.show()
+	
 
 func update_ready(message):
 	$CountDownLabel.text = message
