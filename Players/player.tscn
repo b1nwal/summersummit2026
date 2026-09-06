@@ -431,13 +431,13 @@ fmod_parameters/ReverbWet/variant_type = 3
 
 [node name="artifact" type="FmodEventEmitter2D" parent="playerSounds"]
 event_name = "event:/money"
-event_guid = "{cb4d6af2-8391-48ab-bc6f-19995ddbe58a}"
+event_guid = "{3f6ae9dd-beed-4461-8d5e-a7cafe300394}"
 volume = 0.5
 
 [node name="rewind" type="FmodEventEmitter2D" parent="playerSounds"]
-event_name = "event:/teleport"
-event_guid = "{9c723345-b439-490f-81ad-9158cdd185e0}"
-volume = 0.5
+event_name = "event:/TP"
+event_guid = "{eaf1e1d5-9b0c-4994-a5aa-5683139c7814}"
+volume = 0.1
 
 [node name="ItemSprite2D" type="Sprite2D" parent="."]
 z_index = 10

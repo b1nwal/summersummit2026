@@ -1214,7 +1214,7 @@ tile_map_data = PackedByteArray("AAAUAB4AAAABAAEAAAAXAB4AAAABAAEAAAAaAB4AAAABAAE
 tile_set = SubResource("TileSet_w48qg")
 
 [node name="FmodBanks" type="FmodBankLoader" parent="."]
-bank_paths = ["res://assets/Audio/Desktop/Master.bank"]
+bank_paths = ["res://assets/Audio/Desktop/Master.bank", "res://assets/Audio/Desktop/second.bank"]
 
 [node name="bgAudio" type="Node2D" parent="."]
 
