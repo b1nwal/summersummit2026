@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://bw4aphjyapcqh"]
+[gd_scene load_steps=23 format=3 uid="uid://bw4aphjyapcqh"]
 
 [ext_resource type="Material" uid="uid://lwblg6nqxg0p" path="res://Players/PlayerMaterial.tres" id="1_8g4q3"]
 [ext_resource type="Texture2D" uid="uid://cxxknilyn6av4" path="res://assets/Thief/thief front1.png" id="1_fq5u1"]
@@ -103,6 +103,9 @@ animations = [{
 "speed": 15.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_ps8ke"]
+radius = 96.0
+
 [node name="CharacterBody2D" type="CharacterBody2D"]
 collision_layer = 2
 metadata/speed = 400
@@ -141,7 +144,12 @@ target_position = Vector2(175, 0)
 target_position = Vector2(175, 40)
 
 [node name="RayCast2D5" type="RayCast2D" parent="Cone"]
-target_position = Vector2(175, 80)
+target_position = Vector2(154, -56)
+
+[node name="InteractionRange" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionRange"]
+shape = SubResource("CircleShape2D_ps8ke")
 
 [node name="FlashLight" type="PointLight2D" parent="."]
 position = Vector2(3, 0)

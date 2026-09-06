@@ -30,9 +30,16 @@ func _ready():
 	randomize()
 	print("beginning")
 	time = 0
+	
+	# place artifacts
+	for artifact in artifacts:
+		add_artifact(artifact[0], artifact[1])
+		
+	$player.score_earned.connect(_on_score_added)
+		
 	new_round()
+	
 var past_players = []
-
 
 
 func new_round():
@@ -54,9 +61,6 @@ func new_round():
 			past_player_instance.set_physics_process(false)
 			past_players.append(past_player_instance)
 
-	# place artifacts
-	for artifact in artifacts:
-		add_artifact(artifact[0], artifact[1])
 	
 	var random_int = randi_range(1, 6)
 	if random_int == 1:
@@ -93,8 +97,6 @@ func _on_round_timer_timeout():
 	$RoundTimer.start()
 	$HUD.update_timer(time)
 
-
-
 func _on_count_down_timeout() -> void:
 	if count == 0:
 		$HUD/CountDownLabel.hide()
@@ -108,3 +110,7 @@ func _on_count_down_timeout() -> void:
 	else:
 		count -= 1
 		$CountDown.start()
+		
+func _on_score_added(points):
+	score += points
+	$HUD.update_score(score)
