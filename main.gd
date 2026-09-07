@@ -46,7 +46,6 @@ signal rewind
 
 func _ready():
 	randomize()
-	print("beginning")
 	time = 0
 	score = 0
 	roundNum = 0
@@ -303,7 +302,6 @@ func create_player_path():
 		"s": randi2 - 1
 	}
 	
-	print("exit point set to position {s}".format(data))
 	
 
 

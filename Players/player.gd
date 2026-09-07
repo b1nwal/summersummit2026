@@ -201,6 +201,5 @@ func interact_with_closest_artifacts():
 				"name": artifact.get_sprite_name()
 			}
 			item_sprite.texture = load("res://assets/artifacts/artifact_item_{name}_small.png".format(data))
-			print("now holding artifact")
 			soundManager.play_artifact_sound()
 			break
