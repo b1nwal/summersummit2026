@@ -9,13 +9,14 @@ extends Node2D
 	$playerspawns/playerspawn6.position
 ]
 @onready var portal = $PortalSprite
-
+@onready var player = $player
 @onready var HUD = $HUD
 
 var playerPast_scene = preload("res://Players/playerPast.tscn")
 var artifact_scene = preload("res://gameElements/artifact.tscn")
 var portal_texture = preload("res://assets/portals/portal1.png")
 var portal_light_texture = preload("res://assets/Lights/PointLightGradient.tres")
+
 var portal_sprite
 var portal_visual
 var visited_spawns = []
@@ -47,14 +48,15 @@ signal rewind
 
 func _ready():
 	randomize()
-	print("beginning")
 	time = 0
 	score = 0
 	roundNum = 0
 	# place artifacts
 	for artifact in artifacts:
 		add_artifact(artifact[0], artifact[1], artifact[2])
-		
+
+
+
 	## place portal
 	#portal_sprite = Sprite2D.new()
 	#portal_sprite.texture = portal_texture
@@ -71,42 +73,55 @@ func _ready():
 	portal_visual.add_child(portal_light)
 	portal_sprite.add_child(portal_visual)
 	add_child(portal_sprite)
-		
+
+
+	# Connect
 	$player.score_earned.connect(_on_score_added)
 	$player.exit_point_reached.connect(_on_exit_reached)
 	$player.spotted.connect(_on_spotted)
-		
-	new_round()
+
+
+
 	_start_float_on_portal() 
+	new_round()
+
 var past_players = []
 
-func _start_float_on_portal() -> void:
-	var t := create_tween().set_loops()
-	t.tween_property(portal_visual, "position", Vector2(0, -25), 1.5) \
-		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
-	t.tween_property(portal_visual, "position", Vector2(0, 0), 1.5) \
-		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+#func _process(delta):y
+
+	# change to event
+	#if time < 0:
+		#_game_over()
+		#time = 9999
+
+#change to input
+	#if time == 27: 
+		#$player.set_invincible(false)
+		#for p in past_players:
+			#if is_instance_valid(p):
+				#p.set_invincible(false)
+		#$player/ParticleEffect.hide()
+		#$player/ParticleEffect.stop()
+
 
 func new_round():
 	$player/playerSounds.play_reset_sound()
 	$player.set_physics_process(false)
 	roundNum += 1
-	#if visited_spawns.size() == spawns.size():
-		##_on_game_end()
-		#return
-		
 	time = ROUNDCLOCK
 	count = 2
 	HUD.update_score(score)
 	HUD.update_timer(time)
+	$RoundTimer.stop()
+	rewind.emit()
+
 	if roundNum == 1:
 		HUD.update_objective(1)
 	elif roundNum > 1:
 		HUD.update_objective(2)
-	$RoundTimer.stop()
-	rewind.emit()
-	if $player.record.size() > 1:
-		futures.append($player.record)
+
+	if player.record.size() > 1:
+		futures.append(player.record)
 	if futures:
 		for past in futures:
 			var past_player_instance = playerPast_scene.instantiate()
@@ -118,7 +133,8 @@ func new_round():
 			past_player_instance.spotted.connect(_on_spotted)
 	
 	create_player_path()
-	$player.set_invincible(true)
+	player.set_invincible(true)
+	
 	for p in past_players:
 		if is_instance_valid(p):
 			p.set_invincible(true)
@@ -131,21 +147,30 @@ func new_round():
 	
 	$HUD/CountDownLabel.show()
 	$CountDown.start()
-	
-func _process(delta):
-	if Input.is_action_just_pressed("ui_cancel"):
-		get_tree().quit()
-		
-	if time < 0:
-		_game_over()
-		time = 9999
-	if time == 27: 
-		$player.set_invincible(false)
+
+func _on_count_down_timeout() -> void:
+	if count == 0:
+		$HUD/CountDownLabel.hide()
+		$RoundTimer.start()
+		$HUD.update_timer(time)
+		$HUD.update_score(score)
+		$player/ParticleEffect.show()
+		$player/ParticleEffect.play("default")
+		$player.set_physics_process(true)
 		for p in past_players:
 			if is_instance_valid(p):
-				p.set_invincible(false)
-		$player/ParticleEffect.hide()
-		$player/ParticleEffect.stop()
+				p.set_physics_process(true)
+	else:
+		count -= 1
+		$CountDown.start()
+
+func _start_float_on_portal() -> void:
+	var t := create_tween().set_loops()
+	t.tween_property(portal_visual, "position", Vector2(0, -25), 1.5) \
+		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	t.tween_property(portal_visual, "position", Vector2(0, 0), 1.5) \
+		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+
 
 
 func _frame_whole_map() -> void:
@@ -204,22 +229,8 @@ func _on_round_timer_timeout():
 	$RoundTimer.start()
 	$HUD.update_timer(time)
 
-func _on_count_down_timeout() -> void:
-	if count == 0:
-		$HUD/CountDownLabel.hide()
-		$RoundTimer.start()
-		$HUD.update_timer(time)
-		$HUD.update_score(score)
-		$player/ParticleEffect.show()
-		$player/ParticleEffect.play("default")
-		$player.set_physics_process(true)
-		for p in past_players:
-			if is_instance_valid(p):
-				p.set_physics_process(true)
-	else:
-		count -= 1
-		$CountDown.start()
-		
+
+
 func _on_score_added(points):
 	score += points
 	$HUD.update_score(score)
@@ -320,3 +331,5 @@ func _unhandled_input(event: InputEvent) -> void:
 		if event is InputEventKey and event.pressed and not event.echo:
 			if event.keycode == KEY_ENTER or event.keycode == KEY_KP_ENTER:
 				get_tree().change_scene_to_file("res://UI/main_menu.tscn")
+	if Input.is_action_just_pressed("ui_cancel"):
+		get_tree().quit()
