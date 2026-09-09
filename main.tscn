@@ -1,4 +1,4 @@
-[gd_scene load_steps=146 format=4 uid="uid://8b1aacpykmpl"]
+[gd_scene load_steps=147 format=4 uid="uid://8b1aacpykmpl"]
 
 [ext_resource type="Script" uid="uid://cj5kaa1m55hos" path="res://main.gd" id="1_1bvp3"]
 [ext_resource type="Texture2D" uid="uid://qosfyoqaho0b" path="res://assets/wall floor tile.png" id="2_7mycd"]
@@ -1183,6 +1183,10 @@ polygon = PackedVector2Array(2816, 64, 2816, 128, 2880, 128, 2880, 512, 2816, 51
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_074og"]
 polygon = PackedVector2Array(1472, 640, 1536, 640, 1536, 576, 2752, 576, 2752, 512, 2624, 512, 2624, 128, 2752, 128, 2752, 64, 2560, 64, 2560, 512, 1472, 512)
 
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_1u8w0"]
+cull_mode = 2
+polygon = PackedVector2Array(1728, 992, 1888, 992, 1888, 1120, 1728, 1120)
+
 [node name="Root" type="Node2D"]
 material = SubResource("CanvasItemMaterial_5vw27")
 script = ExtResource("1_1bvp3")
@@ -1249,7 +1253,6 @@ environment = SubResource("Environment_7mycd")
 
 [node name="player" parent="." instance=ExtResource("3_7mycd")]
 z_index = 1
-collision_mask = 1
 script = ExtResource("4_272bh")
 
 [node name="ColorRect" type="ColorRect" parent="."]
@@ -1295,7 +1298,6 @@ position = Vector2(2784, 95)
 position = Vector2(1504, 704)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(480, 608)
@@ -1557,7 +1559,6 @@ shape = SubResource("RectangleShape2D_wat4s")
 one_shot = true
 
 [node name="raysbs" type="StaticBody2D" parent="."]
-visible = false
 collision_layer = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="raysbs"]
@@ -1753,6 +1754,9 @@ occluder = SubResource("OccluderPolygon2D_cegan")
 
 [node name="LightOccluder2D10" type="LightOccluder2D" parent="LightOccluders"]
 occluder = SubResource("OccluderPolygon2D_074og")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_1u8w0")
 
 [connection signal="timeout" from="RoundTimer" to="." method="_on_round_timer_timeout"]
 [connection signal="timeout" from="CountDown" to="." method="_on_count_down_timeout"]

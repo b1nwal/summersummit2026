@@ -10,6 +10,8 @@ extends Node2D
 ]
 @onready var portal = $PortalSprite
 
+@onready var HUD = $HUD
+
 var playerPast_scene = preload("res://Players/playerPast.tscn")
 var artifact_scene = preload("res://gameElements/artifact.tscn")
 var portal_texture = preload("res://assets/portals/portal1.png")
@@ -95,12 +97,12 @@ func new_round():
 		
 	time = ROUNDCLOCK
 	count = 2
-	$HUD.update_score(score)
-	$HUD.update_timer(time)
+	HUD.update_score(score)
+	HUD.update_timer(time)
 	if roundNum == 1:
-		$HUD.update_objective(1)
+		HUD.update_objective(1)
 	elif roundNum > 1:
-		$HUD.update_objective(2)
+		HUD.update_objective(2)
 	$RoundTimer.stop()
 	rewind.emit()
 	if $player.record.size() > 1:
@@ -123,9 +125,9 @@ func new_round():
 	
 	
 	if roundNum == 1:
-		$HUD.update_ready("Steal an artifact and escape.")
+		HUD.update_ready("Steal an artifact and escape.")
 	elif roundNum > 1:
-		$HUD.update_ready("Avoid your past selves.")
+		HUD.update_ready("Avoid your past selves.")
 	
 	$HUD/CountDownLabel.show()
 	$CountDown.start()
