@@ -12,7 +12,8 @@ size = Vector2(64, 84)
 size = Vector2(128, 256)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_02tqw"]
-polygon = PackedVector2Array(64, -46, 64, -84, 0, -84, 0, -46, 2.24209, -46, 62, -46)
+cull_mode = 1
+polygon = PackedVector2Array(64, 0, 64, -84, 0, -84, 0, 0)
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_02tqw"]
 particle_flag_disable_z = true
