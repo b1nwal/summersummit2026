@@ -18,7 +18,7 @@ var stop_start
 var exit_point
 var holding_item = null
 var running = false
-var ramp_up = 10
+var ramp_up = 0
 var ramp_down = 10
 var facing := Vector2.RIGHT
 var f_stiffness = 0.02352
