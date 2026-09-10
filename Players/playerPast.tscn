@@ -121,6 +121,7 @@ animations = [{
 }]
 
 [node name="CharacterBody2D2" type="CharacterBody2D"]
+collision_mask = 9
 script = ExtResource("1_om0np")
 metadata/speed = 400
 metadata/_edit_group_ = true
@@ -150,24 +151,6 @@ position = Vector2(3, 0)
 shadow_enabled = true
 texture = ExtResource("22_om0np")
 
-[node name="Cone" type="Node2D" parent="."]
-z_index = 1
-
-[node name="RayCast2D" type="RayCast2D" parent="Cone"]
-target_position = Vector2(175, -80)
-
-[node name="RayCast2D2" type="RayCast2D" parent="Cone"]
-target_position = Vector2(175, -40)
-
-[node name="RayCast2D3" type="RayCast2D" parent="Cone"]
-target_position = Vector2(175, 0)
-
-[node name="RayCast2D4" type="RayCast2D" parent="Cone"]
-target_position = Vector2(175, 40)
-
-[node name="RayCast2D5" type="RayCast2D" parent="Cone"]
-target_position = Vector2(175, 80)
-
 [node name="playerSounds" type="Node2D" parent="."]
 script = ExtResource("23_qrs7w")
 metadata/delay = 0.15
@@ -179,3 +162,33 @@ volume = 0.5
 fmod_parameters/ReverbWet/id = 3810293487696999223
 fmod_parameters/ReverbWet = 0.8
 fmod_parameters/ReverbWet/variant_type = 3
+
+[node name="Cone" type="Node2D" parent="."]
+z_index = 1
+
+[node name="RayCast2D" type="RayCast2D" parent="Cone"]
+target_position = Vector2(208, -96)
+
+[node name="RayCast2D2" type="RayCast2D" parent="Cone"]
+target_position = Vector2(224, -80)
+
+[node name="RayCast2D3" type="RayCast2D" parent="Cone"]
+target_position = Vector2(232, -56)
+
+[node name="RayCast2D4" type="RayCast2D" parent="Cone"]
+target_position = Vector2(240, -24)
+
+[node name="RayCast2D5" type="RayCast2D" parent="Cone"]
+target_position = Vector2(248, 0)
+
+[node name="RayCast2D6" type="RayCast2D" parent="Cone"]
+target_position = Vector2(240, 24)
+
+[node name="RayCast2D7" type="RayCast2D" parent="Cone"]
+target_position = Vector2(232, 56)
+
+[node name="RayCast2D8" type="RayCast2D" parent="Cone"]
+target_position = Vector2(224, 80)
+
+[node name="RayCast2D9" type="RayCast2D" parent="Cone"]
+target_position = Vector2(208, 96)

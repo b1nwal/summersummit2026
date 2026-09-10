@@ -8,6 +8,9 @@ extends Node2D
 	$playerspawns/playerspawn5.position,
 	$playerspawns/playerspawn6.position
 ]
+@onready var portal = $PortalSprite
+
+@onready var HUD = $HUD
 
 var playerPast_scene = preload("res://Players/playerPast.tscn")
 var artifact_scene = preload("res://gameElements/artifact.tscn")
@@ -99,12 +102,12 @@ func new_round():
 		
 	time = ROUNDCLOCK
 	count = 2
-	$HUD.update_score(score)
-	$HUD.update_timer(time)
+	HUD.update_score(score)
+	HUD.update_timer(time)
 	if roundNum == 1:
-		$HUD.update_objective(1)
+		HUD.update_objective(1)
 	elif roundNum > 1:
-		$HUD.update_objective(2)
+		HUD.update_objective(2)
 	$RoundTimer.stop()
 	rewind.emit()
 	if $player.record.size() > 1:
@@ -127,16 +130,16 @@ func new_round():
 	
 	
 	if roundNum == 1:
-		$HUD.update_ready("Steal an artifact and escape.")
+		HUD.update_ready("Steal an artifact and escape.")
 	elif roundNum > 1:
-		$HUD.update_ready("Avoid your past selves.")
+		HUD.update_ready("Avoid your past selves.")
 	
 	$HUD/CountDownLabel.show()
 	$CountDown.start()
 	
 func _process(delta):
 	if Input.is_action_just_pressed("ui_cancel"):
-		new_round()
+		get_tree().quit()
 		
 	if time < 0:
 		_game_over()
@@ -176,6 +179,7 @@ func _frame_whole_map() -> void:
 
 func _game_over():
 	_frame_whole_map()
+	create_tween().tween_property($ColorRect, "color:a", 0.0, 0.5)
 	$player.set_physics_process(false)
 	$RoundTimer.stop()
 	$HUD/TimeLabel.hide()
@@ -227,10 +231,44 @@ func _on_score_added(points):
 	
 func _on_exit_reached():
 	new_round()
+
+func _frame_killer(observer) -> void:
+	var cam: Camera2D = $player/Camera2D
+	cam.set_process(false)
+	var pos = observer.position
+	var vp := get_viewport_rect().size
+	#var z: float = min(vp.x / map_size.x, vp.y / map_size.y)
+	cam.limit_left = -100000
+	cam.limit_top = -100000
+	cam.limit_right = 100000
+	cam.limit_bottom = 100000
+	var t := create_tween().set_parallel(true).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+	t.tween_property(cam, "global_position", pos, 1.5)
+	t.tween_property(cam, "zoom", Vector2(2.7, 2.7), 1.5)
+
+var gameoverseq_started := false
+func _on_spotted(observer, target):
+	if observer != $player and target != $player:
+		return                                    
+	if gameoverseq_started:
+		return                               
+	gameoverseq_started = true
 	
-func _on_spotted():
+	$player.set_physics_process(false)
+	for p in past_players:
+		if is_instance_valid(p):
+			p.set_physics_process(false)
+	_frame_killer(observer)
+	$RoundTimer.stop()
+	var t := create_tween().set_parallel(true).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+	t.tween_property($ColorRect, "color:a", 1.0, 2.5)
+	await get_tree().create_timer(3).timeout
+	
 	_game_over()
-	
+
+func end_animation():
+	pass
+
 # needs dev
 #func _on_game_end():
 	#print("game over you got")
