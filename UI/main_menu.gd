@@ -1,10 +1,16 @@
 extends Control
 
 const GAME_SCENE = preload("res://main.tscn")
+@onready var music = MainAudio.get_node("Music")
+
+func _ready():
+	music.hold_intro()
+	music.play()
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and not event.echo:
 		if event.keycode == KEY_ENTER or event.keycode == KEY_KP_ENTER:
+			music.release_intro()
 			get_tree().change_scene_to_packed(GAME_SCENE)
 
 func _process(delta: float) -> void:

@@ -69,7 +69,7 @@ func _ready():
 	portal_sprite = Node2D.new()
 	portal_visual = Sprite2D.new()
 	portal_sound = FmodEventEmitter2D.new()
-	portal_sound.event_guid("{80400fb2-5f5e-42e2-8ab0-655f1d08d1d8}")
+	portal_sound.event_guid = "{80400fb2-5f5e-42e2-8ab0-655f1d08d1d8}"
 	portal_sound.autoplay = true
 	portal_visual.texture = portal_texture
 	portal_visual.add_child(portal_light)
