@@ -18,7 +18,7 @@ General/is_memory_tracking_enabled=false
 "Software Format/speaker_mode"=3
 "Software Format/raw_speaker_count"=0
 General/default_listener_count=1
-General/banks_path="res://assets/Audio/Desktop"
+General/banks_path="res://Audio/Banks/Desktop"
 Plugins/path_to_plugin_configuration=""
 General/should_load_by_name=false
 DSP/dsp_buffer_size=512
@@ -37,6 +37,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 FmodManager="*res://addons/fmod/FmodManager.gd"
+MainAudio="*res://Audio/mainAudio.tscn"
 
 [display]
 
@@ -44,6 +45,10 @@ window/size/viewport_width=1920
 window/size/viewport_height=1080
 window/stretch/mode="viewport"
 window/stretch/aspect="expand"
+
+[editor]
+
+export/convert_text_resources_to_binary=false
 
 [editor_plugins]
 
@@ -80,4 +85,5 @@ interact={
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
+textures/vram_compression/import_etc2_astc=true
 viewport/hdr_2d=true

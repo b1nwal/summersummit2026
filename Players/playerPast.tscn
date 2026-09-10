@@ -153,14 +153,14 @@ texture = ExtResource("22_om0np")
 
 [node name="playerSounds" type="Node2D" parent="."]
 script = ExtResource("23_qrs7w")
-metadata/delay = 0.15
+metadata/delay = 0.3
 
 [node name="footsteps" type="FmodEventEmitter2D" parent="playerSounds"]
 event_name = "event:/walking"
 event_guid = "{f1337a33-50eb-40bb-a12e-da83cdddf796}"
 volume = 0.5
 fmod_parameters/ReverbWet/id = 3810293487696999223
-fmod_parameters/ReverbWet = 0.8
+fmod_parameters/ReverbWet = 0.9
 fmod_parameters/ReverbWet/variant_type = 3
 
 [node name="Cone" type="Node2D" parent="."]
