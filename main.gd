@@ -9,7 +9,6 @@ extends Node2D
 	$playerspawns/playerspawn6.position
 ]
 
-@onready var portal := $PortalSprite
 @onready var player := $player
 @onready var hud := $HUD
 @onready var round_timer := $RoundTimer
@@ -25,17 +24,17 @@ var portal_light_texture := preload("res://assets/Lights/PointLightGradient.tres
 var portal_sprite
 var portal_visual
 var futures = []
+var past_players = []
 var time := 0
 var score := 0
 var count := 0
 var roundNum := 0
-var past_players = []
 const TIME_FOR_ONE_ROUND := 30
 const COUNTDOWN_TIME := 2
 var gameovertime := 0
 var gameoverseq_started := false
 
-const artifacts = [
+const ARTIFACTS = [
 	[Vector2(192, 1997), "pot1", 175], 
 	[Vector2(192, 1677), "pot2", 175], 
 	[Vector2(768, 1037), "pot2", 175],
@@ -57,11 +56,11 @@ func _ready() -> void:
 	randomize()
 
 	# place artifacts
-	for artifact in artifacts:
+	for artifact in ARTIFACTS:
 		add_artifact(artifact[0], artifact[1], artifact[2])
 	
 	# place portal
-	var portal_light = PointLight2D.new()
+	var portal_light := PointLight2D.new()
 	portal_light.texture = portal_light_texture
 	portal_light.scale = Vector2(3.0, 3.0)
 	
@@ -80,11 +79,10 @@ func _ready() -> void:
 	
 	new_round()
 
-
 func new_round() -> void:
 	$player/playerSounds.play_reset_sound()
 	player.set_physics_process(false)
-	roundNum =+ 1
+	roundNum += 1
 	time = TIME_FOR_ONE_ROUND
 	count = COUNTDOWN_TIME
 	
@@ -135,14 +133,14 @@ func _game_over() -> void:
 	spawn_ghosts()
 	gameovertimer.start()
 
-func add_artifact(position: Vector2, sprite_name: String, points=200) -> void:
-	var artifact = artifact_scene.instantiate()
-	artifact.initialize_data(position, sprite_name, points)
+func add_artifact(pos: Vector2, sprite_name: String, points=200) -> void:
+	var artifact := artifact_scene.instantiate()
+	artifact.initialize_data(pos, sprite_name, points)
 	add_child(artifact)
 
 func create_player_path() -> void:
-	var randi1 = randi_range(1, spawns.size())
-	var randi2 = randi_range(1, spawns.size())
+	var randi1 := randi_range(1, spawns.size())
+	var randi2 := randi_range(1, spawns.size())
 	
 	while randi1 == randi2:
 		randi2 = randi_range(1, spawns.size())
@@ -154,7 +152,7 @@ func create_player_path() -> void:
 	portal_sprite.global_position = spawns[randi2 - 1]
 	hud.set_waypoint(spawns[randi2 - 1])
 	
-	var data = {
+	var data := {
 		"s": randi2 - 1
 	}
 	
@@ -163,7 +161,7 @@ func create_player_path() -> void:
 func spawn_ghosts() -> void:
 	if futures:
 		for past in futures:
-			var past_player_instance = playerPast_scene.instantiate()
+			var past_player_instance := playerPast_scene.instantiate()
 			add_child(past_player_instance)
 			past_player_instance.position = past[0]
 			past_player_instance.set_movement(past.slice(1))
@@ -186,6 +184,7 @@ func _start_float_on_portal() -> void:
 	t.tween_property(portal_visual, "position", Vector2(0, 0), 1.5) \
 		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 
+## duplicate code -----------------------------
 func _frame_whole_map() -> void:
 	var cam: Camera2D = $player/Camera2D
 	cam.set_process(false)
@@ -207,7 +206,7 @@ func _frame_whole_map() -> void:
 func frame_killer(observer) -> void:
 	var cam: Camera2D = $player/Camera2D
 	cam.set_process(false)
-	var pos = observer.position
+	var pos : Vector2 = observer.position
 	var vp := get_viewport_rect().size
 	#var z: float = min(vp.x / map_size.x, vp.y / map_size.y)
 	cam.limit_left = -100000
@@ -237,14 +236,16 @@ func _on_count_down_timeout() -> void:
 func _on_round_timer_timeout() -> void:
 	if time < 0:
 		_game_over()
-		time = 9999
-	elif time == 27: 
+	elif time == TIME_FOR_ONE_ROUND - 3: 
 		player.set_invincible(false)
 		for p in past_players:
 			if is_instance_valid(p):
 				p.set_invincible(false)
 		$player/ParticleEffect.hide()
 		$player/ParticleEffect.stop()
+		time -= 1
+		#round_timer.start()
+		hud.update_timer(time)
 	else:
 		time -= 1
 		round_timer.start()
@@ -294,7 +295,8 @@ func _on_spotted(observer, target) -> void:
 	#game is over
 	_game_over()
 
-func _input(event: InputEvent) -> void:
+## redo inputs -------------------------------------
+func _unhandled_input(event: InputEvent) -> void:
 	if gameovertime > 0: 
 		if event is InputEventKey and event.pressed and not event.echo:
 			if event.keycode == KEY_ENTER or event.keycode == KEY_KP_ENTER:
