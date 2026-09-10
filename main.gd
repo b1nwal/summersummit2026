@@ -54,13 +54,6 @@ func _ready():
 	# place artifacts
 	for artifact in artifacts:
 		add_artifact(artifact[0], artifact[1], artifact[2])
-
-
-
-	## place portal
-	#portal_sprite = Sprite2D.new()
-	#portal_sprite.texture = portal_texture
-	#add_child(portal_sprite)
 	
 	# place portal
 	var portal_light = PointLight2D.new()
@@ -87,21 +80,13 @@ func _ready():
 
 var past_players = []
 
-#func _process(delta):y
+
 
 	# change to event
-	#if time < 0:
-		#_game_over()
-		#time = 9999
+
 
 #change to input
-	#if time == 27: 
-		#$player.set_invincible(false)
-		#for p in past_players:
-			#if is_instance_valid(p):
-				#p.set_invincible(false)
-		#$player/ParticleEffect.hide()
-		#$player/ParticleEffect.stop()
+
 
 
 func new_round():
@@ -225,9 +210,20 @@ func _game_over():
 	$gameovertimer.start()
 
 func _on_round_timer_timeout():
-	time -= 1
-	$RoundTimer.start()
-	$HUD.update_timer(time)
+	if time < 0:
+		_game_over()
+		time = 9999
+	elif time == 27: 
+		$player.set_invincible(false)
+		for p in past_players:
+			if is_instance_valid(p):
+				p.set_invincible(false)
+		$player/ParticleEffect.hide()
+		$player/ParticleEffect.stop()
+	else:
+		time -= 1
+		$RoundTimer.start()
+		$HUD.update_timer(time)
 
 
 
