@@ -1,6 +1,6 @@
 extends Node
 
-@onready var music = $music
+@onready var music = $Music
 
 func switch():
 	music.event_guid = "" 
