@@ -442,7 +442,7 @@ texture = ExtResource("22_tintf")
 
 [node name="playerSounds" type="Node2D" parent="."]
 script = ExtResource("23_qhuue")
-metadata/delay = 0.5
+metadata/delay = 0.3
 
 [node name="footsteps" type="FmodEventEmitter2D" parent="playerSounds"]
 event_name = "event:/walking"
