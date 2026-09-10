@@ -18,8 +18,8 @@ var stop_start
 var exit_point
 var holding_item = null
 var running = false
-var ramp_up = 300
-var ramp_down = 410
+var ramp_up = 10
+var ramp_down = 10
 var facing := Vector2.RIGHT
 var f_stiffness = 0.02352
 var f_damping = 0.154
@@ -118,7 +118,6 @@ func handle_movement():
 		velocity = v_vec * v_tween(ramp_up, Time.get_ticks_msec() - run_start)
 	if not running and not velocity == Vector2.ZERO:
 		velocity = velocity.normalized() * (speed - v_tween(ramp_down * (velocity.length()/speed), Time.get_ticks_msec() - stop_start))
-		
 
 func set_invincible(boo):
 	invincible = boo
