@@ -1,35 +1,6 @@
-## WHAT HAS BEEN CHANGED
-## - @onready var so that we only call the process once instead of a million times
-## - reordered and grouped all the functions
-## - added remove_ghosts to free the memory properly
-## - formatted functions and variable names to snake case accordingly
-## - placed typed variable ":=" for every variable initialized
-## - placed comments to processes that needed it
-## WHAT NEEDS TO BE CHANGED 
-## - generally should not directly find children by using $parent/child.function()
-## - gameoverbruh function in PLAYER should be a signal what was i on bruh
-## - check your own written code cause im having trouble wrapping my head around some of it
-## - add documentation comments for function 
-##   - ## function does A B C or smth
-##     func function():
-## OTHER THINGS
-## - please read the comments with double # comments. apparently this is for documentation?
- 
 extends Node2D
 
-var playerPast_scene := preload("res://Players/playerPast.tscn")
-var artifact_scene := preload("res://gameElements/artifact.tscn")
-var portal_texture := preload("res://assets/portals/portal1.png")
-var portal_light_texture := preload("res://assets/Lights/PointLightGradient.tres")
-
-
-@onready var player := $player
-@onready var hud := $HUD
-@onready var round_timer := $RoundTimer
-@onready var count_down := $CountDown
-@onready var gameovertimer := $gameovertimer
-@onready var white_flash := $ColorRect
-@onready var spawns := [
+@onready var spawns = [
 	$playerspawns/playerspawn.position,
 	$playerspawns/playerspawn2.position,
 	$playerspawns/playerspawn3.position,
@@ -37,30 +8,27 @@ var portal_light_texture := preload("res://assets/Lights/PointLightGradient.tres
 	$playerspawns/playerspawn5.position,
 	$playerspawns/playerspawn6.position
 ]
-##------------------------------------------------------------------------------
-## I DONT KNOW WHAT THESE VARIABLE TYPES SHOULD BE 
-##------------------------------------------------------------------------------
+@onready var portal = $PortalSprite
+
+@onready var HUD = $HUD
+
+var playerPast_scene = preload("res://Players/playerPast.tscn")
+var artifact_scene = preload("res://gameElements/artifact.tscn")
+var portal_texture = preload("res://assets/portals/portal1.png")
+var portal_light_texture = preload("res://assets/Lights/PointLightGradient.tres")
 var portal_sprite
 var portal_visual
 var portal_sound
 var visited_spawns = []
 var futures = []
-var past_players = []
+var time
+var score
+var count
+var roundNum
+const ROUNDCLOCK = 30
+var gameovertime = 0
 
-var time := 0
-var score := 0
-var count := 0
-var round_number := 0
-var gameovertime := 0
-var gameoverseq_started := false
-
-const TIME_FOR_ONE_ROUND := 30
-const COUNTDOWN_TIME := 2
-##------------------------------------------------------------------------------
-## Artifact position should NOT be stored here. a new scene for maps 
-## specifcally should be made that holds these position in the future
-##------------------------------------------------------------------------------
-const ARTIFACTS = [
+const artifacts = [
 	[Vector2(192, 1997), "pot1", 175], 
 	[Vector2(192, 1677), "pot2", 175], 
 	[Vector2(768, 1037), "pot2", 175],
@@ -78,83 +46,26 @@ const ARTIFACTS = [
 
 signal rewind
 
-func _ready() -> void:
+func _ready():
 	randomize()
-	# Connect
-	player.score_earned.connect(_on_score_added)
-	player.exit_point_reached.connect(_on_exit_reached)
-	player.spotted.connect(_on_spotted)
-	
+	print("beginning")
+	time = 0
+	score = 0
+	roundNum = 0
 	# place artifacts
-	for artifact in ARTIFACTS:
+	for artifact in artifacts:
 		add_artifact(artifact[0], artifact[1], artifact[2])
+		
+	## place portal
+	#portal_sprite = Sprite2D.new()
+	#portal_sprite.texture = portal_texture
+	#add_child(portal_sprite)
 	
 	# place portal
-	place_portal()
-	
-	new_round()
-
-func new_round() -> void:
-	$player/playerSounds.play_reset_sound()
-	# reset round to a default round start state
-	round_number += 1
-	time = TIME_FOR_ONE_ROUND
-	count = COUNTDOWN_TIME
-	player.set_physics_process(false)
-	hud.update_score(score)
-	hud.update_timer(time)
-	round_timer.stop()
-	rewind.emit()
-	
-	#ghost players intializer
-	if player.record.size() > 1:
-		futures.append(player.record)
-	spawn_ghosts()
-	create_player_path()
-	
-	# setplayer's invincibility to true
-	player.set_invincible(true)
-##------------------------------------------------------------------------------
-## objective updating logic should be on HUD
-##------------------------------------------------------------------------------
-	if round_number == 1:
-		hud.update_objective(1)
-		hud.update_ready("Steal an artifact and escape.")
-	elif round_number > 1:
-		hud.update_objective(2)
-		hud.update_ready("Avoid your past selves.")
-	$HUD/CountDownLabel.show()
-	
-	# start the countdown at the start of the round
-	count_down.start()
-
-func game_over() -> void:
-	remove_ghosts()
-	frame_whole_map()
-	# undo the flash / probably shouldnt be here or smth i dunno
-	create_tween().tween_property(white_flash, "color:a", 0.0, 0.5)
-	player.set_physics_process(false)
-	round_timer.stop()
-##------------------------------------------------------------------------------
-## HUD logic should be in HUD and not main
-##------------------------------------------------------------------------------
-	$HUD/TimeLabel.hide()
-	$HUD/ObjectiveLabel.hide()
-	$HUD/ObjectiveLabel2.hide()
-	$HUD/CountDownLabel.hide()
-	player.gameoverbruh()
-	hud.update_ready("Space Time Contiuum\nCollapse.")
-	$HUD/CountDownLabel.show()
-	rewind.emit()
-	if player.record.size() > 1:
-		futures.append(player.record)
-	spawn_ghosts()
-	gameovertimer.start()
-
-func place_portal():
-	var portal_light := PointLight2D.new()
+	var portal_light = PointLight2D.new()
 	portal_light.texture = portal_light_texture
 	portal_light.scale = Vector2(3.0, 3.0)
+	
 	portal_sprite = Node2D.new()
 	portal_visual = Sprite2D.new()
 	portal_sound = FmodEventEmitter2D.new()
@@ -165,186 +76,255 @@ func place_portal():
 	portal_sprite.add_child(portal_visual)
 	portal_sprite.add_child(portal_visual)
 	add_child(portal_sprite)
-	start_float_on_portal() 
-
-func add_artifact(pos: Vector2, sprite_name: String, points=200) -> void:
-	var artifact := artifact_scene.instantiate()
-	artifact.initialize_data(pos, sprite_name, points)
-	add_child(artifact)
-
-func create_player_path() -> void:
-	var randi1 := randi_range(1, spawns.size())
-	var randi2 := randi_range(1, spawns.size())
-	
-	while randi1 == randi2:
-		randi2 = randi_range(1, spawns.size())
 		
-	player.start(spawns[randi1 - 1])
-	player.set_exit_point(spawns[randi2 - 1])
-	
-	# spawn portal @ exit point
-	portal_sprite.global_position = spawns[randi2 - 1]
-	hud.set_waypoint(spawns[randi2 - 1])
-	
-	var data := {
-		"s": randi2 - 1
-	}
-	
-	print("exit point set to position {s}".format(data))
+	$player.score_earned.connect(_on_score_added)
+	$player.exit_point_reached.connect(_on_exit_reached)
+	$player.spotted.connect(_on_spotted)
+		
+	new_round()
+	_start_float_on_portal() 
+var past_players = []
 
-func spawn_ghosts() -> void:
-	if futures:
-		for past in futures:
-			var past_player_instance := playerPast_scene.instantiate()
-			add_child(past_player_instance)
-			past_player_instance.position = past[0]
-			past_player_instance.set_movement(past.slice(1))
-			past_player_instance.set_physics_process(false)
-			past_players.append(past_player_instance)
-			past_player_instance.spotted.connect(_on_spotted)
-
-func remove_ghosts() -> void:
-	for ghost in past_players:
-		if is_instance_valid(ghost):
-			if ghost.is_inside_tree():
-				remove_child(ghost)
-			ghost.queue_free()
-	past_players.clear()
-
-func start_float_on_portal() -> void:
+func _start_float_on_portal() -> void:
 	var t := create_tween().set_loops()
 	t.tween_property(portal_visual, "position", Vector2(0, -25), 1.5) \
 		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 	t.tween_property(portal_visual, "position", Vector2(0, 0), 1.5) \
 		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 
-func frame_whole_map() -> void:
-	var cam: Camera2D = $player/Camera2D
-	cam.set_process(false)
-	player.hide()
-	var map_size := Vector2(3008, 2816)
-	var map_center := Vector2(1504, 1408)
-	var vp := get_viewport_rect().size
-	var z: float = min(vp.x / map_size.x, vp.y / map_size.y)
-##------------------------------------------------------------------------------
-	## map bg should be big enough that camera size does not need to be reset---
-##------------------------------------------------------------------------------
-	cam.limit_left = -100000
-	cam.limit_top = -100000
-	cam.limit_right = 100000
-	cam.limit_bottom = 100000
+func new_round():
+	$player/playerSounds.play_reset_sound()
+	$player.set_physics_process(false)
+	roundNum += 1
+	#if visited_spawns.size() == spawns.size():
+		##_on_game_end()
+		#return
+		
+	time = ROUNDCLOCK
+	count = 2
+	HUD.update_score(score)
+	HUD.update_timer(time)
+	if roundNum == 1:
+		HUD.update_objective(1)
+	elif roundNum > 1:
+		HUD.update_objective(2)
+	$RoundTimer.stop()
+	rewind.emit()
+	if $player.record.size() > 1:
+		futures.append($player.record)
+	if futures:
+		for past in futures:
+			var past_player_instance = playerPast_scene.instantiate()
+			add_child(past_player_instance)
+			past_player_instance.position = past[0]
+			past_player_instance.set_movement(past.slice(1))
+			past_player_instance.set_physics_process(false)
+			past_players.append(past_player_instance)
+			past_player_instance.spotted.connect(_on_spotted)
 	
-	# tween camera to zoom out onto the map
-	var t := create_tween().set_parallel(true).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
-	t.tween_property(cam, "global_position", map_center, 1.5)
-	t.tween_property(cam, "zoom", Vector2(z, z), 1.5)
-
-func frame_killer(observer) -> void:
-	var cam: Camera2D = $player/Camera2D
-	cam.set_process(false)
-	var killer_position : Vector2 = observer.position
-##------------------------------------------------------------------------------
-## map bg should be big enough that camera size does not need to be reset
-##------------------------------------------------------------------------------
-	cam.limit_left = -100000
-	cam.limit_top = -100000
-	cam.limit_right = 100000
-	cam.limit_bottom = 100000
+	create_player_path()
+	$player.set_invincible(true)
+	for p in past_players:
+		if is_instance_valid(p):
+			p.set_invincible(true)
 	
-	# tween camera to zoom in on player
-	var t := create_tween().set_parallel(true).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
-	t.tween_property(cam, "global_position", killer_position, 1.5)
-	t.tween_property(cam, "zoom", Vector2(2.7, 2.7), 1.5)
-
-##------------------------------------------------------------------------------
-## There has to be a better way to do all of these timers bruh
-## and do not tell me making a timer is going to take 4 hours
-##------------------------------------------------------------------------------
-func _on_count_down_timeout() -> void:
-	if count == 0:
-		$HUD/CountDownLabel.hide()
-		hud.update_timer(time)
-		hud.update_score(score)
-		$player/ParticleEffect.show()
-		$player/ParticleEffect.play("default")
-		player.set_physics_process(true)
-		for p in past_players:
-			if is_instance_valid(p):
-				p.set_physics_process(true)
-		round_timer.start()
-	else:
-		count -= 1
-		count_down.start()
-
-func _on_round_timer_timeout() -> void:
-	if time <= 0:
-		game_over()
-	elif time == TIME_FOR_ONE_ROUND - 3: 
-		player.set_invincible(false)
+	
+	if roundNum == 1:
+		HUD.update_ready("Steal an artifact and escape.")
+	elif roundNum > 1:
+		HUD.update_ready("Avoid your past selves.")
+	
+	$HUD/CountDownLabel.show()
+	$CountDown.start()
+	
+func _process(delta):
+	if Input.is_action_just_pressed("ui_cancel"):
+		get_tree().quit()
+		
+	if time < 0:
+		_game_over()
+		time = 9999
+	if time == 27: 
+		$player.set_invincible(false)
 		for p in past_players:
 			if is_instance_valid(p):
 				p.set_invincible(false)
 		$player/ParticleEffect.hide()
 		$player/ParticleEffect.stop()
-		time -= 1
-		round_timer.start()
-		hud.update_timer(time)
+
+
+func _frame_whole_map() -> void:
+	var cam: Camera2D = $player/Camera2D
+	cam.set_process(false)
+
+	$player/Sprite2D.hide()
+	$player/Shadow.hide()
+	$player/ItemSprite2D.hide()
+	$player/FlashLight.hide()
+
+	var map_size := Vector2(3008, 2816)
+	var map_center := Vector2(1504, 1408)
+	var vp := get_viewport_rect().size
+	var z: float = min(vp.x / map_size.x, vp.y / map_size.y)
+	cam.limit_left = -100000
+	cam.limit_top = -100000
+	cam.limit_right = 100000
+	cam.limit_bottom = 100000
+	
+	var t := create_tween().set_parallel(true) \
+		.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+	t.tween_property(cam, "global_position", map_center, 1.5)
+	t.tween_property(cam, "zoom", Vector2(z, z), 1.5)
+
+
+func _game_over():
+	_frame_whole_map()
+	create_tween().tween_property($ColorRect, "color:a", 0.0, 0.5)
+	$player.set_physics_process(false)
+	$RoundTimer.stop()
+	$HUD/TimeLabel.hide()
+	$HUD/ObjectiveLabel.hide()
+	$HUD/ObjectiveLabel2.hide()
+	$HUD/CountDownLabel.hide()
+	$player.gameoverbruh()
+	$HUD.update_ready("Space Time Continuum\nCollapse.")
+	$HUD/CountDownLabel.show()
+	rewind.emit()
+	if $player.record.size() > 1:
+		futures.append($player.record)
+	if futures:
+		for past in futures:
+			var past_player_instance = playerPast_scene.instantiate()
+			add_child(past_player_instance)
+			past_player_instance.position = past[0]
+			past_player_instance.set_movement(past.slice(1))
+			past_player_instance.gameoverbruh()
+			past_player_instance.set_physics_process(false)
+			past_players.append(past_player_instance)
+			past_player_instance.spotted.connect(_on_spotted)
+	$gameovertimer.start()
+
+func _on_round_timer_timeout():
+	time -= 1
+	$RoundTimer.start()
+	$HUD.update_timer(time)
+
+func _on_count_down_timeout() -> void:
+	if count == 0:
+		$HUD/CountDownLabel.hide()
+		$RoundTimer.start()
+		$HUD.update_timer(time)
+		$HUD.update_score(score)
+		$player/ParticleEffect.show()
+		$player/ParticleEffect.play("default")
+		$player.set_physics_process(true)
+		for p in past_players:
+			if is_instance_valid(p):
+				p.set_physics_process(true)
 	else:
-		time -= 1
-		round_timer.start()
-		hud.update_timer(time)
+		count -= 1
+		$CountDown.start()
+		
+func _on_score_added(points):
+	score += points
+	$HUD.update_score(score)
+	
+func _on_exit_reached():
+	new_round()
+
+func _frame_killer(observer) -> void:
+	var cam: Camera2D = $player/Camera2D
+	cam.set_process(false)
+	var pos = observer.position
+	var vp := get_viewport_rect().size
+	#var z: float = min(vp.x / map_size.x, vp.y / map_size.y)
+	cam.limit_left = -100000
+	cam.limit_top = -100000
+	cam.limit_right = 100000
+	cam.limit_bottom = 100000
+	var t := create_tween().set_parallel(true).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+	t.tween_property(cam, "global_position", pos, 1.5)
+	t.tween_property(cam, "zoom", Vector2(2.7, 2.7), 1.5)
+
+var gameoverseq_started := false
+func _on_spotted(observer, target):
+	if observer != $player and target != $player:
+		return                                    
+	if gameoverseq_started:
+		return                               
+	gameoverseq_started = true
+	
+	$player.set_physics_process(false)
+	for p in past_players:
+		if is_instance_valid(p):
+			p.set_physics_process(false)
+	_frame_killer(observer)
+	$RoundTimer.stop()
+	var t := create_tween().set_parallel(true).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+	t.tween_property($ColorRect, "color:a", 1.0, 2.5)
+	await get_tree().create_timer(3).timeout
+	
+	_game_over()
+
+func end_animation():
+	pass
+
+# needs dev
+#func _on_game_end():
+	#print("game over you got")
+	#print(score)
+	#print("diamonds")
+	
+func add_artifact(position: Vector2, sprite_name: String, points=200):
+	var artifact = artifact_scene.instantiate()
+	artifact.initialize_data(position, sprite_name, points)
+	add_child(artifact)
+
+func create_player_path():
+	var randi1 = randi_range(1, spawns.size())
+	var randi2 = randi_range(1, spawns.size())
+	
+	#while spawns[randi1 - 1] in visited_spawns:
+		#randi1 = randi_range(1, spawns.size())
+	
+	while randi1 == randi2:
+		randi2 = randi_range(1, spawns.size())
+		
+	$player.start(spawns[randi1 - 1])
+	$player.set_exit_point(spawns[randi2 - 1])
+	
+	# spawn portal @ exit point
+	portal_sprite.global_position = spawns[randi2 - 1]
+	$HUD.set_waypoint(spawns[randi2 - 1])
+	
+	#visited_spawns.append(spawns[randi1 - 1])
+	
+	var data = {
+		"s": randi2 - 1
+	}
+	
+	print("exit point set to position {s}".format(data))
+	
+
 
 func _on_gameovertimer_timeout() -> void:
+	#if gameovertime > ROUNDCLOCK + 5:
+		#get_tree().change_scene_to_file("res://UI/death_screen.tscn")
 	if gameovertime == 2:
 		for p in past_players:
 			if is_instance_valid(p):
 				p.set_physics_process(true)
 	if gameovertime == 3:
 		$HUD/RestartLabel.show()
-	if gameovertime < 5:
-		gameovertime += 1
-		gameovertimer.start()
+	#if gameovertime <= ROUNDCLOCK + 5:
+	gameovertime += 1
+	$gameovertimer.start()
 
-func _on_score_added(points) -> void:
-	score += points
-	hud.update_score(score)
-	
-func _on_exit_reached() -> void:
-	remove_ghosts()
-	new_round()
-
-func _on_spotted(observer, target) -> void:
-	if observer != player and target != player:
-		return                                    
-	if gameoverseq_started:
-		return                               
-	gameoverseq_started = true
-	
-	# set all the physics off
-	player.set_physics_process(false)
-	for p in past_players:
-		if is_instance_valid(p):
-			p.set_physics_process(false)
-	
-	# zoom the camera onto the killer
-	frame_killer(observer)
-	round_timer.stop()
-	
-	#create the white flash
-	var t := create_tween().set_parallel(true).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
-	t.tween_property(white_flash, "color:a", 1.0, 2.5)
-	await get_tree().create_timer(3).timeout
-	
-	#game is over
-	game_over()
-
-##------------------------------------------------------------------------------
-## redo inputs for resetting and quitting
-##------------------------------------------------------------------------------
 func _unhandled_input(event: InputEvent) -> void:
 	if gameovertime > 0: 
 		if event is InputEventKey and event.pressed and not event.echo:
 			if event.keycode == KEY_ENTER or event.keycode == KEY_KP_ENTER:
 				get_tree().change_scene_to_file("res://UI/main_menu.tscn")
-	if Input.is_action_just_pressed("ui_cancel"):
-		get_tree().quit()
+
+
+#hi

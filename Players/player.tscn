@@ -454,10 +454,12 @@ fmod_parameters/ReverbWet = 0.6
 fmod_parameters/ReverbWet/variant_type = 3
 
 [node name="artifact" type="FmodEventEmitter2D" parent="playerSounds"]
+event_name = "event:/money"
 event_guid = "{3f6ae9dd-beed-4461-8d5e-a7cafe300394}"
 volume = 0.5
 
 [node name="rewind" type="FmodEventEmitter2D" parent="playerSounds"]
+event_name = "event:/TP"
 event_guid = "{eaf1e1d5-9b0c-4994-a5aa-5683139c7814}"
 volume = 0.1
 
