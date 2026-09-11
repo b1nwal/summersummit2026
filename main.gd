@@ -42,6 +42,8 @@ var portal_light_texture := preload("res://assets/Lights/PointLightGradient.tres
 ##------------------------------------------------------------------------------
 var portal_sprite
 var portal_visual
+var portal_sound
+var visited_spawns = []
 var futures = []
 var past_players = []
 
@@ -155,8 +157,12 @@ func place_portal():
 	portal_light.scale = Vector2(3.0, 3.0)
 	portal_sprite = Node2D.new()
 	portal_visual = Sprite2D.new()
+	portal_sound = FmodEventEmitter2D.new()
+	portal_sound.event_guid = "{80400fb2-5f5e-42e2-8ab0-655f1d08d1d8}"
+	portal_sound.autoplay = true
 	portal_visual.texture = portal_texture
 	portal_visual.add_child(portal_light)
+	portal_sprite.add_child(portal_visual)
 	portal_sprite.add_child(portal_visual)
 	add_child(portal_sprite)
 	start_float_on_portal() 

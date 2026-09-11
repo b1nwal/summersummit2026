@@ -13,11 +13,26 @@ signal score_earned(amount)
 signal exit_point_reached()
 signal spotted(observer, target)
 
+## GAME STATES
+var gameoverseq := false
+
+## PLAYER STATES
+var holding_item = null
+var running = false
+var invincible := true
+var record = [Vector2()]
+
+## idk what this is 
 var run_start
 var stop_start
 var exit_point
-var holding_item = null
-var running = false
+
+## SPOTTING
+const spot_time := 0.05
+var spot_timer := 0.0
+var spot_fired := false
+
+## TWEENING/MOVEMENT
 var ramp_up = 300
 var ramp_down = 410
 var facing := Vector2.RIGHT
@@ -26,12 +41,7 @@ var f_damping = 0.154
 var f_A = .07
 var angular_velocity = 0
 var angular_acceleration = 0
-var record = [Vector2()]
-const spot_time := 0.05
-var spot_timer := 0.0
-var spot_fired := false
-var gameoverseq := false
-var invincible := true
+
 
 func gameoverbruh():
 	gameoverseq = true
@@ -50,22 +60,46 @@ func _obtain_v_vec():
 	return [a,position]
 
 func _physics_process(delta: float) -> void:
-	handle_movement()
+	var v_vec = _obtain_v_vec()[0]
+	position = _obtain_v_vec()[1]
+	handle_movement(v_vec)
 	handle_flashlight(delta)
-	
-	
-	
+
 	# check if distance to exit is < 64 px
 	if exit_point:
 		if global_position.distance_squared_to(exit_point) < 4096:
 			on_exit_point_reached()
 
 	move_and_slide()
+	render_player(v_vec)
 	
-func handle_movement():	
-	var v_vec = _obtain_v_vec()[0]
-	position = _obtain_v_vec()[1]
+func handle_movement(v_vec):	
 	
+	
+
+	
+		 
+	var e = angle_difference(v_vec.angle(), facing.angle())
+
+	if not v_vec == Vector2.ZERO and not running:
+		running = true
+		run_start = Time.get_ticks_msec()
+	if v_vec == Vector2.ZERO and running:
+		running = false
+		stop_start = Time.get_ticks_msec()
+		animated_sprite.stop()
+	if running:
+		if angular_acceleration < 0.0174533:
+			e = angle_difference(v_vec.angle() + f_A*sin((Time.get_ticks_msec() - run_start)/100), facing.angle())
+		angular_acceleration = f_stiffness*e - f_damping*angular_velocity
+		angular_velocity += angular_acceleration
+		
+		facing = facing.rotated(-angular_velocity)
+		velocity = v_vec * v_tween(ramp_up, Time.get_ticks_msec() - run_start)
+	if not running and not velocity == Vector2.ZERO:
+		velocity = velocity.normalized() * (speed - v_tween(ramp_down * (velocity.length()/speed), Time.get_ticks_msec() - stop_start))
+		
+func render_player(v_vec):
 	if v_vec[0] > 0:
 		if particles:
 			particles.emitting = true
@@ -98,35 +132,15 @@ func handle_movement():
 			animated_sprite.play("default_artifact")
 		else:
 			animated_sprite.play("default")
-		 
-	var e = angle_difference(v_vec.angle(), facing.angle())
-
-	if not v_vec == Vector2.ZERO and not running:
-		running = true
-		run_start = Time.get_ticks_msec()
-	if v_vec == Vector2.ZERO and running:
-		running = false
-		stop_start = Time.get_ticks_msec()
-		animated_sprite.stop()
-	if running:
-		if angular_acceleration < 0.0174533:
-			e = angle_difference(v_vec.angle() + f_A*sin((Time.get_ticks_msec() - run_start)/100), facing.angle())
-		angular_acceleration = f_stiffness*e - f_damping*angular_velocity
-		angular_velocity += angular_acceleration
-		
-		facing = facing.rotated(-angular_velocity)
-		velocity = v_vec * v_tween(ramp_up, Time.get_ticks_msec() - run_start)
-	if not running and not velocity == Vector2.ZERO:
-		velocity = velocity.normalized() * (speed - v_tween(ramp_down * (velocity.length()/speed), Time.get_ticks_msec() - stop_start))
-		
 
 func set_invincible(boo):
 	invincible = boo
 
 func handle_flashlight(delta: float) -> void:
-	$FlashLight.rotation = facing.angle()
 	
+	$FlashLight.rotation = facing.angle()
 	$Cone.rotation = facing.angle()
+	
 	if gameoverseq == false and invincible == false:
 		var target = null
 		for ray in $Cone.get_children():
@@ -152,6 +166,7 @@ func v_tween(ramp_time: int, x: float) -> float:
 		m = (3*((x/ramp_time)**2) - 2*((x/ramp_time)**3))
 	return m * speed
 
+# on round start
 func start(pos: Vector2):
 	record = [pos,facing]
 	animated_sprite.play("default")
@@ -201,6 +216,5 @@ func interact_with_closest_artifacts():
 				"name": artifact.get_sprite_name()
 			}
 			item_sprite.texture = load("res://assets/artifacts/artifact_item_{name}_small.png".format(data))
-			print("now holding artifact")
 			soundManager.play_artifact_sound()
 			break
