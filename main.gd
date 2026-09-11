@@ -277,7 +277,7 @@ func _on_count_down_timeout() -> void:
 		count_down.start()
 
 func _on_round_timer_timeout() -> void:
-	if time < 0:
+	if time <= 0:
 		game_over()
 	elif time == TIME_FOR_ONE_ROUND - 3: 
 		player.set_invincible(false)
