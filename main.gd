@@ -187,7 +187,7 @@ func _game_over():
 	$HUD/ObjectiveLabel2.hide()
 	$HUD/CountDownLabel.hide()
 	$player.gameoverbruh()
-	$HUD.update_ready("Space Time Contiuum\nCollapse.")
+	$HUD.update_ready("Space Time Continuum\nCollapse.")
 	$HUD/CountDownLabel.show()
 	rewind.emit()
 	if $player.record.size() > 1:
